@@ -1,0 +1,55 @@
+
+export function setupTooltips() {
+  const plane = document.querySelector(".plane");
+  const shade = plane.querySelector(".shade");
+
+  function removeClass(removedClass) {
+    return function (node) {
+      node.classList.remove(removedClass);
+    };
+  }
+
+  function getShapes(mainEl, shapeEl, plane) {
+    const shapes = plane.querySelectorAll(shapeEl);
+    return shapes;
+  }
+
+  function getShapesAndRemoveClass(planeClass, shapeClass, addedClass) {
+    const shapes = getShapes(planeClass, shapeClass, plane);
+    shapes.forEach(removeClass(addedClass));
+  }
+
+  function hideAllTooltips() {
+    document.querySelectorAll(".tooltip").forEach(removeClass("tooltip-show"));
+  }
+
+  function showCurrentTooltip(e) {
+    const name = `.${e.target.id}-tooltip`;
+    const tooltip = document.querySelector(name);
+    tooltip.classList.add("tooltip-show");
+    tooltip.style.transform = `translate(${e.layerX + 10}px, ${e.layerY}px)`;
+  }
+  function setShade(value) {
+    shade.style.fillOpacity = value;
+  }
+  function showBorders(e, addedClass) {
+    e.target.classList.add(addedClass);
+  }
+  const listener = (e) => {
+    const hoverOnElement = e.target.classList.contains("shape");
+    if (hoverOnElement) {
+      console.log("contains shape");
+      setShade(0.8);
+      getShapesAndRemoveClass(".plane", ".shape", "polygon-show");
+      showBorders(e, "polygon-show");
+      hideAllTooltips();
+      showCurrentTooltip(e);
+    } else {
+      console.log("not contains shape");
+      setShade(0.2);
+      getShapesAndRemoveClass(".plane", ".shape", "polygon-show");
+      hideAllTooltips();
+    }
+  };
+  return listener;
+}
