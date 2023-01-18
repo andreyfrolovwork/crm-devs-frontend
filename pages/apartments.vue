@@ -21,11 +21,18 @@
             </div>
         </div>
         <div class="filters">
+            <button @click="load">
+                click
+            </button>
             <a-slider
-                v-model:value="value2"
+                v-model:value="price"
+                :included="true"
+                :min="priceRange[0]"
+                :max="priceRange[1]"
                 range
+                @afterChange="load"
                 />
-            <!--      <div class='text-h4'>Площадь</div>
+            <!--      <div class='text-h4'> Площадь</div>
             <q-range
               class='q-mt-xl'
               color='deep-orange'
@@ -72,7 +79,8 @@ import apartsStore from '../store/store.js'
 
 const astore = apartsStore()
 const { aparts, area, price, floor, areaRange, priceRange, floorRange, columns } = storeToRefs(astore)
-const { setArea, setPrice, setFloor, load } = astore
+const { setArea, setPrice, setFloor, load, loadf } = astore
+const sliderval = ref([0,100])
 const rows = ref([
     {
         _id: '63c51d6f17baf635b57b07de',
@@ -87,9 +95,9 @@ const rows = ref([
 
 async function setPricef(pay) {
     setPrice(pay)
-    const value = await load()
+/*    const value = await load()
     console.log('value', value)
-    rows.value.push(value[0])
+    rows.value.push(value[0])*/
 }
 </script>
 <style lang='scss'>
