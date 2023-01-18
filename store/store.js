@@ -9,6 +9,30 @@ const apartsStore = defineStore("index-page", {
         floor: [0, 10],
         floorRange: [0, 10],
 
+        rooms: [0, 1, 2, 3, 4],
+        roomsRange: [
+            {
+                value: 0,
+                label: "Студия",
+            },
+            {
+                value: 1,
+                label: "1 комната",
+            },
+            {
+                value: 2,
+                label: "2 комнаты",
+            },
+            {
+                value: 3,
+                label: "3 комнаты",
+            },
+            {
+                value: 4,
+                label: "4 комнаты",
+            },
+        ],
+
         aparts: [],
 
         page: 1,
@@ -22,6 +46,18 @@ const apartsStore = defineStore("index-page", {
     }),
 
     actions: {
+        clearFilters(pay) {
+            console.log(pay)
+            this.sortBy = "rooms"
+            this.orderBy = "asc"
+            this.area = this.areaRange
+            this.price = this.priceRange
+            this.floor = this.floorRange
+            this.rooms = [0, 1, 2, 3, 4]
+            this.rowsPerPage = 10
+            this.page = 1
+            this.load()
+        },
         setSortByCol(sortedColumn) {
             this.sortBy = sortedColumn
             if (this.orderBy === "asc") {
@@ -57,6 +93,7 @@ const apartsStore = defineStore("index-page", {
                         area: this.area,
                         price: this.price,
                         floor: this.floor,
+                        rooms: this.rooms,
                     },
                 }
                 console.log("load with params", props)
@@ -68,6 +105,7 @@ const apartsStore = defineStore("index-page", {
                 this.priceRange = aparts.filters.priceRange
                 this.floorRange = aparts.filters.floorRange
                 this.count = aparts.filters.count
+                this.maxCount = aparts.filters.maxCount
             } catch (e) {
                 debugger
             }

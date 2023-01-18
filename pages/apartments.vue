@@ -1,25 +1,7 @@
 <template>
     <section class="apartments">
         <div class="data">
-            <aparts-table/>
-            <div
-                v-for="apart in aparts"
-                :key="apart"
-                class="data__row"
-                >
-                <div class="data__prop">
-                    {{ apart.rooms }} к квартира
-                </div>
-                <div class="data__prop">
-                    {{ apart.area }}м
-                </div>
-                <div class="data__prop">
-                    {{ apart.price }} рублей
-                </div>
-                <div class="data__prop">
-                    {{ apart.floor }} этаж
-                </div>
-            </div>
+            <aparts-table />
         </div>
         <div class="filters">
             <ClientOnly
@@ -66,6 +48,18 @@
                     :tooltip-visible="tooltip"
                     @after-change="load"
                     />
+                <a-typography-title :level="2">
+                    Количество комнат
+                </a-typography-title>
+                <a-select
+                    v-model:value="rooms"
+                    mode="multiple"
+                    style="width: 100%"
+                    placeholder="Выбрать этажи"
+                    :options="roomsRange"
+                    @change="load"
+                    />
+                <a-button @click="clearFilters">Сбросить фильтры</a-button>
             </ClientOnly>
         </div>
     </section>
@@ -74,12 +68,18 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import apartsStore from '~/store/store.js'
-
+import { onBeforeMount, ref } from "vue"
 const astore = apartsStore()
-const { aparts, area, price, floor, areaRange, priceRange, floorRange, tooltip } = storeToRefs(astore)
-const { load } = astore
+const { area, price, floor, areaRange, priceRange, floorRange, tooltip,rooms, roomsRange } = storeToRefs(astore)
+const { load,clearFilters } = astore
+onBeforeMount(async () => {
+    await load()
+})
 
-
+const value = ref([])
+function handleChange(e){
+    console.log(e)
+}
 </script>
 <style lang='scss'>
 .apartments {
