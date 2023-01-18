@@ -39,7 +39,7 @@
                     :max="priceRange[1]"
                     :step="100000"
                     range
-                    :tooltip-visible="true"
+                    :tooltip-visible="tooltip"
                     @after-change="load"
                     />
                 <a-typography-title :level="2">
@@ -51,7 +51,7 @@
                     :min="areaRange[0]"
                     :max="areaRange[1]"
                     range
-                    :tooltip-visible="true"
+                    :tooltip-visible="tooltip"
                     @after-change="load"
                     />
                 <a-typography-title :level="2">
@@ -63,7 +63,7 @@
                     :min="floorRange[0]"
                     :max="floorRange[1]"
                     range
-                    :tooltip-visible="true"
+                    :tooltip-visible="tooltip"
                     @after-change="load"
                     />
             </ClientOnly>
@@ -76,7 +76,7 @@ import { storeToRefs } from 'pinia'
 import apartsStore from '~/store/store.js'
 
 const astore = apartsStore()
-const { aparts, area, price, floor, areaRange, priceRange, floorRange, columns } = storeToRefs(astore)
+const { aparts, area, price, floor, areaRange, priceRange, floorRange, tooltip } = storeToRefs(astore)
 const { load } = astore
 
 

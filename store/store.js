@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-
+import columns from "./columns.js"
 const apartsStore = defineStore("index-page", {
     state: () => ({
         area: [0, 200],
@@ -8,33 +8,29 @@ const apartsStore = defineStore("index-page", {
         priceRange: [0, 6000000],
         floor: [0, 10],
         floorRange: [0, 10],
+
         aparts: [],
+
         page: 1,
         rowsPerPage: 10,
-        columns: [
-            {
-                title: "Квартира",
-                dataIndex: "room",
-                key: "room",
-            },
-            {
-                title: "Площадь",
-                dataIndex: "area",
-                key: "area",
-            },
-            {
-                title: "Цена",
-                dataIndex: "price",
-                key: "price",
-            },
-            {
-                title: "Этаж",
-                dataIndex: "floor",
-                key: "floor",
-            },
-        ],
+        count: 220,
+
+        sortBy: "rooms",
+        orderBy: "asc",
+        columns,
+        tooltip: false,
     }),
+
     actions: {
+        setSortByCol(sortedColumn) {
+            this.sortBy = sortedColumn
+            if (this.orderBy === "asc") {
+                this.orderBy = "desc"
+            } else {
+                this.orderBy = "asc"
+            }
+            this.load()
+        },
         setArea(payload) {
             console.log("setArea", payload)
             this.area = payload
@@ -55,6 +51,9 @@ const apartsStore = defineStore("index-page", {
                     body: {
                         rowsPerPage: this.rowsPerPage,
                         page: this.page,
+                        orderBy: this.orderBy,
+                        sortBy: this.sortBy,
+
                         area: this.area,
                         price: this.price,
                         floor: this.floor,
@@ -68,6 +67,7 @@ const apartsStore = defineStore("index-page", {
                 this.areaRange = aparts.filters.areaRange
                 this.priceRange = aparts.filters.priceRange
                 this.floorRange = aparts.filters.floorRange
+                this.count = aparts.filters.count
             } catch (e) {
                 debugger
             }
