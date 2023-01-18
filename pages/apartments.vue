@@ -37,6 +37,7 @@
                     :included="true"
                     :min="priceRange[0]"
                     :max="priceRange[1]"
+                    :step="100000"
                     range
                     :tooltip-visible="true"
                     @after-change="load"
@@ -72,7 +73,7 @@
 
 <script setup>
 import { storeToRefs } from 'pinia'
-import apartsStore from '../store/store.js'
+import apartsStore from '~/store/store.js'
 
 const astore = apartsStore()
 const { aparts, area, price, floor, areaRange, priceRange, floorRange, columns } = storeToRefs(astore)

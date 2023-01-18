@@ -1,13 +1,15 @@
 <template>
-  <div class='header'>
-    <div
-      v-for='header in headers'
-      :key='header.name'
-      class='header-item'
-    >
-      <router-link :to='header.to'>{{ header.name }}</router-link>
+    <div class="header">
+        <div
+            v-for="header in headers"
+            :key="header.name"
+            class="header-item"
+            >
+            <router-link :to="header.to">
+                {{ header.name }}
+            </router-link>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -25,14 +27,14 @@ export default {
           name: 'Квартиры',
           to: '/apartments'
         },
-        {
+/*        {
           name: 'effect',
           to: '/effect'
         },
         {
           name: 'table',
           to: '/table'
-        }
+        }*/
       ]
     }
   }

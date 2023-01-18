@@ -1,13 +1,12 @@
 <template>
-    <div>aparts table</div>
+    <a-table
+        :data-source="aparts"
+        :columns="columns"
+        />
 </template>
-
-<script>
-export default {
-    name: "aparts-table"
-}
+<script setup>
+import apartsStore from '~/store/store.js'
+import { storeToRefs } from "pinia"
+const astore = apartsStore()
+const {aparts, columns} = storeToRefs(astore)
 </script>
-
-<style scoped>
-
-</style>
