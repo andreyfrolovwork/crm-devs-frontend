@@ -1,14 +1,11 @@
 import { defineStore } from "pinia"
-/*
-import {api} from 'boot/axios.js'
-*/
 
 const apartsStore = defineStore("index-page", {
     state: () => ({
-        area: [0, 150],
-        areaRange: [0, 150],
-        price: [0, 3000000],
-        priceRange: [0, 3000000],
+        area: [0, 200],
+        areaRange: [0, 200],
+        price: [0, 6000000],
+        priceRange: [0, 6000000],
         floor: [0, 10],
         floorRange: [0, 10],
         aparts: [],
@@ -58,7 +55,7 @@ const apartsStore = defineStore("index-page", {
                         page: this.page,
                         area: this.area,
                         price: this.price,
-                        /*                        floor: this.floor,*/
+                        floor: this.floor,
                     },
                 }
                 console.log("load with params", props)
@@ -66,9 +63,9 @@ const apartsStore = defineStore("index-page", {
                 console.log(aparts)
                 console.log("result", aparts)
                 this.aparts = aparts.rows
-                /*                this.areaRange = aparts.filters.areaRange
+                this.areaRange = aparts.filters.areaRange
                 this.priceRange = aparts.filters.priceRange
-                this.floorRange = aparts.filters.floorRange*/
+                this.floorRange = aparts.filters.floorRange
             } catch (e) {
                 debugger
             }

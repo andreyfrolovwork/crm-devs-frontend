@@ -1,6 +1,7 @@
 <template>
     <section class="apartments">
         <div class="data">
+            <aparts-table/>
             <div
                 v-for="apart in aparts"
                 :key="apart"
@@ -21,84 +22,63 @@
             </div>
         </div>
         <div class="filters">
-            <button @click="load">
-                click
-            </button>
-            <a-slider
-                v-model:value="price"
-                :included="true"
-                :min="priceRange[0]"
-                :max="priceRange[1]"
-                range
-                @afterChange="load"
-                />
-            <!--      <div class='text-h4'> Площадь</div>
-            <q-range
-              class='q-mt-xl'
-              color='deep-orange'
-              label-always=''
-              markers=''
-              :min='areaRange.min'
-              :max='areaRange.max'
-              :inner-min='areaRange.min'
-              :inner-max='areaRange.max'
-              :model-value='area'
-              @change='setArea'></q-range>
-            <div class='text-h4'>Цена</div>
-            <q-range
-              class='q-mt-xl'
-              color='deep-orange'
-              label-always=''
-              markers=''
-              :min='priceRange.min'
-              :max='priceRange.max'
-              :inner-min='priceRange.min'
-              :inner-max='priceRange.max'
-              :model-value='price'
-              @change='setPricef'></q-range>
-            <div class='text-h4'>Этаж</div>
-            <q-range
-              class='q-mt-xl'
-              color='deep-orange'
-              label-always=''
-              markers=''
-              :min='floorRange.min'
-              :max='floorRange.max'
-              :inner-min='floorRange.min'
-              :inner-max='floorRange.max'
-              :model-value='floor'
-              @change='setFloor'></q-range>-->
+            <ClientOnly
+                fallback-tag="span"
+                fallback="Loading filters..."
+                >
+                <button @click="load">
+                    click
+                </button>
+                <a-typography-title :level="2">
+                    Цена
+                </a-typography-title>
+                <a-slider
+                    v-model:value="price"
+                    :included="true"
+                    :min="priceRange[0]"
+                    :max="priceRange[1]"
+                    range
+                    :tooltip-visible="true"
+                    @after-change="load"
+                    />
+                <a-typography-title :level="2">
+                    Площадь
+                </a-typography-title>
+                <a-slider
+                    v-model:value="area"
+                    :included="true"
+                    :min="areaRange[0]"
+                    :max="areaRange[1]"
+                    range
+                    :tooltip-visible="true"
+                    @after-change="load"
+                    />
+                <a-typography-title :level="2">
+                    Этаж
+                </a-typography-title>
+                <a-slider
+                    v-model:value="floor"
+                    :included="true"
+                    :min="floorRange[0]"
+                    :max="floorRange[1]"
+                    range
+                    :tooltip-visible="true"
+                    @after-change="load"
+                    />
+            </ClientOnly>
         </div>
     </section>
 </template>
 
 <script setup>
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
 import apartsStore from '../store/store.js'
 
 const astore = apartsStore()
 const { aparts, area, price, floor, areaRange, priceRange, floorRange, columns } = storeToRefs(astore)
-const { setArea, setPrice, setFloor, load, loadf } = astore
-const sliderval = ref([0,100])
-const rows = ref([
-    {
-        _id: '63c51d6f17baf635b57b07de',
-        section: 1,
-        rooms: 0,
-        area: 26.575,
-        price: 1911423,
-        floor: 1,
-        __v: 0
-    }
-])
+const { load } = astore
 
-async function setPricef(pay) {
-    setPrice(pay)
-/*    const value = await load()
-    console.log('value', value)
-    rows.value.push(value[0])*/
-}
+
 </script>
 <style lang='scss'>
 .apartments {
