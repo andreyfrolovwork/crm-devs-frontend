@@ -27,14 +27,14 @@ export default {
           name: 'Квартиры',
           to: '/apartments'
         },
-/*        {
-          name: 'effect',
-          to: '/effect'
+        {
+          name: 'test',
+          to: '/test'
         },
         {
-          name: 'table',
-          to: '/table'
-        }*/
+          name: 'floors',
+          to: '/floors'
+        }
       ]
     }
   }

@@ -69,6 +69,7 @@
 import { storeToRefs } from 'pinia'
 import apartsStore from '~/store/store.js'
 import { onBeforeMount, ref } from "vue"
+
 const astore = apartsStore()
 const { area, price, floor, areaRange, priceRange, floorRange, tooltip,rooms, roomsRange } = storeToRefs(astore)
 const { load,clearFilters } = astore
@@ -77,9 +78,7 @@ onBeforeMount(async () => {
 })
 
 const value = ref([])
-function handleChange(e){
-    console.log(e)
-}
+
 </script>
 <style lang='scss'>
 .apartments {
