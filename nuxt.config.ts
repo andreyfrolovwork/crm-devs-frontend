@@ -7,18 +7,7 @@ export default defineNuxtConfig({
     build: {
         transpile: ["lodash-es"],
     },
-    modules: [
-        // ...
-        "@pinia/nuxt",
-        /*        {
-            autoImports: [
-                // automatically imports `defineStore`
-                'defineStore', // import { defineStore } from 'pinia'
-                // automatically imports `defineStore` as `definePiniaStore`
-                ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
-            ],
-        },*/
-    ],
+    modules: ["@pinia/nuxt"],
     css: ["@/assets/styles/_base.scss", "@/assets/styles/_modern-normalize.scss"],
     vite: {
         ssr: {
