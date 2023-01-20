@@ -10,6 +10,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .page-left-enter-active,
 .page-right-enter-active,
 .page-left-leave-active,

@@ -1,3 +1,11 @@
+// for map
+
+@mixin map() {
+  @media (min-aspect-ratio: 16/9) {
+    @content;
+  }
+}
+
 // MEDIA
 @mixin phone-s {
   @media (max-width: 374px) {

@@ -4,9 +4,9 @@ import { defineNuxtConfig } from "nuxt/config"
 import Components from "unplugin-vue-components/vite"
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
-    build: {
+    /*    build: {
         transpile: ["lodash-es"],
-    },
+    },*/
     modules: ["@pinia/nuxt"],
     css: ["@/assets/styles/_base.scss", "@/assets/styles/_modern-normalize.scss"],
     vite: {

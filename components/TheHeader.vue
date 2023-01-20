@@ -38,6 +38,10 @@ export default {
                 {
                     name: "load",
                     to: "/load"
+                },
+                {
+                    name: "section",
+                    to: "/section"
                 }
             ]
         }
