@@ -1,7 +1,7 @@
 <template>
-    <figure class="plane-on-main">
+    <figure class="plane">
         <img
-            class="plane-on-main__plan-img"
+            class="plane__plan-img"
             :src="mainImage.src1"
             alt="main map image"
             >
@@ -64,9 +64,9 @@
 <script setup>
 import { onBeforeUnmount, onMounted } from "vue"
 import _ from "lodash"
-import { touchScroll } from "../functions/touchScroll.js"
-import { setHalhScrollLeft } from "../functions/setHalhScrollLeft.js"
-import { setupTooltips } from "../functions/setupTooltips.js"
+import { touchScroll } from "../../functions/touchScroll.js"
+import { setHalhScrollLeft } from "../../functions/setHalhScrollLeft.js"
+import { setupTooltips } from "../../functions/setupTooltips.js"
 import { useRouter } from "nuxt/app"
 
 const router = useRouter()
@@ -77,50 +77,35 @@ const mainImage = {
 
 const mapProps = {
     holes: [
-/*        {
+        {
             classNameHoles: "polygon house1",
             classNameShape:"polygon shape",
             idShape:"house1",
             d: "M412.5 603.5C416.667 626 425 671.6 425 674L386.5 684.5L326 588L313.5 511L509 462L593 552.5L601.5 626.5L558.5 633.5L491.5 552.5L396 581L412.5 603.5Z",
             show:true,
-            toolTipClass:'tooltip house1-tooltip sold',
-            toolTipText:'Продано',
-            routeTo:{
-                path:'/sections',
-                query:{
-                    section:'1'
-                }
-            }
-        },*/
+            toolTipClass:'tooltip house1-tooltip',
+            toolTipText:'Корпус 1',
+            routeTo:'house1'
+        },
         {
             classNameHoles: "polygon house2",
             classNameShape:"polygon shape",
-            idShape:"house2",
+            idShape:"house1",
             d: "M648 424.5L655 493.5L733 583.5L766.5 574.5L759.5 505L739 481L803 463L887.5 539.5L916 532V467.5L907 455.5L850.5 402.5L813 381.5L648 424.5Z",
             show:true,
             toolTipClass:'tooltip house2-tooltip',
             toolTipText:'Корпус 2',
-            routeTo:{
-                path:'/sections',
-                query:{
-                    section:'1'
-                }
-            }
+            routeTo:'house2'
         },
         {
             classNameHoles: "polygon house3",
             classNameShape:"polygon shape",
-            idShape:"house3",
+            idShape:"house1",
             d: "M945 414L1037.5 485L1065 483L1067 420L1044.5 398L1081 387L1177 454.5L1199.5 444L1202 382.5L1089.5 309L945 348.5V414Z",
             show:true,
             toolTipClass:'tooltip house3-tooltip',
             toolTipText:'Корпус 3',
-            routeTo:{
-                path:'/sections',
-                query:{
-                    section:'1'
-                }
-            }
+            routeTo:'house3'
         }
     ]
 }
@@ -128,28 +113,16 @@ const mapProps = {
 console.log("setup")
 let listener
 
-function click(e) {
-    console.log("click",e)
-    if(!e.sold){
-        router.push(e.routeTo)
-    } else {
-        alert("Обьект продан")
-    }
+function click(e,payload) {
+    console.log("click",e,payload)
+    router.push({ path: "/mainplan" })
 }
 
 onMounted(() => {
     console.log("onMounted")
-    touchScroll(".plane-on-main")
-    setHalhScrollLeft(".plane-on-main")
-    listener = _.debounce(setupTooltips(
-        ".plane-on-main",
-        ".shape",
-        "shape",
-        ".tooltip",
-        "tooltip-show",
-        "polygon-show",
-        ".shade"
-    ), 50)
+    touchScroll(".plane")
+    setHalhScrollLeft(".plane")
+    listener = _.debounce(setupTooltips(".plane"), 50)
     window.addEventListener("mousemove", listener)
 
 })
@@ -170,7 +143,7 @@ body {
     font-family: sans-serif;
 }
 
-.plane-on-main {
+.plane {
     position: relative;
     overflow: hidden;
     overflow-x: auto;
@@ -239,7 +212,6 @@ body {
     visibility: visible;
     will-change: transform, opacity;
     transition: opacity 0.5s;
-
 }
 
 .tooltip-show {
@@ -258,9 +230,5 @@ body {
 
 .shade {
     transition: fill-opacity 0.5s;
-}
-
-.sold {
-    background-color: #6c6c6c;
 }
 </style>

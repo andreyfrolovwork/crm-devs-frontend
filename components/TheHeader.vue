@@ -28,20 +28,24 @@ export default {
                     to: "/apartments"
                 },
                 {
-                    name: "test",
-                    to: "/test"
+                    name: "sections",
+                    to: "/sections"
                 },
                 {
                     name: "floors",
                     to: "/floors"
                 },
                 {
-                    name: "load",
-                    to: "/load"
+                    name: "admin",
+                    to: "/admin"
                 },
                 {
                     name: "section",
                     to: "/section"
+                },
+                {
+                    name: "mainplan",
+                    to: "/mainplan"
                 }
             ]
         }

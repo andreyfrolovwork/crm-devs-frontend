@@ -72,53 +72,56 @@ import { useRouter } from "nuxt/app"
 const router = useRouter()
 
 const mainImage = {
-    src1: "http://localhost:6200/images/main-map-image.jpg"
+    src1: "http://localhost:6200/images/section-1.jpg"
 }
 
 const mapProps = {
     holes: [
-/*        {
+        {
             classNameHoles: "polygon house1",
             classNameShape:"polygon shape",
             idShape:"house1",
             d: "M412.5 603.5C416.667 626 425 671.6 425 674L386.5 684.5L326 588L313.5 511L509 462L593 552.5L601.5 626.5L558.5 633.5L491.5 552.5L396 581L412.5 603.5Z",
             show:true,
+            sold:true,
             toolTipClass:'tooltip house1-tooltip sold',
-            toolTipText:'Продано',
+            toolTipText:'Продан',
             routeTo:{
-                path:'/sections',
+                path:'/floors',
                 query:{
-                    section:'1'
+                    floor:'1'
                 }
             }
-        },*/
-        {
+        },
+/*        {
             classNameHoles: "polygon house2",
             classNameShape:"polygon shape",
             idShape:"house2",
             d: "M648 424.5L655 493.5L733 583.5L766.5 574.5L759.5 505L739 481L803 463L887.5 539.5L916 532V467.5L907 455.5L850.5 402.5L813 381.5L648 424.5Z",
             show:true,
+            sold:false,
             toolTipClass:'tooltip house2-tooltip',
             toolTipText:'Корпус 2',
             routeTo:{
-                path:'/sections',
+                path:'/floors',
                 query:{
-                    section:'1'
+                    floor:'2'
                 }
             }
-        },
+        },*/
         {
             classNameHoles: "polygon house3",
             classNameShape:"polygon shape",
             idShape:"house3",
             d: "M945 414L1037.5 485L1065 483L1067 420L1044.5 398L1081 387L1177 454.5L1199.5 444L1202 382.5L1089.5 309L945 348.5V414Z",
             show:true,
+            sold:false,
             toolTipClass:'tooltip house3-tooltip',
-            toolTipText:'Корпус 3',
+            toolTipText:'1 секция 3 этаж',
             routeTo:{
-                path:'/sections',
+                path:'/floors',
                 query:{
-                    section:'1'
+                    floor:'3'
                 }
             }
         }
@@ -261,6 +264,6 @@ body {
 }
 
 .sold {
-    background-color: #6c6c6c;
+    background-color: #a4a4a4;
 }
 </style>

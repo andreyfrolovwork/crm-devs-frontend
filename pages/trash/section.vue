@@ -1,13 +1,16 @@
 <template>
     <figure class="plane">
-        <img
+        <the-sec1 />
+        <!--        <img
             class="plane__plan-img"
-            src="~/assets/home1.jpg"
+            src="~/assets/sec1_horizontal.png"
             alt="main map image"
-            >
+            >-->
         <svg
             class="svg-overlay"
-            viewBox="0 0 1920 1080"
+            width="2448"
+            height="3138"
+            viewBox="0 0 2448 3138"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
             >
@@ -18,95 +21,120 @@
                     >
                     <rect
                         fill="#fff"
-                        width="1920"
-                        height="1080"
+                        width="2448"
+                        height="3138"
                         />
-                    <path
+                    <rect
                         class="polygon house1"
-                        d="M309 867.5H42.5V806H321L357 791H388L484 760V797.5C464.833 810.167 424.1 835.5 414.5 835.5C404.9 835.5 392.833 843.5 388 847.5H357L309 867.5Z"
+                        x="424"
+                        y="1612"
+                        width="736"
+                        height="591"
+                        fill="#7AC86D"
+                        fill-opacity="0.5"
                         />
                     <path
                         class="polygon house2"
-                        d="M483 702.5V760L386 791H358L318.5 807L47 801.5V738.5H318.5L358 731H386L483 702.5Z"
+                        d="M572 560H1756V861H1904V1302H1168V853H1164H572V560Z"
+                        fill="#36CBBA"
+                        fill-opacity="0.5"
                         />
                     <path
                         class="polygon house3"
-                        d="M47 739H323M323 739L354 730.5H389L481.5 703L476 654L389 671H358.5L323 679.5H42V739H323Z"
-                        />
-                    <!--                    <path
-                        class="polygon house1"
-                        d="M412.5 603.5C416.667 626 425 671.6 425 674L386.5 684.5L326 588L313.5 511L509 462L593 552.5L601.5 626.5L558.5 633.5L491.5 552.5L396 581L412.5 603.5Z"
+                        d="M572 860H1160V1604H572H425V1164H572V860Z"
+                        fill="#1B9C8E"
+                        fill-opacity="0.5"
                         />
                     <path
-                        class="polygon house2"
-                        d="M648 424.5L655 493.5L733 583.5L766.5 574.5L759.5 505L739 481L803 463L887.5 539.5L916 532V467.5L907 455.5L850.5 402.5L813 381.5L648 424.5Z"
+                        class="polygon house4"
+                        d="M1168 1760H1904V2211H1756V2502H1164H572V2211H1168V1760Z"
+                        fill="#31B4B4"
+                        fill-opacity="0.5"
                         />
-                    <path
-                        class="polygon house3"
-                        d="M945 414L1037.5 485L1065 483L1067 420L1044.5 398L1081 387L1177 454.5L1199.5 444L1202 382.5L1089.5 309L945 348.5V414Z"
-                        />-->
+
                 </mask>
             </defs>
             <rect
                 class="shade"
-                width="1920"
-                height="1080"
+                width="2448"
+                height="3138"
                 fill="#000"
                 fill-opacity="0.2  "
                 mask="url(#holes)"
                 />
             <g class="shapes">
-                <path
+                <rect
                     id="house1"
                     class="polygon shape"
-                    d="M309 867.5H42.5V806H321L357 791H388L484 760V797.5C464.833 810.167 424.1 835.5 414.5 835.5C404.9 835.5 392.833 843.5 388 847.5H357L309 867.5Z"
-                    @click="goToFloor({sec:1,floor:1})"
+                    x="424"
+                    y="1612"
+                    width="736"
+                    height="591"
+                    fill="#7AC86D"
+                    fill-opacity="0.5"
                     />
                 <path
                     id="house2"
                     class="polygon shape"
-                    d="M483 702.5V760L386 791H358L318.5 807L47 801.5V738.5H318.5L358 731H386L483 702.5Z"
-                    @click="goToFloor({sec:1,floor:2})"
+                    d="M572 560H1756V861H1904V1302H1168V853H1164H572V560Z"
+                    fill="#36CBBA"
+                    fill-opacity="0.5"
                     />
                 <path
                     id="house3"
                     class="polygon shape"
-                    d="M47 739H323M323 739L354 730.5H389L481.5 703L476 654L389 671H358.5L323 679.5H42V739H323Z"
-                    @click="goToFloor({sec:1,floor:3})"
+                    d="M572 860H1160V1604H572H425V1164H572V860Z"
+                    fill="#1B9C8E"
+                    fill-opacity="0.5"
+                    />
+                <path
+                    id="house4"
+                    class="polygon shape"
+                    d="M1168 1760H1904V2211H1756V2502H1164H572V2211H1168V1760Z"
+                    fill="#31B4B4"
+                    fill-opacity="0.5"
                     />
 
             </g>
         </svg>
         <div class="tooltips">
             <div class="tooltip house1-tooltip">
-                Подъезд 1 Этаж 1
+                Корпус 1
             </div>
             <div class="tooltip house2-tooltip">
-                Подъезд 1 Этаж 2
+                Корпус 2
             </div>
             <div class="tooltip house3-tooltip">
-                Подъезд 1 Этаж 3
+                Корпус 3
             </div>
         </div>
     </figure>
 </template>
 <script setup>
-import { onBeforeUnmount, onMounted } from "vue"
+import { onBeforeUnmount, onMounted,ref } from "vue"
 import _ from "lodash"
-import { touchScroll } from "../functions/touchScroll.js"
-import { setHalhScrollLeft } from "../functions/setHalhScrollLeft.js"
-import { setupTooltips } from "../functions/setupTooltips.js"
+import { touchScroll } from "../../functions/touchScroll.js"
+import { setHalhScrollLeft } from "../../functions/setHalhScrollLeft.js"
+import { setupTooltips } from "../../functions/setupTooltips.js"
 import { useRouter } from "nuxt/app"
 const router = useRouter()
 
 console.log("setup")
-function goToFloor(query){
-    console.log('click')
-    router.push({ path:'/floors',query })
-}
 let listener
-onMounted(() => {
+function click(){
+    console.log('click')
+    router.push({ path:'/mainplan' })
+}
+
+function addListener(){
     console.log("mounted")
+    touchScroll(".plane")
+    setHalhScrollLeft(".plane")
+    listener = _.debounce(setupTooltips(), 50)
+    window.addEventListener("mousemove", listener)
+}
+onMounted(() => {
+    console.log("onMounted")
     touchScroll(".plane")
     setHalhScrollLeft(".plane")
     listener = _.debounce(setupTooltips(), 50)
@@ -118,6 +146,34 @@ onBeforeUnmount(() => {
     window.removeEventListener("mousemove", listener)
 })
 </script>
+<style lang="scss">
+@mixin map() {
+    @media (min-aspect-ratio: 24/31) {
+        @content;
+    }
+}
+
+.plane {
+    @include map {
+        background: #ae22c4;
+    }
+
+    &__plan-img {
+        @include map {
+            height: initial;
+            width: 100vw;
+        }
+    }
+}
+
+.svg-overlay {
+    @include map {
+        height: initial;
+        width: 100vw;
+    }
+}
+</style>
+<!--
 
 <style lang="scss">
 /*@import '../css/_mixins.scss';*/
@@ -136,7 +192,7 @@ body {
 
     box-sizing: border-box;
     height: 100vh;
-    background: aqua;
+   /* background: aqua;*/
 
     &__plan-img {
         position: absolute;
@@ -201,3 +257,4 @@ body {
     transition: fill-opacity 0.5s;
 }
 </style>
+-->
