@@ -2,7 +2,7 @@
     <figure class="plane">
         <img
             class="plane__plan-img"
-            src="~/assets/main-map-image.jpg"
+            :src="mainImage.src1"
             alt="main map image"
             >
         <svg
@@ -22,17 +22,12 @@
                         height="1080"
                         />
                     <path
-                        class="polygon house1"
-                        d="M412.5 603.5C416.667 626 425 671.6 425 674L386.5 684.5L326 588L313.5 511L509 462L593 552.5L601.5 626.5L558.5 633.5L491.5 552.5L396 581L412.5 603.5Z"
+                        v-for="hole in mapProps.holes"
+                        :key="hole.d"
+                        :d="hole.d"
+                        :class="hole.classNameHoles"
                         />
-                    <path
-                        class="polygon house2"
-                        d="M648 424.5L655 493.5L733 583.5L766.5 574.5L759.5 505L739 481L803 463L887.5 539.5L916 532V467.5L907 455.5L850.5 402.5L813 381.5L648 424.5Z"
-                        />
-                    <path
-                        class="polygon house3"
-                        d="M945 414L1037.5 485L1065 483L1067 420L1044.5 398L1081 387L1177 454.5L1199.5 444L1202 382.5L1089.5 309L945 348.5V414Z"
-                        />
+
                 </mask>
             </defs>
             <rect
@@ -45,59 +40,94 @@
                 />
             <g class="shapes">
                 <path
-                    id="house1"
-                    class="polygon shape"
-                    d="M412.5 603.5C416.667 626 425 671.6 425 674L386.5 684.5L326 588L313.5 511L509 462L593 552.5L601.5 626.5L558.5 633.5L491.5 552.5L396 581L412.5 603.5Z"
+                    v-for="hole in mapProps.holes"
+                    :id="hole.idShape"
+                    :key="hole.d"
+                    :d="hole.d"
+                    :class="hole.classNameShape"
+                    @click="click(hole)"
                     />
-                <path
-                    id="house2"
-                    class="polygon shape"
-                    d="M648 424.5L655 493.5L733 583.5L766.5 574.5L759.5 505L739 481L803 463L887.5 539.5L916 532V467.5L907 455.5L850.5 402.5L813 381.5L648 424.5Z"
-                    />
-                <path
-                    id="house3"
-                    class="polygon shape"
-                    d="M945 414L1037.5 485L1065 483L1067 420L1044.5 398L1081 387L1177 454.5L1199.5 444L1202 382.5L1089.5 309L945 348.5V414Z"
-                    @click="click"
-                    />
+
             </g>
         </svg>
         <div class="tooltips">
-            <div class="tooltip house1-tooltip">
-                Корпус 1
+            <div
+                v-for="tooltip in mapProps.holes"
+                :key="tooltip.toolTipClass"
+                :class="tooltip.toolTipClass"
+
+                >
+                {{ tooltip.toolTipText }}
             </div>
-            <div class="tooltip house2-tooltip">
-                Корпус 2
-            </div>
-            <div class="tooltip house3-tooltip">
-                Корпус 3
-            </div>
+
         </div>
     </figure>
 </template>
 <script setup>
-import { onBeforeUnmount, onMounted,ref } from "vue"
+import { onBeforeUnmount, onMounted } from "vue"
 import _ from "lodash"
 import { touchScroll } from "../functions/touchScroll.js"
 import { setHalhScrollLeft } from "../functions/setHalhScrollLeft.js"
 import { setupTooltips } from "../functions/setupTooltips.js"
 import { useRouter } from "nuxt/app"
+
 const router = useRouter()
+
+const mainImage = {
+    src1: "http://localhost:6200/images/main-map-image.jpg"
+}
+
+const mapProps = {
+    holes: [
+        {
+            classNameHoles: "polygon house1",
+            classNameShape:"polygon shape",
+            idShape:"house1",
+            d: "M412.5 603.5C416.667 626 425 671.6 425 674L386.5 684.5L326 588L313.5 511L509 462L593 552.5L601.5 626.5L558.5 633.5L491.5 552.5L396 581L412.5 603.5Z",
+            show:true,
+            toolTipClass:'tooltip house1-tooltip',
+            toolTipText:'Корпус 1',
+            routeTo:'house1'
+        },
+        {
+            classNameHoles: "polygon house2",
+            classNameShape:"polygon shape",
+            idShape:"house1",
+            d: "M648 424.5L655 493.5L733 583.5L766.5 574.5L759.5 505L739 481L803 463L887.5 539.5L916 532V467.5L907 455.5L850.5 402.5L813 381.5L648 424.5Z",
+            show:true,
+            toolTipClass:'tooltip house2-tooltip',
+            toolTipText:'Корпус 2',
+            routeTo:'house2'
+        },
+        {
+            classNameHoles: "polygon house3",
+            classNameShape:"polygon shape",
+            idShape:"house1",
+            d: "M945 414L1037.5 485L1065 483L1067 420L1044.5 398L1081 387L1177 454.5L1199.5 444L1202 382.5L1089.5 309L945 348.5V414Z",
+            show:true,
+            toolTipClass:'tooltip house3-tooltip',
+            toolTipText:'Корпус 3',
+            routeTo:'house3'
+        }
+    ]
+}
 
 console.log("setup")
 let listener
-function click(){
-    console.log('click')
-    router.push({ path:'/mainplan' })
+
+function click(e,payload) {
+    console.log("click",e,payload)
+    //router.push({ path: "/mainplan" })
 }
 
-function addListener(){
+function addListener() {
     console.log("mounted")
     touchScroll(".plane")
     setHalhScrollLeft(".plane")
     listener = _.debounce(setupTooltips(), 50)
     window.addEventListener("mousemove", listener)
 }
+
 onMounted(() => {
     console.log("onMounted")
     touchScroll(".plane")
@@ -118,6 +148,7 @@ onBeforeUnmount(() => {
         @content;
     }
 }
+
 body {
     margin: 0;
     font-family: sans-serif;
@@ -170,7 +201,7 @@ body {
     fill: none;
     stroke: #fff;
     stroke-width: 4px;
-    stroke-opacity: 0.35;
+    stroke-opacity: 0;
     vector-effect: non-scaling-stroke;
     transition: stroke-opacity 0.5s;
     pointer-events: all;
