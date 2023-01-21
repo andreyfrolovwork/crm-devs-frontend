@@ -103,7 +103,7 @@ const onFinishFailed = errorInfo => {
 </script>
 
 <style scoped>
-.admin{
+/*.admin{
     padding: 40px 10px 10px 10px;
-}
+}*/
 </style>

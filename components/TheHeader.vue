@@ -9,6 +9,7 @@
                 {{ header.name }}
             </router-link>
         </div>
+        <feedback-button />
     </div>
 </template>
 
@@ -16,6 +17,8 @@
 
 export default {
     name: "TheHeader",
+    components: {},
+
     data() {
         return {
             headers: [
@@ -29,7 +32,12 @@ export default {
                 },
                 {
                     name: "sections",
-                    to: "/sections"
+                    to: {
+                        path:"/sections",
+                        query:{
+                            section:1
+                        }
+                    }
                 },
                 {
                     name: "floors",
@@ -38,10 +46,6 @@ export default {
                 {
                     name: "admin",
                     to: "/admin"
-                },
-                {
-                    name: "section",
-                    to: "/section"
                 },
                 {
                     name: "mainplan",
