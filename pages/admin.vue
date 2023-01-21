@@ -10,19 +10,20 @@
             v-model:visible="modalVisible"
             title="Заказ звонка"
             centered
+            :ok-button-props="{ disabled:disabled }"
             @ok="sendMessage"
             >
             <a-form
-                :model="formState"
                 :ref="form"
+                :model="formState"
                 name="basic"
                 :label-col="{ span: 8 }"
                 :wrapper-col="{ span: 16 }"
                 autocomplete="off"
-                @finish="onFinish"
-                @finishFailed="onFinishFailed"
                 ok-text="Заказать звонок"
                 cancel-text="отмена"
+                @finish="onFinish"
+                @finishFailed="onFinishFailed"
                 >
                 <a-form-item
                     label="Ваше имя"
@@ -54,7 +55,7 @@
 </template>
 
 <script setup>
-import { ref,reactive } from "vue"
+import { ref,reactive,computed } from "vue"
 import { message } from 'ant-design-vue';
 import $url from "../functions/fetch.js"
 const modalVisible = ref(false);
@@ -63,6 +64,11 @@ const form = ref(null)
 const showCallRequestModal = (val) => {
     modalVisible.value = val;
 };
+
+const disabled = computed(() => {
+    return !(formState.name && formState.telNumber.length > 11 && formState.remember);
+});
+
 
 function sendMessage(){
     const hide = message.loading('Отправляем заявку', 0);
