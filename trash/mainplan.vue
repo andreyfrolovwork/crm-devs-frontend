@@ -64,9 +64,9 @@
 <script setup>
 import { onBeforeUnmount, onMounted } from "vue"
 import _ from "lodash"
-import { touchScroll } from "../../functions/touchScroll.js"
-import { setHalhScrollLeft } from "../../functions/setHalhScrollLeft.js"
-import { setupTooltips } from "../../functions/setupTooltips.js"
+import { touchScroll } from "../functions/touchScroll.js"
+import { setHalhScrollLeft } from "../functions/setHalhScrollLeft.js"
+import { setupTooltips } from "../functions/setupTooltips.js"
 import { useRouter } from "nuxt/app"
 
 const router = useRouter()

@@ -8,23 +8,91 @@
         </a-button>
         <a-modal
             v-model:visible="modalVisible"
-            title="Vertically centered modal dialog"
+            title="Заказ звонка"
             centered
-            @ok="showCallRequestModal(false)"
+            @ok="sendMessage"
             >
-            <p>some contents...</p>
-            <p>some contents...</p>
-            <p>some contents...</p>
+            <a-form
+                :model="formState"
+                :ref="form"
+                name="basic"
+                :label-col="{ span: 8 }"
+                :wrapper-col="{ span: 16 }"
+                autocomplete="off"
+                @finish="onFinish"
+                @finishFailed="onFinishFailed"
+                ok-text="Заказать звонок"
+                cancel-text="отмена"
+                >
+                <a-form-item
+                    label="Ваше имя"
+                    name="name"
+                    :rules="[{ required: true, message: 'Пожалуйста введите свое имя!' }]"
+                    >
+                    <a-input v-model:value="formState.name" />
+                </a-form-item>
+
+                <a-form-item
+                    label="Ваш мобильный"
+                    name="telNumber"
+                    :rules="[{ required: true, min:11, message: 'Пожалуйста введите свой номер телефона!' }]"
+                    >
+                    <a-input v-model:value="formState.telNumber" />
+                </a-form-item>
+
+                <a-form-item
+                    name="remember"
+                    :wrapper-col="{ offset: 8, span: 16 }"
+                    >
+                    <a-checkbox v-model:checked="formState.remember">
+                        Согласен с политикой конфиденциальности
+                    </a-checkbox>
+                </a-form-item>
+            </a-form>
         </a-modal>
     </div>
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref,reactive } from "vue"
+import { message } from 'ant-design-vue';
+import $url from "../functions/fetch.js"
 const modalVisible = ref(false);
 
+const form = ref(null)
 const showCallRequestModal = (val) => {
     modalVisible.value = val;
+};
+
+function sendMessage(){
+    const hide = message.loading('Отправляем заявку', 0);
+    setTimeout(hide, 2500);
+    $url('/send-message',{
+        name:formState.name,
+        telNumber:formState.telNumber
+    }).then(() => {
+        hide()
+        message.success('Ваша заявка успешно отправлена!');
+        formState.name = ''
+        formState.telNumber = ''
+        modalVisible.value = false
+    }).catch(() => {
+        hide()
+        modalVisible.value = false
+        message.error('Произошла ошибка, попробуйте нам позвонить или попробуйте еще.');
+    })
+}
+
+const formState = reactive({
+    name: '',
+    telNumber: '',
+    remember: true,
+});
+const onFinish = values => {
+    console.log('Success:', values);
+};
+const onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
 };
 </script>
 
