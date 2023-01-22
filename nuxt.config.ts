@@ -7,6 +7,15 @@ export default defineNuxtConfig({
     /*    build: {
         transpile: ["lodash-es"],
     },*/
+    runtimeConfig: {
+        // The private keys which are only available within server-side
+        apiSecret: "123",
+        // Keys within public, will be also exposed to the client-side
+        public: {
+            baseImagesUrl: "http://localhost:6200/images/",
+            //otherUrl: process.env.OTHER_URL || "default_other_url"
+        },
+    },
     modules: ["@pinia/nuxt"],
     css: ["@/assets/styles/_base.scss", "@/assets/styles/_modern-normalize.scss"],
     vite: {

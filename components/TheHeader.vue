@@ -40,17 +40,9 @@ export default {
                     }
                 },
                 {
-                    name: "floors",
-                    to: "/floors"
-                },
-                {
                     name: "admin",
                     to: "/admin"
                 },
-                {
-                    name: "mainplan",
-                    to: "/mainplan"
-                }
             ]
         }
     }

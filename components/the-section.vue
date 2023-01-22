@@ -2,31 +2,31 @@
     <figure class="plane-on-main">
         <img
             class="plane-on-main__plan-img"
-            :src="mainImage.src1"
+            :src="section.sectionImage"
             alt="main map image"
-            >
+        >
         <svg
             class="svg-overlay"
             viewBox="0 0 1920 1080"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
+        >
             <defs>
                 <mask
                     id="holes"
                     class="holes-mask"
-                    >
+                >
                     <rect
                         fill="#fff"
                         width="1920"
                         height="1080"
-                        />
+                    />
                     <path
                         v-for="hole in mapProps.holes"
                         :key="hole.d"
                         :d="hole.d"
                         :class="hole.classNameHoles"
-                        />
+                    />
 
                 </mask>
             </defs>
@@ -37,7 +37,7 @@
                 fill="#000"
                 fill-opacity="0.2  "
                 mask="url(#holes)"
-                />
+            />
             <g class="shapes">
                 <path
                     v-for="hole in mapProps.holes"
@@ -46,7 +46,7 @@
                     :d="hole.d"
                     :class="hole.classNameShape"
                     @click="click(hole)"
-                    />
+                />
 
             </g>
         </svg>
@@ -56,35 +56,62 @@
                 :id="tooltip.idToolTip"
                 :key="tooltip.toolTipClass"
                 :class="tooltip.toolTipClass"
-                >
+            >
                 {{ tooltip.toolTipText }}
             </div>
         </div>
     </figure>
 </template>
 <script setup>
-import { onBeforeUnmount, onMounted } from "vue"
+import { onBeforeMount, onBeforeUnmount, onMounted, ref } from "vue"
 import _ from "lodash"
 import { touchScroll } from "../functions/touchScroll.js"
 import { setHalhScrollLeft } from "../functions/setHalhScrollLeft.js"
 import { setupTooltips } from "../functions/setupTooltips.js"
 import { useRouter,useRoute } from "nuxt/app"
-
+import $url from "../functions/fetch.js"
 const router = useRouter()
 const route = useRoute()
 console.log(route.query)
+
+const section = ref({})
 
 const mainImage = {
     src1: "http://localhost:6200/images/section-1.jpg"
 }
 
+import darr from '../functions/path.js'
+
+
+const holes = darr.map((path,i) => {
+    return {
+        classNameHoles: "polygon house" + i,
+        classNameShape:"polygon shape",
+        idShape:"house" + i,
+        d:path,
+        show:true,
+        sold:false,
+        toolTipClass:`tooltip house${i}-tooltip`,
+        idToolTip:`house${i}-tooltip`,
+        toolTipText:'Площадка номер ' + i,
+        routeTo:{
+            path:'/floors',
+            query:{
+                apartments:i,
+            }
+        }
+    }
+
+})
+
 const mapProps = {
-    holes: [
+    holes:holes
+    /*holes: [
         {
             classNameHoles: "polygon house1",
             classNameShape:"polygon shape",
             idShape:"house1",
-            d: "M412.5 603.5C416.667 626 425 671.6 425 674L386.5 684.5L326 588L313.5 511L509 462L593 552.5L601.5 626.5L558.5 633.5L491.5 552.5L396 581L412.5 603.5Z",
+            d:"M474.5,806.5v18l-86,43l-31-1l-38,18l-276-2l0.4-95l2.6,0l276-1l35-13l31,1l86-33V806.5z",
             show:true,
             sold:true,
             toolTipClass:'tooltip house1-tooltip sold',
@@ -97,7 +124,7 @@ const mapProps = {
                 }
             }
         },
-/*        {
+/!*        {
             classNameHoles: "polygon house2",
             classNameShape:"polygon shape",
             idShape:"house2",
@@ -112,7 +139,7 @@ const mapProps = {
                     floor:'2'
                 }
             }
-        },*/
+        },*!/
         {
             classNameHoles: "polygon house3",
             classNameShape:"polygon shape",
@@ -147,7 +174,7 @@ const mapProps = {
                 }
             }
         }
-    ]
+    ]*/
 }
 
 console.log("setup")
@@ -161,6 +188,9 @@ function click(e) {
         alert("Обьект продан")
     }
 }
+onBeforeMount(async () => {
+    section.value = await $url('/sections')
+})
 
 onMounted(() => {
     console.log("onMounted")

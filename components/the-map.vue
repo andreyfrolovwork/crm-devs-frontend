@@ -53,6 +53,7 @@
         <div class="tooltips">
             <div
                 v-for="tooltip in mapProps.holes"
+                :id="tooltip.idToolTip"
                 :key="tooltip.toolTipClass"
                 :class="tooltip.toolTipClass"
                 >
@@ -84,6 +85,7 @@ const mapProps = {
             d: "M412.5 603.5C416.667 626 425 671.6 425 674L386.5 684.5L326 588L313.5 511L509 462L593 552.5L601.5 626.5L558.5 633.5L491.5 552.5L396 581L412.5 603.5Z",
             show:true,
             toolTipClass:'tooltip house1-tooltip sold',
+            idToolTip:"house1-tooltip",
             toolTipText:'Продано',
             routeTo:{
                 path:'/sections',
@@ -99,6 +101,7 @@ const mapProps = {
             d: "M648 424.5L655 493.5L733 583.5L766.5 574.5L759.5 505L739 481L803 463L887.5 539.5L916 532V467.5L907 455.5L850.5 402.5L813 381.5L648 424.5Z",
             show:true,
             toolTipClass:'tooltip house2-tooltip',
+            idToolTip:"house2-tooltip",
             toolTipText:'Корпус 2',
             routeTo:{
                 path:'/sections',
@@ -114,6 +117,7 @@ const mapProps = {
             d: "M945 414L1037.5 485L1065 483L1067 420L1044.5 398L1081 387L1177 454.5L1199.5 444L1202 382.5L1089.5 309L945 348.5V414Z",
             show:true,
             toolTipClass:'tooltip house3-tooltip',
+            idToolTip:"house3-tooltip",
             toolTipText:'Корпус 3',
             routeTo:{
                 path:'/sections',
