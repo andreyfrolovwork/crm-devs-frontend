@@ -1,3 +1,4 @@
 <template>
-    <the-map />
+    <div>123</div>
+<!--    <the-map />-->
 </template>

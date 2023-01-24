@@ -26,6 +26,8 @@
             <tr
                 v-for="apart in aparts"
                 :key="apart._id"
+                class="table-row"
+                @click="goToApartment(apart)"
                 >
                 <td class="table-ex-td">
                     {{ apart.rooms }} к квартира
@@ -53,10 +55,20 @@
 <script setup>
 import apartsStore from "~/store/store.js"
 import { storeToRefs } from "pinia"
+import { useRouter } from "nuxt/app"
 
 const astore = apartsStore()
 const { aparts, columns, page, count, rowsPerPage, sortBy, orderBy } = storeToRefs(astore)
 const { load,setSortByCol } = astore
+const router = useRouter()
+function goToApartment(apart){
+    router.push({
+        path:'/apartment',
+        query:{
+            _id:apart._id
+        }
+    })
+}
 
 </script>
 
@@ -78,4 +90,13 @@ const { load,setSortByCol } = astore
 .sort-box {
     height: 30px;
 }
+.table-row {
+    transition: background-color 100ms ease-in-out;
+    background-color: #ffffff;
+    &:hover {
+        background-color: #bbbbbb;
+
+    }
+}
+
 </style>

@@ -1,10 +1,11 @@
 <template>
-    <figure class="plane-on-main">
+    <figure class="plane_floor">
         <img
-            class="plane-on-main__plan-img"
-            :src="mainImage.src1"
+            class="floor_plan-img"
+            :src="config.public.baseImagesUrl + section.sectionImage"
             alt="main map image"
             >
+
         <svg
             class="svg-overlay"
             viewBox="0 0 1920 1080"
@@ -21,10 +22,10 @@
                         width="1920"
                         height="1080"
                         />
-                    <path
-                        v-for="hole in mapProps.holes"
+                    <polygon
+                        v-for="hole in section.sections"
                         :key="hole.d"
-                        :d="hole.d"
+                        :points="hole.d"
                         :class="hole.classNameHoles"
                         />
 
@@ -39,11 +40,11 @@
                 mask="url(#holes)"
                 />
             <g class="shapes">
-                <path
-                    v-for="hole in mapProps.holes"
+                <polygon
+                    v-for="hole in section.sections"
                     :id="hole.idShape"
                     :key="hole.d"
-                    :d="hole.d"
+                    :points="hole.d"
                     :class="hole.classNameShape"
                     @click="click(hole)"
                     />
@@ -52,7 +53,7 @@
         </svg>
         <div class="tooltips">
             <div
-                v-for="tooltip in mapProps.holes"
+                v-for="tooltip in section.sections"
                 :id="tooltip.idToolTip"
                 :key="tooltip.toolTipClass"
                 :class="tooltip.toolTipClass"
@@ -63,90 +64,54 @@
     </figure>
 </template>
 <script setup>
-import { onBeforeUnmount, onMounted } from "vue"
+import { onBeforeMount, onBeforeUnmount, onMounted, ref } from "vue"
 import _ from "lodash"
 import { touchScroll } from "../functions/touchScroll.js"
 import { setHalhScrollLeft } from "../functions/setHalhScrollLeft.js"
 import { setupTooltips } from "../functions/setupTooltips.js"
-import { useRouter } from "nuxt/app"
+import { useRouter, useRoute, useRuntimeConfig } from "nuxt/app"
+import { message } from 'ant-design-vue';
+import $url from "../functions/fetch.js"
 
 const router = useRouter()
-
-const mainImage = {
-    src1: "http://localhost:6200/images/main-map-image.jpg"
-}
-
-const mapProps = {
-    holes: [
-/*        {
-            classNameHoles: "polygon house1",
-            classNameShape:"polygon shape",
-            idShape:"house1",
-            d: "M412.5 603.5C416.667 626 425 671.6 425 674L386.5 684.5L326 588L313.5 511L509 462L593 552.5L601.5 626.5L558.5 633.5L491.5 552.5L396 581L412.5 603.5Z",
-            show:true,
-            toolTipClass:'tooltip house1-tooltip sold',
-            idToolTip:"house1-tooltip",
-            toolTipText:'Продано',
-            routeTo:{
-                path:'/sections',
-                query:{
-                    section:'1'
-                }
-            }
-        },*/
-        {
-            classNameHoles: "polygon house2",
-            classNameShape:"polygon shape",
-            idShape:"house2",
-            d: "M648 424.5L655 493.5L733 583.5L766.5 574.5L759.5 505L739 481L803 463L887.5 539.5L916 532V467.5L907 455.5L850.5 402.5L813 381.5L648 424.5Z",
-            show:true,
-            toolTipClass:'tooltip house2-tooltip',
-            idToolTip:"house2-tooltip",
-            toolTipText:'Корпус 2',
-            routeTo:{
-                path:'/sections',
-                query:{
-                    section:'1'
-                }
-            }
-        },
-        {
-            classNameHoles: "polygon house3",
-            classNameShape:"polygon shape",
-            idShape:"house3",
-            d: "M945 414L1037.5 485L1065 483L1067 420L1044.5 398L1081 387L1177 454.5L1199.5 444L1202 382.5L1089.5 309L945 348.5V414Z",
-            show:true,
-            toolTipClass:'tooltip house3-tooltip',
-            idToolTip:"house3-tooltip",
-            toolTipText:'Корпус 3',
-            routeTo:{
-                path:'/sections',
-                query:{
-                    section:'1'
-                }
-            }
-        }
-    ]
-}
-
-console.log("setup")
+const route = useRoute()
+const config = useRuntimeConfig()
+const section = ref({})
 let listener
+console.log("setup")
+console.log(route.query)
 
 function click(e) {
-    console.log("click",e)
-    if(!e.sold){
-        router.push(e.routeTo)
+    console.log("click", e)
+    if (!e.sold) {
+        router.push({
+            path:'/apartment',
+            query:{
+                _id:e._id   ,
+            }
+        })
     } else {
-        alert("Обьект продан")
+        message.error("Обьект продан")
     }
 }
 
+onBeforeMount(async () => {
+    const result = await $url('/floors', {
+        section: route.query.section,
+        floor: route.query.floor,
+    }).catch(() => {
+        message.error("Произошла ошибка на сервере, попробуйте обновить страницу!")
+    })
+    console.log(result)
+    section.value = result
+})
+
 onMounted(() => {
     console.log("onMounted")
-    touchScroll(".plane-on-main")
-    setHalhScrollLeft(".plane-on-main")
+    touchScroll(".plane_floor")
+    setHalhScrollLeft(".plane_floor")
     listener = _.debounce(setupTooltips(
-        ".plane-on-main",
+        ".plane_floor",
         ".shape",
         "shape",
         ".tooltip",
@@ -174,7 +139,7 @@ body {
     font-family: sans-serif;
 }
 
-.plane-on-main {
+.plane_floor {
     position: relative;
     overflow: hidden;
     overflow-x: auto;
@@ -182,25 +147,14 @@ body {
     box-sizing: border-box;
 
     height: 100vh;
-    background: #f0f8ff;
+    background: #e5fdfd;
 
     @include map {
         background: #f8d8ff;
     }
 
-    &__plan-img {
-        position: absolute;
-        object-fit: cover;
 
-        height: 100vh;
-        width: initial;
-        max-width: initial;
 
-        @include map {
-            height: initial;
-            width: 100vw;
-        }
-    }
 }
 
 .svg-overlay {
@@ -216,7 +170,19 @@ body {
         width: 100vw;
     }
 }
+.floor_plan-img {
+    position: absolute;
+    object-fit: cover;
 
+    height: 100vh;
+    width: initial;
+    max-width: initial;
+
+    @include map {
+        height: initial;
+        width: 100vw;
+    }
+}
 .shapes .polygon {
     fill: none;
     stroke: #fff;
@@ -265,6 +231,6 @@ body {
 }
 
 .sold {
-    background-color: #6c6c6c;
+    background-color: #a4a4a4;
 }
 </style>

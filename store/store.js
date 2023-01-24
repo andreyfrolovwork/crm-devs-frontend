@@ -8,13 +8,8 @@ const apartsStore = defineStore("index-page", {
         priceRange: [0, 6000000],
         floor: [0, 10],
         floorRange: [0, 10],
-
-        rooms: [0, 1, 2, 3, 4],
+        rooms: [1, 2, 3, 4],
         roomsRange: [
-            {
-                value: 0,
-                label: "Студия",
-            },
             {
                 value: 1,
                 label: "1 комната",

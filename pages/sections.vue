@@ -75,12 +75,12 @@ import { touchScroll } from "../functions/touchScroll.js"
 import { setHalhScrollLeft } from "../functions/setHalhScrollLeft.js"
 import { setupTooltips } from "../functions/setupTooltips.js"
 import { useRouter,useRoute,useRuntimeConfig } from "nuxt/app"
+import { message } from 'ant-design-vue';
 import $url from "../functions/fetch.js"
 const router = useRouter()
 const route = useRoute()
 const config = useRuntimeConfig()
 const section = ref({})
-const error = ref(false)
 let listener
 console.log("setup")
 console.log(route.query)
@@ -94,12 +94,13 @@ function click(e) {
     }
 }
 onBeforeMount(async () => {
-    section.value = await $url('/sections',{
+    const result = await $url('/sections',{
         section:route.query.section | 1
     }).catch(() => {
-        console.log('error section')
-        error.value = true
+        message.error("Произошла ошибка на сервере, попробуйте обновить страницу!")
     })
+    console.log(result)
+    section.value = result
 })
 
 onMounted(() => {

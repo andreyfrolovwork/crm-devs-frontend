@@ -104,6 +104,7 @@ const value = ref([])
             flex-flow: row;
             margin: 4px;
             background: #f9f9f9;
+
         }
 
         &__prop {

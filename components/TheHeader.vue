@@ -27,8 +27,8 @@ export default {
                     to: "/"
                 },
                 {
-                    name: "Квартиры",
-                    to: "/apartments"
+                    name: "Квартиры таблица",
+                    to: "/table"
                 },
                 {
                     name: "sections",
@@ -36,6 +36,16 @@ export default {
                         path:"/sections",
                         query:{
                             section:1
+                        }
+                    }
+                },
+                {
+                    name: "floors",
+                    to: {
+                        path:"/floors",
+                        query:{
+                            section:1,
+                            floor:1
                         }
                     }
                 },
