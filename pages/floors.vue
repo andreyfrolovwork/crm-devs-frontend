@@ -87,7 +87,7 @@ function click(e) {
         router.push({
             path:'/apartment',
             query:{
-                _id:e._id   ,
+                _id:e.apartId   ,
             }
         })
     } else {
