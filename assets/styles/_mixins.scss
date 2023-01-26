@@ -1,11 +1,3 @@
-// for map
-
-@mixin map() {
-  @media (min-aspect-ratio: 16/9) {
-    @content;
-  }
-}
-
 // MEDIA
 @mixin phone-s {
   @media (max-width: 374px) {
@@ -213,6 +205,15 @@ $container-width: 1520;
 @mixin ymaps-filter {
   [class*="-ground-pane"] {
     position: relative;
+    @content;
+  }
+}
+
+
+// my
+
+@mixin map() {
+  @media (min-aspect-ratio: 16/9) {
     @content;
   }
 }

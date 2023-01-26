@@ -781,11 +781,7 @@
     </svg>
 </template>
 <style lang="scss">
-@mixin map() {
-    @media (min-aspect-ratio: 16/9) {
-        @content;
-    }
-}
+
 .the_sec1 {
     position: absolute;
     height: 100vh;

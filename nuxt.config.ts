@@ -17,7 +17,7 @@ export default defineNuxtConfig({
         },
     },
     modules: ["@pinia/nuxt"],
-    css: ["@/assets/styles/_base.scss", "@/assets/styles/_modern-normalize.scss"],
+    //css: ["@/assets/styles/_base.scss", "@/assets/styles/_modern-normalize.scss"],
     vite: {
         ssr: {
             noExternal: ["ant-design-vue"],
@@ -29,8 +29,8 @@ export default defineNuxtConfig({
         ],
         css: {
             preprocessorOptions: {
-                sass: {
-                    additionalData: '@import "@/assets/styles/_mixins.scss"',
+                scss: {
+                    additionalData: '@import "@/assets/styles/_mixins.scss";',
                 },
             },
         },

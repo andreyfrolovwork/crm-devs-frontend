@@ -4,7 +4,7 @@
             type="primary"
             @click="showCallRequestModal(true)"
             >
-            Заказать звонок
+            {{props.text}}
         </a-button>
         <a-modal
             v-model:visible="modalVisible"
@@ -59,6 +59,7 @@ import { ref,reactive,computed } from "vue"
 import { message } from 'ant-design-vue';
 import $url from "../functions/fetch.js"
 const modalVisible = ref(false);
+const props = defineProps(['text'])
 
 const form = ref(null)
 const showCallRequestModal = (val) => {

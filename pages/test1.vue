@@ -9,13 +9,11 @@
             max="11"
             >
         <label for="volume">Volume</label>
-        <!--        <a-tooltip
-            placement="topLeft"
-            title="Prompt Text"
-            >
-            <a-button>Align edge / 边缘对齐</a-button>
-        </a-tooltip>-->
-        <!--        <splide :options="options">
+        <a-image
+            :width="200"
+            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+            />
+        <splide :options="options">
             <splide-slide>
                 <img
                     src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
@@ -34,7 +32,7 @@
                     alt=""
                     >
             </splide-slide>
-        </splide>-->
+        </splide>
     </div>
 </template>
 

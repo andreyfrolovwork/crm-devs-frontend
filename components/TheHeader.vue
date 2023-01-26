@@ -9,7 +9,7 @@
                 {{ header.name }}
             </router-link>
         </div>
-        <feedback-button />
+        <feedback-button text="Заказать звонок"/>
     </div>
 </template>
 

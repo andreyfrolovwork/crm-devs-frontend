@@ -147,11 +147,6 @@ onBeforeUnmount(() => {
 })
 </script>
 <style lang="scss">
-@mixin map() {
-    @media (min-aspect-ratio: 24/31) {
-        @content;
-    }
-}
 
 .plane {
     @include map {
