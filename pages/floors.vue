@@ -4,51 +4,23 @@
             class="floor_plan-img"
             :src="config.public.baseImagesUrl + section.sectionImage"
             alt="main map image"
-            >
-
+        >
         <svg
             class="svg-overlay"
-            viewBox="0 0 1920 1080"
+            viewBox="0 0 1000 600"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-            <defs>
-                <mask
-                    id="holes"
-                    class="holes-mask"
-                    >
-                    <rect
-                        fill="#fff"
-                        width="1920"
-                        height="1080"
-                        />
-                    <polygon
-                        v-for="hole in section.sections"
-                        :key="hole.d"
-                        :points="hole.d"
-                        :class="hole.classNameHoles"
-                        />
-
-                </mask>
-            </defs>
-            <rect
-                class="shade"
-                width="1920"
-                height="1080"
-                fill="#000"
-                fill-opacity="0.2  "
-                mask="url(#holes)"
-                />
+        >
             <g class="shapes">
                 <polygon
                     v-for="hole in section.sections"
                     :id="hole.idShape"
                     :key="hole.d"
                     :points="hole.d"
-                    :class="hole.classNameShape"
+                    :class="hole.classNameShape + 'aparts_areas'"
                     @click="click(hole)"
-                    />
-
+                    @mouseover="hover"
+                />
             </g>
         </svg>
         <div class="tooltips">
@@ -57,7 +29,7 @@
                 :id="tooltip.idToolTip"
                 :key="tooltip.toolTipClass"
                 :class="tooltip.toolTipClass"
-                >
+            >
                 {{ tooltip.toolTipText }}
             </div>
         </div>
@@ -70,8 +42,9 @@ import { touchScroll } from "../functions/touchScroll.js"
 import { setHalhScrollLeft } from "../functions/setHalhScrollLeft.js"
 import { setupTooltips } from "../functions/setupTooltips.js"
 import { useRouter, useRoute, useRuntimeConfig } from "nuxt/app"
-import { message } from 'ant-design-vue';
+import { message } from "ant-design-vue"
 import $url from "../functions/fetch.js"
+import { setupOneTooltip } from "../functions/setupOneTooltip.js"
 
 const router = useRouter()
 const route = useRoute()
@@ -81,13 +54,17 @@ let listener
 console.log("setup")
 console.log(route.query)
 
+function hover() {
+    console.log("hover")
+}
+
 function click(e) {
     console.log("click", e)
     if (!e.sold) {
         router.push({
-            path:'/apartment',
-            query:{
-                _id:e.apartId   ,
+            path: "/apartment",
+            query: {
+                _id: e.apartId
             }
         })
     } else {
@@ -96,9 +73,9 @@ function click(e) {
 }
 
 onBeforeMount(async () => {
-    const result = await $url('/floors', {
+    const result = await $url("/floors", {
         section: route.query.section,
-        floor: route.query.floor,
+        floor: route.query.floor
     }).catch(() => {
         message.error("Произошла ошибка на сервере, попробуйте обновить страницу!")
     })
@@ -108,17 +85,14 @@ onBeforeMount(async () => {
 
 onMounted(() => {
     console.log("onMounted")
-    touchScroll(".plane_floor")
-    setHalhScrollLeft(".plane_floor")
-    listener = _.debounce(setupTooltips(
-        ".plane_floor",
-        ".shape",
-        "shape",
+    listener = setupOneTooltip(
+        "plane_floor",
+        "polygon",
         ".tooltip",
-        "tooltip-show",
-        "polygon-show",
-        ".shade"
-    ), 50)
+        "tooltip-show"
+    )
+
+
     window.addEventListener("mousemove", listener)
 
 })
@@ -135,7 +109,17 @@ body {
     font-family: sans-serif;
 }
 
+
+.floors_plane_background {
+    width: 100%;
+    height: 100%;
+}
+
 .plane_floor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     position: relative;
     overflow: hidden;
     overflow-x: auto;
@@ -143,77 +127,84 @@ body {
     box-sizing: border-box;
 
     height: 100vh;
-    background: #e5fdfd;
+    //background: #e5fdfd;
 
     @include map {
         background: #f8d8ff;
     }
 
 
+    .svg-overlay {
+        position: absolute;
+        object-fit: cover;
+        width: 100%;
+        /* height: 100vh;
+         width: initial;
+         max-width: initial;
+     */
+        @include map {
+            height: initial;
+            width: 100vw;
+        }
+    }
 
-}
+    .floor_plan-img {
+        position: absolute;
+        width: 100%;
+        /*    object-fit: cover;
+            height: 100vh;
+            width: initial;
+            max-width: initial;
+            height: 100%;*/
 
-.svg-overlay {
-    position: absolute;
-    object-fit: cover;
+        @include map {
+            // height: initial;
+            //width: 100vw;
+        }
+    }
 
-    height: 100vh;
-    width: initial;
-    max-width: initial;
+    .shapes .polygon {
+        fill: #3d9db2;
+        opacity: 0;
+        stroke: #fff;
+        stroke-width: 4px;
+        stroke-opacity: 0;
+        vector-effect: non-scaling-stroke;
+        transition: stroke-opacity, opacity 0.5s;
+        pointer-events: all;
 
-    @include map {
-        height: initial;
-        width: 100vw;
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    .shapes .polygon-show {
+        stroke-opacity: 1;
+    }
+
+    .tooltip {
+        position: absolute;
+        width: fit-content;
+        background-color: #f44336;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 9999px;
+        pointer-events: none;
+        opacity: 0;
+        //opacity: 1;
+        visibility: visible;
+        will-change: transform, opacity;
+        transition: opacity 0.5s;
+
+    }
+
+    .tooltip-show {
+        visibility: visible;
+        opacity: 1;
     }
 }
-.floor_plan-img {
-    position: absolute;
-    object-fit: cover;
 
-    height: 100vh;
-    width: initial;
-    max-width: initial;
-
-    @include map {
-        height: initial;
-        width: 100vw;
-    }
-}
-.shapes .polygon {
-    fill: none;
-    stroke: #fff;
-    stroke-width: 4px;
-    stroke-opacity: 0;
-    vector-effect: non-scaling-stroke;
-    transition: stroke-opacity 0.5s;
-    pointer-events: all;
-}
-
-.shapes .polygon-show {
-    stroke-opacity: 1;
-}
-
-.tooltip {
-    position: absolute;
-    width: fit-content;
-    background-color: #f44336;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 9999px;
-    pointer-events: none;
-    opacity: 0;
-    visibility: visible;
-    will-change: transform, opacity;
-    transition: opacity 0.5s;
-
-}
-
-.tooltip-show {
-    visibility: visible;
-    opacity: 1;
-}
-
-.holes-mask .polygon {
+/*.holes-mask .polygon {
     fill: #333;
     transition: fill 0.5s;
 }
@@ -229,4 +220,8 @@ body {
 .sold {
     background-color: #a4a4a4;
 }
+
+.aparts_areas {
+
+}*/
 </style>
