@@ -1,39 +1,28 @@
 <template>
     <div>
-        <button @click="showModal">
+        <button @click="showModal(true)">
             show modal
         </button>
-        <button @click="showRef">
-            show ref
-        </button>
-        <Transition name="slide-fade">
-            <the-modal
-                v-if="show"
-                @close="showModal(false)"
-                >
-                <div class="m-modal">
-                    <input type="text">
-                    <input type="text">
-                    <input type="text">
-                </div>
-            </the-modal>
-        </Transition>
+        <the-modal
+            v-model:showM="showM"
+            >
+            <div class="m-modal">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+            </div>
+        </the-modal>
     </div>
 </template>
 
 <script setup>
-import { ref, getCurrentInstance } from "vue"
+import { ref } from "vue"
 
-const show = ref(false)
-
+const showM = ref(false)
 function showModal(val) {
-    show.value = val
+    showM.value = val
 }
 
-function showRef() {
-    const currentInstance = getCurrentInstance()
-    currentInstance.ctx.$refs.modal.showModalInModal()
-}
 </script>
 
 <style lang="scss" scoped>

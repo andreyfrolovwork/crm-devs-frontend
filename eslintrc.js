@@ -24,6 +24,7 @@ module.exports = {
         ],
         "vue/multi-word-component-names": "off",
         "vue/html-indent": ["error", 4, { attribute: 1, closeBracket: 1 }],
+        "vue/require-prop-types": "off",
     },
     extends: ["plugin:nuxt/recommended", "plugin:vue/vue3-recommended" /*, 'plugin:prettier/recommended'*/],
 }
