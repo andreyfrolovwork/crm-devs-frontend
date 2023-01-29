@@ -1,0 +1,35 @@
+<template>
+    <button class="the-button">
+        <slot />
+    </button>
+</template>
+
+<style lang="scss">
+.the-button {
+    background: none;
+    //olor: inherit;
+    border: none;
+    //padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+
+    align-items: center;
+    padding: 8px 16px;
+    width: 168px;
+    height: 40px;
+
+    background: $base_green;
+    color:white;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    transition: background-color 0.15s ease-in-out;;
+
+    &:hover {
+        background: $base_green_light;
+    }
+
+
+}
+</style>

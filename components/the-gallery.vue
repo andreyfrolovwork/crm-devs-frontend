@@ -1,19 +1,25 @@
 <template>
     <splide :options="options">
         <splide-slide>
-            <a-image
-                src="http://localhost:6200/images/chrome_1.png"
-                />
+            <div class="splide-image-wrapper">
+                <a-image
+                    src="http://localhost:6200/images/chrome_1.png"
+                    />
+            </div>
         </splide-slide>
         <splide-slide>
-            <a-image
-                src="http://localhost:6200/images/chrome_1.png"
-                />
+            <div class="splide-image-wrapper">
+                <a-image
+                    src="http://localhost:6200/images/chrome_1.png"
+                    />
+            </div>
         </splide-slide>
         <splide-slide>
-            <a-image
-                src="http://localhost:6200/images/chrome_1.png"
-                />
+            <div class="splide-image-wrapper">
+                <a-image
+                    src="http://localhost:6200/images/chrome_1.png"
+                    />
+            </div>
         </splide-slide>
     </splide>
 </template>
@@ -33,5 +39,11 @@ const options = {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+.splide-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 </style>
