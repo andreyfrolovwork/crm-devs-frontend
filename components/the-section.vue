@@ -4,29 +4,29 @@
             class="plane-on-main__plan-img"
             :src="section.sectionImage"
             alt="main map image"
-        >
+            >
         <svg
             class="svg-overlay"
             viewBox="0 0 1920 1080"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
-        >
+            >
             <defs>
                 <mask
                     id="holes"
                     class="holes-mask"
-                >
+                    >
                     <rect
                         fill="#fff"
                         width="1920"
                         height="1080"
-                    />
+                        />
                     <path
                         v-for="hole in mapProps.holes"
                         :key="hole.d"
                         :d="hole.d"
                         :class="hole.classNameHoles"
-                    />
+                        />
 
                 </mask>
             </defs>
@@ -37,7 +37,7 @@
                 fill="#000"
                 fill-opacity="0.2  "
                 mask="url(#holes)"
-            />
+                />
             <g class="shapes">
                 <path
                     v-for="hole in mapProps.holes"
@@ -46,7 +46,7 @@
                     :d="hole.d"
                     :class="hole.classNameShape"
                     @click="click(hole)"
-                />
+                    />
 
             </g>
         </svg>
@@ -56,7 +56,7 @@
                 :id="tooltip.idToolTip"
                 :key="tooltip.toolTipClass"
                 :class="tooltip.toolTipClass"
-            >
+                >
                 {{ tooltip.toolTipText }}
             </div>
         </div>

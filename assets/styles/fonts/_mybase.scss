@@ -14,3 +14,20 @@
   transform: translateY(5px);
   opacity: 0;
 }
+
+// the-show
+.animate {
+  animation-name: show;
+  animation-duration: 1.2s;
+  animation-iteration-count: 1;
+}
+@keyframes show {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
