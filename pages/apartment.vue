@@ -2,7 +2,7 @@
     <div class="aplist">
         <div
             class="block1"
-        >
+            >
             <div class="image-gallery">
                 <the-gallery />
             </div>
@@ -14,7 +14,7 @@
                                 src="http://localhost:6200/images/all-sec.png"
                                 alt="секции"
                                 class="description__content__sections"
-                            >
+                                >
                         </div>
                         <div class="t title">
                             Двухкомнатная <br> квартира № 229
@@ -46,7 +46,7 @@
                                     <img
                                         :src="config.public.baseImagesUrl + 'print.svg'"
                                         alt=""
-                                    >
+                                        >
                                     Скачать PDF- брошюру
                                 </button>
                             </div>
@@ -68,6 +68,7 @@ import { useApart } from "../useHooks/useApart.js"
 const route = useRoute()
 const config = useRuntimeConfig()
 const { apart } = useApart(route)
+
 </script>
 <style lang="scss" scoped>
 .t {

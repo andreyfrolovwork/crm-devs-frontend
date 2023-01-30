@@ -8,9 +8,14 @@ export function useApart(route) {
         apart.value = "231"
         const result = await $url("/oneapart", {
             _id: route.query._id,
-        }).catch(() => {
-            message.error("Произошла ошибка на сервере, попробуйте обновить страницу!")
         })
+            .then((r) => {
+                r.price = r.price.toLocaleString("ru")
+                return r
+            })
+            .catch(() => {
+                message.error("Произошла ошибка на сервере, попробуйте обновить страницу!")
+            })
         apart.value = result
         console.log(result)
     })
