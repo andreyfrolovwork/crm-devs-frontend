@@ -1,5 +1,6 @@
 <template>
 <!--    <TheHeader />-->
+    <the-navbar />
     <slot />
 </template>
 
