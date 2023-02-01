@@ -1,72 +1,81 @@
 <template>
-    <figure class="plane-on-main">
-        <img
+    <div>
+        <the-bottom-modal
+            v-model:show-m="showModal"
+            >
+            <button @click="clickOnSection(currentFloor)">Перейти к площадке</button>
+            {{ currentFloor.toolTipText }}
+        </the-bottom-modal>
+        <figure class="plane-on-main">
+            <!--        <img
             class="plane-on-main__small-image"
-            src="config.public.baseImagesUrl + section.sectionImageSmall"
+            :src="config.public.baseImagesUrl + section.sectionImageSmall"
             alt="main map image"
-            >
-        <img
-            class="plane-on-main__plan-img"
-            :src="config.public.baseImagesUrl + section.sectionImage"
-            alt="main map image"
-            >
+            >-->
+            <img
+                v-if="loadSection"
+                class="plane-on-main__plan-img"
+                :src="config.public.baseImagesUrl + section.sectionImage"
+                alt="main map image"
+                >
 
-        <svg
-            class="svg-overlay"
-            viewBox="0 0 1920 1080"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-            <defs>
-                <mask
-                    id="holes"
-                    class="holes-mask"
-                    >
-                    <rect
-                        fill="#fff"
-                        width="1920"
-                        height="1080"
-                        />
+            <svg
+                class="svg-overlay"
+                viewBox="0 0 1920 1080"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                <defs>
+                    <mask
+                        id="holes"
+                        class="holes-mask"
+                        >
+                        <rect
+                            fill="#fff"
+                            width="1920"
+                            height="1080"
+                            />
+                        <path
+                            v-for="hole in section.sections"
+                            :key="hole.d"
+                            :d="hole.d"
+                            :class="hole.classNameHoles"
+                            />
+
+                    </mask>
+                </defs>
+                <rect
+                    class="shade"
+                    width="1920"
+                    height="1080"
+                    fill="#000"
+                    fill-opacity="0.2  "
+                    mask="url(#holes)"
+                    />
+                <g class="shapes">
                     <path
                         v-for="hole in section.sections"
+                        :id="hole.idShape"
                         :key="hole.d"
                         :d="hole.d"
-                        :class="hole.classNameHoles"
+                        :class="hole.classNameShape"
+                        @click="click(hole)"
                         />
 
-                </mask>
-            </defs>
-            <rect
-                class="shade"
-                width="1920"
-                height="1080"
-                fill="#000"
-                fill-opacity="0.2  "
-                mask="url(#holes)"
-                />
-            <g class="shapes">
-                <path
-                    v-for="hole in section.sections"
-                    :id="hole.idShape"
-                    :key="hole.d"
-                    :d="hole.d"
-                    :class="hole.classNameShape"
-                    @click="click(hole)"
-                    />
-
-            </g>
-        </svg>
-        <div class="tooltips">
-            <div
-                v-for="tooltip in section.sections"
-                :id="tooltip.idToolTip"
-                :key="tooltip.toolTipClass"
-                :class="tooltip.toolTipClass"
-                >
-                {{ tooltip.toolTipText }}
+                </g>
+            </svg>
+            <div class="tooltips">
+                <div
+                    v-for="tooltip in section.sections"
+                    :id="tooltip.idToolTip"
+                    :key="tooltip.toolTipClass"
+                    :class="tooltip.toolTipClass"
+                    >
+                    {{ tooltip.toolTipText }}
+                </div>
             </div>
-        </div>
-    </figure>
+        </figure>
+    </div>
 </template>
 <script setup>
 import { onBeforeMount, onBeforeUnmount, onMounted, ref } from "vue"
@@ -74,33 +83,52 @@ import _ from "lodash"
 import { touchScroll } from "../functions/touchScroll.js"
 import { setHalhScrollLeft } from "../functions/setHalhScrollLeft.js"
 import { setupTooltips } from "../functions/setupTooltips.js"
-import { useRouter,useRoute,useRuntimeConfig } from "nuxt/app"
-import { message } from 'ant-design-vue';
+import { useRouter, useRoute, useRuntimeConfig } from "nuxt/app"
+import { message } from "ant-design-vue"
 import $url from "../functions/fetch.js"
+import { isMobile } from "../functions/isMobile.js"
+
 const router = useRouter()
 const route = useRoute()
 const config = useRuntimeConfig()
 const section = ref({})
+const loadSection = ref(false)
+const showModal = ref(false)
+const currentFloor = ref(null)
 let listener
 console.log("setup")
 console.log(route.query)
 
-function click(e) {
-    console.log("click",e)
-    if(!e.sold){
+
+function clickOnSection(e) {
+    if (!e.sold) {
         router.push(e.routeTo)
     } else {
         message.error("Обьект продан")
     }
 }
-onBeforeMount(async () => {
-    const result = await $url('/sections',{
-        section:route.query.section | 1
+
+function click(e) {
+    if (isMobile.any()) {
+        currentFloor.value = e
+        showModal.value = true
+        console.log("click", e)
+    } else {
+        clickOnSection(e)
+    }
+}
+
+onBeforeMount(() => {
+    $url("/sections", {
+        section: route.query.section | 1
+    }).then((r) => {
+        console.log(r)
+        section.value = r
+        loadSection.value = true
+        return r
     }).catch(() => {
         message.error("Произошла ошибка на сервере, попробуйте обновить страницу!")
     })
-    console.log(result)
-    section.value = result
 })
 
 onMounted(() => {

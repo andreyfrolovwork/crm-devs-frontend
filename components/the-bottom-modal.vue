@@ -28,19 +28,19 @@ function close(){
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 
 .the_modal_wrapper {
-    z-index: 101;
     background: #3d9db2;
+    z-index:101;
 
     position: absolute;
-    top:0px;
+    //top:0px;
     right:0px;
     bottom:0px;
     left:0px;
     width: 100vw;
-    height: 100vh;
+    height: 200px;
 
     display: flex;
     flex-flow: column;

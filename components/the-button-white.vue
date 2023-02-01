@@ -5,7 +5,7 @@
 </template>
 
 
-<style lang="scss">
+<style scoped lang="scss">
 .the-button {
     background: none;
     //olor: inherit;

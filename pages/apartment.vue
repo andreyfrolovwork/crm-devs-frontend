@@ -9,7 +9,7 @@
             <div class="description">
                 <div class="description__content">
                     <div class="d2">
-                        <div>
+                        <div class="d__top-image">
                             <img
                                 src="http://localhost:6200/images/all-sec.png"
                                 alt="секции"
@@ -17,14 +17,14 @@
                                 >
                         </div>
                         <div class="t title">
-                            Двухкомнатная <br> квартира № 229
+                            {{ apart.title }}
                         </div>
                         <div class="d2__props">
                             <div class="t props">
-                                {{ apart.area }} м<sup>2</sup>
+                                Площадь: <b>{{ apart.area }} м<sup>2</sup></b>
                             </div>
                             <div class="t props">
-                                <b>{{ apart.floor }}</b> из 10 этаж
+                                Этаж: <b>{{ apart.floor }} из 10</b>
                             </div>
                             <div class="dfr mprice">
                                 <div class="t price">
@@ -100,7 +100,8 @@ const { apart } = useApart(route)
 }
 
 .aplist {
-    padding: 40px 10px 10px 10px;
+    //padding: 40px 10px 10px 10px;
+    padding: 90px 10px 10px 10px;
     //background-color: #71afcb;
     display: flex;
     flex-flow: column;
@@ -130,7 +131,7 @@ const { apart } = useApart(route)
         flex: 1;
         margin-right: 5px;
         box-shadow: 0 0 50px rgb(0 0 0 / 10%);
-        min-width: 375px;
+        //min-width: 375px;
         height: 600px;
         @include tablet {
             margin:0px;
@@ -151,12 +152,12 @@ const { apart } = useApart(route)
         //background-color: #8cc988;
         flex-flow: column;
         margin-left: 5px;
-        min-width: 375px;
+        //min-width: 375px;
         @include tablet {
             margin:10px 0 0 0;
         }
         @include phone {
-            margin:0px;
+            margin:10px 0 0 0;
         }
 
         &__content {
@@ -177,6 +178,9 @@ const { apart } = useApart(route)
 
             &__sections {
                 margin-bottom: 36px;
+                @include phone {
+                    width: 100%;
+                }
             }
 
             @include phone {
@@ -198,17 +202,25 @@ const { apart } = useApart(route)
                         font-weight: 600;
                         font-size: 40px;
                         line-height: 49px;
+
                     }
                 }
             }
 
             .d2 {
                 margin: 15px;
+                @include phone {
+                    margin: 0px;
+                }
 
                 display: flex;
                 flex-flow: column;
                 justify-content: center;
 
+                &__top-image{
+                    display: flex;
+                    justify-content: center;
+                }
                 &__props {
                     margin-top: 20px;
                 }
@@ -222,7 +234,11 @@ const { apart } = useApart(route)
                     font-size: 32px;
                     font-weight: 600;
                     line-height: 35px;
-                    margin-bottom: 19px
+                    margin-bottom: 19px;
+                    @include phone {
+                        font-size: 27px;
+                        //font-size: 12px;
+                    }
                 }
 
                 .creditlink {
@@ -230,6 +246,9 @@ const { apart } = useApart(route)
                     font-size: 16px;
                     margin-left: 10px;
                     line-height: 31px;
+                    @media (max-width: 486px) {
+                        margin: 0;
+                    }
                 }
 
                 .props {
@@ -243,6 +262,7 @@ const { apart } = useApart(route)
 
                 .mprice {
                     margin: 30px 0 41px 0px;
+                    flex-flow: row wrap;
                 }
 
                 .price {
@@ -255,7 +275,7 @@ const { apart } = useApart(route)
 
                 .buybut {
                     display: flex;
-                    flex-flow: row;
+                    flex-flow: row wrap;
                     justify-content: flex-start;
                 }
 
@@ -274,6 +294,10 @@ const { apart } = useApart(route)
                     @media (max-width: 1110px) {
                         margin-left: 15px;
                     }
+                    @media (max-width: 398px) {
+                        margin: 15px 0;
+                    }
+
                 }
             }
         }

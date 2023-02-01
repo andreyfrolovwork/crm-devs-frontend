@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"
 import columns from "./columns.js"
+
 const apartsStore = defineStore("index-page", {
     state: () => ({
         area: [0, 200],
@@ -8,7 +9,7 @@ const apartsStore = defineStore("index-page", {
         priceRange: [0, 6000000],
         floor: [0, 10],
         floorRange: [0, 10],
-        rooms: [1, 2, 3, 4],
+        rooms: [],
         roomsRange: [
             {
                 value: 1,
@@ -39,8 +40,31 @@ const apartsStore = defineStore("index-page", {
         columns,
         tooltip: false,
     }),
-
+    getters: {
+        b1: (state) => state.rooms.includes(1),
+        b2: (state) => state.rooms.includes(2),
+        b3: (state) => state.rooms.includes(3),
+        b4: (state) => state.rooms.includes(4),
+        roomsProps: (state) => {
+            if (state.rooms.length === 0) {
+                return [1, 2, 3, 4]
+            } else {
+                return state.rooms
+            }
+        },
+    },
     actions: {
+        setRoom(room) {
+            if (this.rooms.includes(room)) {
+                this.rooms = this.rooms.filter((roomEl) => roomEl !== room)
+            } else {
+                this.rooms.push(room)
+            }
+            if (this.rooms.length === 0) {
+                this.rooms = [1, 2, 3, 4]
+            }
+            this.load()
+        },
         clearFilters(pay) {
             console.log(pay)
             this.sortBy = "rooms"
@@ -88,7 +112,7 @@ const apartsStore = defineStore("index-page", {
                         area: this.area,
                         price: this.price,
                         floor: this.floor,
-                        rooms: this.rooms,
+                        rooms: this.roomsProps,
                     },
                 }
                 console.log("load with params", props)

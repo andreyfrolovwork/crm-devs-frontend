@@ -1,7 +1,63 @@
 <template>
     <div class="navbar">
+        <Transition name="mobile-menu1">
+            <div
+                v-if="showNavbar"
+                class="navbar-menu"
+                >
+                <ul class="nav-ul">
+                    <div class="navbar-menu__title">О проекте</div>
+                    <li
+                        v-for="link in menuLinks"
+                        :key="link.name"
+                        class="nav-menu"
+                        >
+                        <NuxtLink
+                            class="link black bar"
+                            :to="link.to"
+                            >
+                            {{ link.name }}
+                        </NuxtLink>
+                    </li>
+                    <div class="navbar-menu__title">Подбор квартиры</div>
+                    <li class="nav-menu">
+                        <NuxtLink
+                            class="link black bar"
+                            to="/sections"
+                            >
+                            На карте
+                        </NuxtLink>
+                    </li>
+                    <li class="nav-menu">
+                        <NuxtLink
+                            class="link black bar"
+                            to="/table"
+                            >
+                            Поиск по параметрам
+                        </NuxtLink>
+                    </li>
+                </ul>
+            </div>
+        </Transition>
+        <div class="navbar__mobile-button">
+            <div class="logo">
+                <img
+                    :src="config.public.baseImagesUrl + 'logo-header.svg'"
+                    alt="logo"
+                    >
+            </div>
+            <div class="menu-button">
+                <the-menu-icon @showmenu="showNavbarMenu" />
+            </div>
+        </div>
         <div class="navbar__center">
             <div class="navbar__center__left">
+                <div class="logo">
+                    <img
+                        :src="config.public.baseImagesUrl + 'logo-header.svg'"
+                        alt="logo"
+                        >
+                </div>
                 <div
                     class="link withmenu"
                     @click="showMenu"
@@ -41,22 +97,22 @@
                 </NuxtLink>
             </div>
 
-            <div class="navbar__center__left m10">
+            <div class="navbar__center__left aicenter">
                 <a
                     href="tel:+73517001717"
                     class="link m15r"
                     >
                     <span class="phone__number">8 (351) 700-17-17</span>
                 </a>
-                <the-button-white>Заказать звонок</the-button-white>
+                <feedback-button>Заказать звонок</feedback-button>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import { useRuntimeConfig } from "nuxt/app"
 import { ref } from "vue"
-
 const menuLinks = [
     {
         name: "О проекте",
@@ -79,9 +135,14 @@ const menuLinks = [
         to: "/l5"
     }
 ]
-
+const config = useRuntimeConfig()
 const show = ref(false)
+const showNavbar = ref(false)
 
+function showNavbarMenu(){
+    console.log('show menu')
+    showNavbar.value = !showNavbar.value
+}
 function showMenu(value) {
     if (!value) {
         show.value = !show.value
@@ -98,7 +159,14 @@ function showMenu(value) {
 
 }
 
+.logo {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    ///margin-left: 15px;
+}
 .navbar {
+
     //box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
     box-shadow: 0 0 10px rgb(43 41 41 / 16%);
 
@@ -111,13 +179,38 @@ function showMenu(value) {
     flex-direction: row;
     //max-width: 1440px;
     justify-content: center;
+    &__mobile-button {
+        @mixin show-mobile {
+            display: flex;
+            align-items: center;
+            flex-flow:row;
+            justify-content: space-between;
+            flex:1;
+            margin: 0 15px;
+        }
+        display: none;
+        @include phone {
+            @include show-mobile
+        }
+        @include tablet {
+            @include show-mobile
+        }
+
+    }
     &__center {
+        @include phone {
+            display: none;
+        }
+        @include tablet {
+            display:none;
+        }
         display: flex;
         max-width: 1440px;
         flex: 1;
         flex-flow: row;
         //background: #2c491c;
         justify-content: space-between;
+        margin: 0 15px;
         &__left {
             display: flex;
             flex-direction: row;
@@ -154,8 +247,7 @@ function showMenu(value) {
     margin: 5px 0;
 }
 
-.m10 {
-    margin: 0 15px;
+.aicenter {
     align-items: center;
 }
 .m15r {
@@ -180,5 +272,50 @@ function showMenu(value) {
     margin: 0;
 }
 
+.navbar-menu {
+    position: absolute;
+    background: white;
+    display: flex;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    margin-top: 60px;
+    ul {
+        padding: 50px 50px 50px 70px;
+    }
+    li {
+        margin-left: 15px;
+    }
+    &__title {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+/*        font-size: 16px;
+        line-height: 20px;*/
+        font-size: 24px;
+        line-height: 30px;
+    }
+    .bar {
+        font-size: 18px;
+        line-height: 33px;
+    }
+}
+
+// mobile menu transitiion property
+.mobile-menu1-enter-active {
+    transition: all 0.1s ease-out;
+}
+
+.mobile-menu1-leave-active {
+    transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.mobile-menu1-enter-from {
+    transform: translateX(-100px);
+    opacity: 0;
+}
+.mobile-menu1-leave-to {
+    transform: translateX(-100px);
+    opacity: 0;
+}
 
 </style>

@@ -31,10 +31,14 @@ export function setupTooltips(
     }
 
     function showCurrentTooltip(e) {
-        const name = `#${e.target.id}-tooltip`
-        const tooltip = document.querySelector(name)
-        tooltip.classList.add(toolTopShowClass)
-        tooltip.style.transform = `translate(${e.layerX + 10}px, ${e.layerY}px)`
+        try {
+            const name = `#${e.target.id}-tooltip`
+            const tooltip = document.querySelector(name)
+            tooltip.classList.add(toolTopShowClass)
+            tooltip.style.transform = `translate(${e.layerX + 10}px, ${e.layerY}px)`
+        } catch (e) {
+            debugger
+        }
     }
     function setShade(value) {
         shade.style.fillOpacity = value

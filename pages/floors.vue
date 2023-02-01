@@ -1,28 +1,38 @@
 <template>
-    <figure class="plane_floor">
-        <img
-            class="floor_plan-img"
-            :src="config.public.baseImagesUrl + section.sectionImage"
-            alt="main map image"
-        >
-        <svg
-            class="svg-overlay"
-            viewBox="0 0 1000 600"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-        >
-            <g class="shapes">
-                <polygon
-                    v-for="hole in section.sections"
-                    :id="hole.idShape"
-                    :key="hole.d"
-                    :points="hole.d"
-                    :class="hole.classNameShape + 'aparts_areas'"
-                    @click="click(hole)"
-                    @mouseover="hover"
-                />
-            </g>
-        </svg>
+    <div>
+        <the-bottom-modal
+            v-model:show-m="showModal"
+            >
+            <button @click="clickOnApart(currentApart)">
+                Перейти к описанию квартиры
+            </button>
+            {{ currentApart.toolTipText }}
+        </the-bottom-modal> <figure class="plane_floor">
+            <img
+                class="floor_plan-img"
+                :src="config.public.baseImagesUrl + section.sectionImage"
+                alt="main map image"
+                >
+            <svg
+                class="svg-overlay"
+                viewBox="0 0 1000 600"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                <g class="shapes">
+                    <polygon
+                        v-for="hole in section.sections"
+                        :id="hole.idShape"
+                        :key="hole.d"
+                        :points="hole.d"
+                        :class="hole.classNameShape + 'aparts_areas'"
+                        @click="click(hole)"
+                        @mouseover="hover"
+                        />
+                </g>
+            </svg>
+
+        </figure>
         <div class="tooltips">
             <div
                 v-for="tooltip in section.sections"
@@ -33,7 +43,7 @@
                 {{ tooltip.toolTipText }}
             </div>
         </div>
-    </figure>
+    </div>
 </template>
 <script setup>
 import { onBeforeMount, onBeforeUnmount, onMounted, ref } from "vue"
@@ -45,11 +55,15 @@ import { useRouter, useRoute, useRuntimeConfig } from "nuxt/app"
 import { message } from "ant-design-vue"
 import $url from "../functions/fetch.js"
 import { setupOneTooltip } from "../functions/setupOneTooltip.js"
+import { isMobile } from "../functions/isMobile.js"
 
 const router = useRouter()
 const route = useRoute()
 const config = useRuntimeConfig()
 const section = ref({})
+const showModal = ref(false)
+const currentApart = ref(null)
+
 let listener
 console.log("setup")
 console.log(route.query)
@@ -58,8 +72,15 @@ function hover() {
     console.log("hover")
 }
 
-function click(e) {
-    console.log("click", e)
+function clickOnApart(e) {
+    if (!e.sold) {
+        router.push(e.routeTo)
+    } else {
+        message.error("Обьект продан")
+    }
+}
+
+function gotoApart(e) {
     if (!e.sold) {
         router.push({
             path: "/apartment",
@@ -71,6 +92,17 @@ function click(e) {
         message.error("Обьект продан")
     }
 }
+
+function click(e) {
+    if (isMobile.any()) {
+        currentApart.value = e
+        showModal.value = true
+        console.log("click", e)
+    } else {
+        gotoApart(e)
+    }
+}
+
 
 onBeforeMount(async () => {
     const result = await $url("/floors", {
@@ -126,12 +158,24 @@ body {
     transition: .5s;
     box-sizing: border-box;
 
+    margin:0 20vw;
+
     height: 100vh;
     //background: #e5fdfd;
 
     @include map {
         background: #f8d8ff;
     }
+    @include tablet {
+        margin:0 3vw;
+    }
+    @include phone {
+        margin:0 0;
+    }
+
+    /*@include media(1080px){
+        margin:0 20vw;
+    }*/
 
 
     .svg-overlay {
@@ -182,28 +226,28 @@ body {
         stroke-opacity: 1;
     }
 
-    .tooltip {
-        position: absolute;
-        width: fit-content;
-        background-color: #f44336;
-        color: #fff;
-        padding: 5px 10px;
-        border-radius: 9999px;
-        pointer-events: none;
-        opacity: 0;
-        //opacity: 1;
-        visibility: visible;
-        will-change: transform, opacity;
-        transition: opacity 0.5s;
-
-    }
-
-    .tooltip-show {
-        visibility: visible;
-        opacity: 1;
-    }
 }
 
+.tooltip {
+    position: absolute;
+    width: fit-content;
+    background-color: #f44336;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 9999px;
+    pointer-events: none;
+    opacity: 0;
+    //opacity: 1;
+    visibility: visible;
+    will-change: transform, opacity;
+    transition: opacity 0.5s;
+
+}
+
+.tooltip-show {
+    visibility: visible;
+    opacity: 1;
+}
 /*.holes-mask .polygon {
     fill: #333;
     transition: fill 0.5s;

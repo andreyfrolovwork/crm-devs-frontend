@@ -1,11 +1,11 @@
 <template>
     <div class="admin">
-        <a-button
+        <the-button-white
             type="primary"
             @click="showCallRequestModal(true)"
             >
-            {{props.text}}
-        </a-button>
+            <slot />
+        </the-button-white>
         <a-modal
             v-model:visible="modalVisible"
             title="Заказ звонка"

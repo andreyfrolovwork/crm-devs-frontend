@@ -1,5 +1,6 @@
 import { onBeforeMount, ref } from "vue"
 import $url from "~/functions/fetch.js"
+import cookTitle from "~/functions/cookTitle.js"
 
 export function useApart(route) {
     const apart = ref("123")
@@ -11,6 +12,7 @@ export function useApart(route) {
         })
             .then((r) => {
                 r.price = r.price.toLocaleString("ru")
+                r.title = cookTitle(r)
                 return r
             })
             .catch(() => {
