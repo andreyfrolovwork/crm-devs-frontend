@@ -3,8 +3,6 @@ import { defineNuxtPlugin } from "#app"
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.directive("animate-on-scroll", {
         mounted: (el, binding, vnode, prevVnode) => {
-            debugger
-
             function callback([entry]) {
                 console.log("observe callback")
                 if (entry && entry.isIntersecting) {
@@ -22,6 +20,7 @@ export default defineNuxtPlugin((nuxtApp) => {
             vnode.observer.observe(el)
         },
         beforeUnmount: (el, binding, vnode, prevVnode) => {
+            console.log("before unmount")
             vnode.observer.disconnect()
         },
     })

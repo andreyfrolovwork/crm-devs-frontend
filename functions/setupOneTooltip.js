@@ -1,3 +1,5 @@
+import { isMobile } from "~/functions/isMobile.js"
+
 export function setupOneTooltip(planeClass, holeClass, tooltipClass, tooltipShowClass) {
     function removeClass(removedClass) {
         return function (node) {
@@ -18,14 +20,16 @@ export function setupOneTooltip(planeClass, holeClass, tooltipClass, tooltipShow
     }
 
     const listener = (e) => {
-        const hoverOnHole = e.target.classList.contains(holeClass)
-        if (hoverOnHole) {
-            console.log("hover")
-            hideAllTooltips()
-            showAndMoveCurrentTooltip(e)
-        } else {
-            hideAllTooltips()
-            console.log("not hover")
+        if (!isMobile.any()) {
+            const hoverOnHole = e.target.classList.contains(holeClass)
+            if (hoverOnHole) {
+                console.log("hover")
+                hideAllTooltips()
+                showAndMoveCurrentTooltip(e)
+            } else {
+                hideAllTooltips()
+                console.log("not hover")
+            }
         }
     }
     return listener

@@ -21,10 +21,10 @@
                         </div>
                         <div class="d2__props">
                             <div class="t props">
-                                Площадь: <b>{{ apart.area }} м<sup>2</sup></b>
+                                Площадь: <span class="bold">{{ apart.area }} м<sup>2</sup></span>
                             </div>
                             <div class="t props">
-                                Этаж: <b>{{ apart.floor }} из 10</b>
+                                Этаж: <span class="bold">{{ apart.floor }} из 10</span>
                             </div>
                             <div class="dfr mprice">
                                 <div class="t price">
@@ -39,7 +39,7 @@
 
                         <div class="df jcc aic buybut">
                             <div>
-                                <the-button>Оставить заявку</the-button>
+                                <the-button @click="showFeedbackModal">Оставить заявку</the-button>
                             </div>
                             <div>
                                 <button class="download-pdf">
@@ -57,7 +57,31 @@
                 </div>
             </div>
         </div>
-        <!--        <div><the-credit /></div>-->
+        <div class="howbuy">
+            <div class="h1 howbuy_title">Как купить?</div>
+            <div class="howbuy-text">Продажи в ЖК «Конфетти» ведутся строго по договорам долевого участия (ДДУ), согласно действующему законодательству РФ (№ 214‑ФЗ)</div>
+            <the-tabs :tabs="['Ипотека','Рассрочка','Материнский капитал','100% оплата','Trade-in']">
+                <template #t0>
+                    <the-credit />
+                </template>
+                <template #t1>
+                    t1
+                </template>
+                <template #t2>
+                    t2
+                </template>
+
+                <template #t3>
+                    t3
+                </template>
+                <template #t4>
+                    t4
+                </template>
+                <template #t5>
+                    t5
+                </template>
+            </the-tabs>
+        </div>
     </div>
 </template>
 <script setup>
@@ -67,10 +91,17 @@ import { useApart } from "../useHooks/useApart.js"
 
 const route = useRoute()
 const config = useRuntimeConfig()
-const { apart } = useApart(route)
+const { apart,showFeedbackModal } = useApart(route)
 
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
+.splide__track {
+    height: 100%; // вот это свойство мы добавили
+    overflow: hidden;
+    position: relative;
+    z-index: 0
+}
+
 .t {
     font-family: Montserrat, serif;
     font-weight: 400;
@@ -306,6 +337,28 @@ const { apart } = useApart(route)
     .img-sec {
         width: 131px;
         object-fit: contain;
+    }
+}
+
+.howbuy_title {
+    text-align: left;
+}
+.howbuy {
+    max-width: 1440px;
+    margin: 44px 0;
+    display: flex;
+    flex-flow: column;
+    &-title {
+        display: flex;
+    }
+    &-text {
+        margin: 13px 0;
+        font-family: "Montserrat", serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 26px;
+
     }
 }
 </style>

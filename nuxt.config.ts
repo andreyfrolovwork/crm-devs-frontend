@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     },
     modules: ["@pinia/nuxt"],
     css: [
-        "@/assets/styles/fonts/_mybase.scss",
+        "@/assets/styles/_mybase.scss",
         "@/assets/styles/fonts/Montserrat.scss" /*"@/assets/styles/_base.scss", "@/assets/styles/_modern-normalize.scss"*/,
     ],
     vite: {

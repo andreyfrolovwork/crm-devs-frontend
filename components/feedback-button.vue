@@ -58,8 +58,12 @@
 import { ref,reactive,computed } from "vue"
 import { message } from 'ant-design-vue';
 import $url from "../functions/fetch.js"
-const modalVisible = ref(false);
+import { storeToRefs } from "pinia"
+import apartsStore from "../store/store.js"
 const props = defineProps(['text'])
+
+const astore = apartsStore()
+const { currentApart, modalVisible } = storeToRefs(astore)
 
 const form = ref(null)
 const showCallRequestModal = (val) => {
@@ -76,7 +80,8 @@ function sendMessage(){
     setTimeout(hide, 2500);
     $url('/send-message',{
         name:formState.name,
-        telNumber:formState.telNumber
+        telNumber:formState.telNumber,
+        currentApart:currentApart.value
     }).then(() => {
         hide()
         message.success('Ваша заявка успешно отправлена!');

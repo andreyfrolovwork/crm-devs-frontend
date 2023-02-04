@@ -39,6 +39,9 @@ const apartsStore = defineStore("index-page", {
         orderBy: "asc",
         columns,
         tooltip: false,
+
+        currentApart: {},
+        modalVisible: false,
     }),
     getters: {
         b1: (state) => state.rooms.includes(1),
@@ -54,6 +57,12 @@ const apartsStore = defineStore("index-page", {
         },
     },
     actions: {
+        showFeedbackModal() {
+            this.modalVisible = true
+        },
+        saveCurrentApart(payload) {
+            this.currentApart = payload
+        },
         setRoom(room) {
             if (this.rooms.includes(room)) {
                 this.rooms = this.rooms.filter((roomEl) => roomEl !== room)

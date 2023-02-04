@@ -15,6 +15,7 @@
                         <NuxtLink
                             class="link black bar"
                             :to="link.to"
+                            @click="showNavbarMenu()"
                             >
                             {{ link.name }}
                         </NuxtLink>
@@ -24,6 +25,7 @@
                         <NuxtLink
                             class="link black bar"
                             to="/sections"
+                            @click="showNavbarMenu()"
                             >
                             На карте
                         </NuxtLink>
@@ -32,6 +34,7 @@
                         <NuxtLink
                             class="link black bar"
                             to="/table"
+                            @click="showNavbarMenu()"
                             >
                             Поиск по параметрам
                         </NuxtLink>
@@ -44,6 +47,8 @@
                 <img
                     :src="config.public.baseImagesUrl + 'logo-header.svg'"
                     alt="logo"
+                    class="logo"
+                    @click="goToMain"
                     >
             </div>
             <div class="menu-button">
@@ -56,6 +61,7 @@
                     <img
                         :src="config.public.baseImagesUrl + 'logo-header.svg'"
                         alt="logo"
+                        @click="goToMain"
                         >
                 </div>
                 <div
@@ -111,7 +117,7 @@
 </template>
 
 <script setup>
-import { useRuntimeConfig } from "nuxt/app"
+import { useRouter, useRuntimeConfig } from "nuxt/app"
 import { ref } from "vue"
 const menuLinks = [
     {
@@ -138,6 +144,7 @@ const menuLinks = [
 const config = useRuntimeConfig()
 const show = ref(false)
 const showNavbar = ref(false)
+const router = useRouter()
 
 function showNavbarMenu(){
     console.log('show menu')
@@ -149,6 +156,11 @@ function showMenu(value) {
     } else {
         show.value = value
     }
+}
+function goToMain(){
+    router.push({
+        path:'/'
+    })
 }
 </script>
 
@@ -180,13 +192,17 @@ function showMenu(value) {
     //max-width: 1440px;
     justify-content: center;
     &__mobile-button {
+
         @mixin show-mobile {
             display: flex;
             align-items: center;
             flex-flow:row;
             justify-content: space-between;
             flex:1;
-            margin: 0 15px;
+            //margin: 0 58px 0 15px;
+            margin: 0px 35px 0 15px;
+            //margin: 0 25px 0 15px;
+
         }
         display: none;
         @include phone {
@@ -210,7 +226,8 @@ function showMenu(value) {
         flex-flow: row;
         //background: #2c491c;
         justify-content: space-between;
-        margin: 0 15px;
+        //margin: 0 15px;
+        margin: 0 66px 0 15px;
         &__left {
             display: flex;
             flex-direction: row;

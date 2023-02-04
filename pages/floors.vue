@@ -7,7 +7,8 @@
                 Перейти к описанию квартиры
             </button>
             {{ currentApart.toolTipText }}
-        </the-bottom-modal> <figure class="plane_floor">
+        </the-bottom-modal>
+        <figure class="plane_floor">
             <img
                 class="floor_plan-img"
                 :src="config.public.baseImagesUrl + section.sectionImage"
@@ -31,7 +32,6 @@
                         />
                 </g>
             </svg>
-
         </figure>
         <div class="tooltips">
             <div
@@ -39,7 +39,7 @@
                 :id="tooltip.idToolTip"
                 :key="tooltip.toolTipClass"
                 :class="tooltip.toolTipClass"
-            >
+                >
                 {{ tooltip.toolTipText }}
             </div>
         </div>
@@ -47,10 +47,6 @@
 </template>
 <script setup>
 import { onBeforeMount, onBeforeUnmount, onMounted, ref } from "vue"
-import _ from "lodash"
-import { touchScroll } from "../functions/touchScroll.js"
-import { setHalhScrollLeft } from "../functions/setHalhScrollLeft.js"
-import { setupTooltips } from "../functions/setupTooltips.js"
 import { useRouter, useRoute, useRuntimeConfig } from "nuxt/app"
 import { message } from "ant-design-vue"
 import $url from "../functions/fetch.js"
@@ -89,7 +85,7 @@ function gotoApart(e) {
             }
         })
     } else {
-        message.error("Обьект продан")
+        message.error("Объект продан")
     }
 }
 
@@ -102,7 +98,6 @@ function click(e) {
         gotoApart(e)
     }
 }
-
 
 onBeforeMount(async () => {
     const result = await $url("/floors", {
@@ -123,10 +118,7 @@ onMounted(() => {
         ".tooltip",
         "tooltip-show"
     )
-
-
     window.addEventListener("mousemove", listener)
-
 })
 onBeforeUnmount(() => {
     console.log("remove listener")
@@ -158,7 +150,7 @@ body {
     transition: .5s;
     box-sizing: border-box;
 
-    margin:0 20vw;
+    margin: 0 20vw;
 
     height: 100vh;
     //background: #e5fdfd;
@@ -167,10 +159,10 @@ body {
         background: #f8d8ff;
     }
     @include tablet {
-        margin:0 3vw;
+        margin: 0 3vw;
     }
     @include phone {
-        margin:0 0;
+        margin: 0 0;
     }
 
     /*@include media(1080px){
@@ -248,6 +240,10 @@ body {
     visibility: visible;
     opacity: 1;
 }
+.sold {
+    background-color: #a4a4a4;
+}
+
 /*.holes-mask .polygon {
     fill: #333;
     transition: fill 0.5s;

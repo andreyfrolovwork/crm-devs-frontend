@@ -1,8 +1,11 @@
 import { onBeforeMount, ref } from "vue"
 import $url from "~/functions/fetch.js"
 import cookTitle from "~/functions/cookTitle.js"
-
+import apartsStore from "~/store/store.js"
+import { message } from "ant-design-vue"
 export function useApart(route) {
+    const astore = apartsStore()
+    const { saveCurrentApart, showFeedbackModal } = astore
     const apart = ref("123")
     apart.value = "333"
     onBeforeMount(async () => {
@@ -13,6 +16,7 @@ export function useApart(route) {
             .then((r) => {
                 r.price = r.price.toLocaleString("ru")
                 r.title = cookTitle(r)
+                saveCurrentApart(r)
                 return r
             })
             .catch(() => {
@@ -23,5 +27,6 @@ export function useApart(route) {
     })
     return {
         apart,
+        showFeedbackModal,
     }
 }

@@ -61,10 +61,12 @@
             @after-change="load"
             />
     </div>
-    <div class="clear-filters" @click="clearFilters">
+    <div
+        class="clear-filters"
+        @click="clearFilters"
+        >
         <div
             class="clear-filters__text"
-
             >
             Сбросить фильтры
         </div>
@@ -127,8 +129,17 @@ const { clearFilters, load } = astore
     flex: 1;
     max-width: 273px;
     min-width: 212px;
-
     margin-right: 20px;
+    height: fit-content;
+    padding: 10px;
+    @include box-shadow;
+    @include tablet {
+        position: absolute;
+        z-index: 95;
+        padding: 10px;
+        min-width: 250px;
+        background: white;
+    }
 }
 
 .ant-slider-handle {
@@ -170,12 +181,12 @@ const { clearFilters, load } = astore
         }
 
         &__value {
-            font-family: 'Montserrat', serif;
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 20px;
-            margin-right: 10px;
+                font-family: 'Montserrat', serif;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                margin-right: 10px;
         }
     }
 }
