@@ -1,6 +1,8 @@
+import { useRuntimeConfig } from "nuxt/app"
 function $url(additionalRules, body) {
+    const config = useRuntimeConfig()
     return $fetch(additionalRules, {
-        baseURL: "http://localhost:6200/api",
+        baseURL: config.public.apiUrl,
         method: "POST",
         body,
     })

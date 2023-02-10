@@ -10,13 +10,15 @@
                 alt="back"
                 >
             <div class="bl" />
-            <div id="observer-root">
-                <div class="observable">Observed Element 1</div>
-                <div class="observable">Observed Element 2</div>
-                <div class="observable">Observed Element 3</div>
-                <div class="observable">Observed Element 4</div>
-                <div class="observable">Observed Element 5</div>
-                <div class="observable">Observed Element 6</div>
+            <div
+                v-animate-on-scroll
+                class="bl2"
+                >
+                123
+                <img
+                    :src="config.public.baseImagesUrl + 'mainback.webp'"
+                    alt="back"
+                    >
             </div>
         </div>
     </div>
@@ -24,50 +26,17 @@
 
 <script setup>
 import { useRuntimeConfig } from "nuxt/app"
-import { onMounted } from "vue"
-const config = useRuntimeConfig()
-onMounted(() => {
-    const callback = (entries) => console.log(entries);
-    const observer = new IntersectionObserver(callback, {
-        root: document.querySelector("#observer-root"),
-        threshold: 1.0,
-    });
 
-    document
-        .querySelectorAll(".observable")
-        .forEach((el) => observer.observe(el));
-})
+const config = useRuntimeConfig()
+
+
 </script>
 
-<style lang="scss" >
-#observer-root {
-    height: 256px;
-    overflow: scroll;
-}
-
-.observable {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    padding: 32px;
-    transition: background-color 0.5s ease;
-}
-
-.observable.in-sight {
-    background-color: rgba(0,0,0,0.15);
-}
-
-
-
-/*
-.observable {
-    width: 100%;
-    height: 1000px;
-    border: 1px solid black;
-}
-*/
-
+<style lang="scss">
 .mwr {
     padding-top: 60px;
-
+    height: 100vh;
+    overflow: scroll;
     &-content {
         display: flex;
         flex-flow: column nowrap;

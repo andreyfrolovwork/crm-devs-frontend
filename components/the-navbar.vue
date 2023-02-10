@@ -141,7 +141,7 @@ const menuLinks = [
         to: "/l5"
     }
 ]
-const config = useRuntimeConfig()
+    const config = useRuntimeConfig()
 const show = ref(false)
 const showNavbar = ref(false)
 const router = useRouter()

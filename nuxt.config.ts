@@ -13,6 +13,7 @@ export default defineNuxtConfig({
         // Keys within public, will be also exposed to the client-side
         public: {
             baseImagesUrl: "http://localhost:6200/images/",
+            apiUrl: "http://localhost:6200/api",
             //otherUrl: process.env.OTHER_URL || "default_other_url"
         },
     },

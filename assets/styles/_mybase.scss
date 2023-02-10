@@ -20,12 +20,13 @@
 // the-show
 .animate {
   animation-name: show;
-  animation-duration: 1.2s;
+  //animation-duration: 1.2s;
+  animation-duration: 2s;
   animation-iteration-count: 1;
 }
 @keyframes show {
   0% {
-    transform: translateY(30px);
+    transform: translateY(60px);
     opacity: 0;
   }
   100% {
