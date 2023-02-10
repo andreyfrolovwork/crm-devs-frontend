@@ -3,21 +3,21 @@
         <splide-slide>
             <div class="splide-image-wrapper">
                 <a-image
-                    src="http://localhost:6200/images/chrome_1.png"
+                    :src="config.public.baseImagesUrl + 'chrome_1.png'"
                     />
             </div>
         </splide-slide>
         <splide-slide>
             <div class="splide-image-wrapper">
                 <a-image
-                    src="http://localhost:6200/images/chrome_1.png"
+                    :src="config.public.baseImagesUrl + 'chrome_1.png'"
                     />
             </div>
         </splide-slide>
         <splide-slide>
             <div class="splide-image-wrapper">
                 <a-image
-                    src="http://localhost:6200/images/chrome_1.png"
+                    :src="config.public.baseImagesUrl + 'chrome_1.png'"
                     />
             </div>
         </splide-slide>
@@ -25,12 +25,15 @@
 </template>
 
 <script setup>
+import { useRuntimeConfig } from "nuxt/app"
+
 const options = {
     rewind: true,
     gap: "1rem",
     width: "100%",
     height: "100%"
 }
+const config = useRuntimeConfig()
 </script>
 
 <style scoped>

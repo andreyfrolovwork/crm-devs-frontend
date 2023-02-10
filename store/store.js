@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"
 import columns from "./columns.js"
+import $url from "~/functions/fetch.js"
 
 const apartsStore = defineStore("index-page", {
     state: () => ({
@@ -110,22 +111,19 @@ const apartsStore = defineStore("index-page", {
 
         async load() {
             try {
-                const props = {
-                    method: "POST",
-                    body: {
-                        rowsPerPage: this.rowsPerPage,
-                        page: this.page,
-                        orderBy: this.orderBy,
-                        sortBy: this.sortBy,
+                const body = {
+                    rowsPerPage: this.rowsPerPage,
+                    page: this.page,
+                    orderBy: this.orderBy,
+                    sortBy: this.sortBy,
 
-                        area: this.area,
-                        price: this.price,
-                        floor: this.floor,
-                        rooms: this.roomsProps,
-                    },
+                    area: this.area,
+                    price: this.price,
+                    floor: this.floor,
+                    rooms: this.roomsProps,
                 }
-                console.log("load with params", props)
-                const aparts = await $fetch("http://localhost:6200/api/aparts", props)
+                console.log("load with params", body)
+                const aparts = await $url("/aparts", body)
                 console.log(aparts)
                 console.log("result", aparts)
                 this.aparts = aparts.rows

@@ -67,12 +67,12 @@ import _ from "lodash"
 import { touchScroll } from "../functions/touchScroll.js"
 import { setHalhScrollLeft } from "../functions/setHalhScrollLeft.js"
 import { setupTooltips } from "../functions/setupTooltips.js"
-import { useRouter } from "nuxt/app"
+import { useRouter, useRuntimeConfig } from "nuxt/app"
 
 const router = useRouter()
-
+const config = useRuntimeConfig()
 const mainImage = {
-    src1: "http://localhost:6200/images/main-map-image.jpg"
+    src1: config.public.baseImagesUrl + 'main-map-image.jpg'
 }
 
 const mapProps = {

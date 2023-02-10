@@ -1,4 +1,5 @@
 import { defineStore } from "pinia"
+import $url from "~/functions/fetch.js"
 
 const adminstore = defineStore("admin-store", {
     state: () => ({
@@ -23,7 +24,7 @@ const adminstore = defineStore("admin-store", {
                     },
                 }
                 console.log("load with params", props)
-                const aparts = await $fetch("http://localhost:6200/api/aparts", props)
+                const aparts = await $url("/aparts", props.body)
                 console.log(aparts)
                 console.log("result", aparts)
                 this.aparts = aparts.rows

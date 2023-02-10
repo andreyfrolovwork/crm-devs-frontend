@@ -31,7 +31,7 @@
                 >
                 <td>
                     <a-image
-                        src="http://localhost:6200/images/chrome_1.png"
+                        :src="config.public.baseImagesUrl + 'chrome_1.png'"
                         />
                 <!--                    <the-gallery />-->
                 </td>
@@ -61,8 +61,9 @@
 <script setup>
 import apartsStore from "~/store/store.js"
 import { storeToRefs } from "pinia"
-import { useRouter } from "nuxt/app"
+import { useRouter, useRuntimeConfig } from "nuxt/app"
 import cookTitle from "../functions/cookTitle.js"
+const config = useRuntimeConfig()
 
 const astore = apartsStore()
 const { aparts, columns, page, count, rowsPerPage, sortBy, orderBy } = storeToRefs(astore)

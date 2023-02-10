@@ -11,7 +11,7 @@
                     <div class="d2">
                         <div class="d__top-image">
                             <img
-                                src="http://localhost:6200/images/all-sec.png"
+                                :src="config.public.baseImagesUrl + 'all-sec.png'"
                                 alt="секции"
                                 class="description__content__sections"
                                 >

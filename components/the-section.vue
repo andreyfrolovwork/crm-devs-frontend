@@ -75,11 +75,6 @@ const route = useRoute()
 console.log(route.query)
 
 const section = ref({})
-
-const mainImage = {
-    src1: "http://localhost:6200/images/section-1.jpg"
-}
-
 import darr from '../functions/path.js'
 
 

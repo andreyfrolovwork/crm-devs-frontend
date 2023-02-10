@@ -17,11 +17,13 @@
 
 <script setup>
 import { ref,onMounted } from "vue"
+import { useRuntimeConfig } from "nuxt/app"
 const imagesrc = ref(null)
 const loading = ref(true)
+const config = useRuntimeConfig()
 onMounted(() => {
     let myImage = new Image();
-    myImage.src = 'http://localhost:6200/images/home1.jpg';
+    myImage.src = config.public.baseImagesUrl + 'home1.jpg'
     console.log('start load image')
     myImage.onload = () => {
         loading.value = false
