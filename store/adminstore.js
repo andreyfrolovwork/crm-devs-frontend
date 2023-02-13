@@ -34,7 +34,7 @@ const adminstore = defineStore("admin-store", {
                 this.count = aparts.filters.count
                 this.maxCount = aparts.filters.maxCount
             } catch (e) {
-                debugger
+                console.log("error")
             }
         },
     },

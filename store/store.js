@@ -133,7 +133,7 @@ const apartsStore = defineStore("index-page", {
                 this.count = aparts.filters.count
                 this.maxCount = aparts.filters.maxCount
             } catch (e) {
-                debugger
+                console.log("error")
             }
         },
     },

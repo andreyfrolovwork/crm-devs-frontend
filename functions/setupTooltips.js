@@ -37,7 +37,7 @@ export function setupTooltips(
             tooltip.classList.add(toolTopShowClass)
             tooltip.style.transform = `translate(${e.layerX + 10}px, ${e.layerY}px)`
         } catch (e) {
-            debugger
+            console.log("error")
         }
     }
     function setShade(value) {
