@@ -1,9 +1,7 @@
 <template>
     <div class="mwr">
         <div class="mwr-content">
-            <div class="h1">
-                Главная
-            </div>
+            <the-index-top />
             <div
                 v-animate-on-scroll
                 >
