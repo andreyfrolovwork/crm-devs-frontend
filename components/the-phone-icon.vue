@@ -30,6 +30,7 @@
 <style lang="scss">
 
 .phone-icon {
+    user-select:none;
     &:focus {
         animation-name: phone-call;
         animation-duration: 300ms;

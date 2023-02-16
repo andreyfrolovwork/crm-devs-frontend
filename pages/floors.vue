@@ -3,10 +3,29 @@
         <the-bottom-modal
             v-model:show-m="showModal"
             >
-            <the-button-white @click="clickOnApart(currentApart)">
-                Перейти к описанию квартиры
-            </the-button-white>
-            {{ currentApart.toolTipText }}
+            <div class="apartdesc">
+                <div class="apartdesc-text">
+                    <div class="apartdesc-text-title">
+                        {{ currentApart.title }}
+                    </div>
+                    <div class="apartdesc-text-textshadow">
+                        {{ currentApart.floor }} этаж
+                    </div>
+                    <div class="apartdesc-text-priceline">
+                        <div class="apartdesc-text-priceline-price">
+                            {{ currentApart.price.toLocaleString("ru") }} рублей
+                        </div>
+                        <div class="apartdesc-text-priceline-area">
+                            {{ currentApart.area2 }}м<sup>2</sup>
+                        </div>
+                    </div>
+                </div>
+                <div class="apartdesc-button">
+                    <the-button @click="clickOnApart(currentApart)">
+                        Перейти к описанию квартиры
+                    </the-button>
+                </div>
+            </div>
         </the-bottom-modal>
         <figure class="plane_floor">
             <img
@@ -69,14 +88,21 @@ function hover() {
 }
 
 function clickOnApart(e) {
+    console.log("click on apart",e)
     if (!e.sold) {
-        router.push(e.routeTo)
+        router.push({
+            path: "/apartment",
+            query: {
+                _id: e.apartId
+            }
+        })
     } else {
         message.error("Обьект продан")
     }
 }
 
 function gotoApart(e) {
+    console.log("gotoApart")
     if (!e.sold) {
         router.push({
             path: "/apartment",
@@ -91,6 +117,7 @@ function gotoApart(e) {
 
 function click(e) {
     if (isMobile.any()) {
+        console.log("current apart ", e)
         currentApart.value = e
         showModal.value = true
         console.log("click", e)
@@ -126,6 +153,25 @@ onBeforeUnmount(() => {
 })
 </script>
 <style lang="scss">
+
+.apartdesc {
+    display: flex;
+    flex-direction: column;
+    //justify-content: center;
+    ///align-content: center;
+    &-text {
+        font-family: "Montserrat", serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 43px;
+        //color: white;
+    }
+
+    &-button {
+        margin: 0 auto;
+    }
+}
 
 
 body {
@@ -240,6 +286,7 @@ body {
     visibility: visible;
     opacity: 1;
 }
+
 .sold {
     background-color: #a4a4a4;
 }
@@ -264,4 +311,45 @@ body {
 .aparts_areas {
 
 }*/
+
+.apartdesc {
+    display: flex;
+    flex-direction: column;
+    &-text {
+        &-title {
+            font-family: 'Montserrat',serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+        }
+        &-textshadow {
+            font-family: 'Montserrat',serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 16px;
+            color: #757575;
+        }
+        &-priceline {
+            display: flex;
+            &-price {
+                font-family: "Montserrat", serif;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 45px;
+                margin-right: 21px;
+            }
+            &-area {
+                font-family: 'Montserrat',serif;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 30px;
+                line-height: 37px;
+                color: #000000;
+            }
+        }
+    }
+}
 </style>

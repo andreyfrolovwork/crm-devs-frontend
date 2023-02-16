@@ -224,7 +224,7 @@ function calc(srok, summ, percent, vznos) {
 }
 
 .table {
-    margin: 0 10px 0 10px;
+    margin: 0 10px 17px 10px;
 
     .bank-col {
         display: flex;

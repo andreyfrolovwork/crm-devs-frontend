@@ -31,7 +31,7 @@ function close(){
 <style scoped lang="scss">
 
 .the_modal_wrapper {
-    background: $base_green;
+   // background: $base_green;
     z-index:101;
 
     position: absolute;
@@ -41,11 +41,11 @@ function close(){
     left:0px;
     width: 100vw;
     //height: 200px;
-    height: 60px;
-
+    ///height: 94px;
+    height: 137px;
     display: flex;
     flex-flow: column;
-    justify-content: center;
+    //justify-content: center;
     align-items: center;
 
 }

@@ -13,6 +13,7 @@ export function setupOneTooltip(planeClass, holeClass, tooltipClass, tooltipShow
         nodeListOf.forEach(removeClass(tooltipShowClass))
     }
     function showAndMoveCurrentTooltip(e) {
+        console.log(e)
         const name = `#${e.target.id}-tooltip`
         const tooltip = document.querySelector(name)
         tooltip.classList.add(tooltipShowClass)

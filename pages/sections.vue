@@ -3,9 +3,11 @@
         <the-bottom-modal
             v-model:show-m="bottomModal"
             >
-            <the-button-white @click="clickOnSection(currentFloor)">
-                Перейти к площадке
-            </the-button-white>
+            <div class="section-modal">
+                <the-button-white @click="clickOnSection(currentFloor)">
+                    Перейти к площадке
+                </the-button-white>
+            </div>
             {{ currentFloor.toolTipText }}
         </the-bottom-modal>
         <figure class="plane-on-main">
@@ -272,5 +274,13 @@ body {
 
 .sold {
     background-color: #a4a4a4;
+}
+
+.section-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
 }
 </style>
