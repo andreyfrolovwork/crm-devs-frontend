@@ -73,7 +73,7 @@
                     v-for="tooltip in section.sections"
                     :id="tooltip.idToolTip"
                     :key="tooltip.toolTipClass"
-                    :class="tooltip.toolTipClass"
+                    :class="tooltip.toolTipClass + ' sect'"
                     >
                     {{ tooltip.toolTipText }}
                 </div>
@@ -239,9 +239,10 @@ body {
     stroke-opacity: 1;
 }
 
-.tooltip {
+.sect {
     position: absolute;
     width: fit-content;
+    //background-color: #36f43f;
     background-color: #f44336;
     color: #fff;
     padding: 5px 10px;

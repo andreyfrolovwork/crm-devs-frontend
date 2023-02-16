@@ -57,9 +57,26 @@
                 v-for="tooltip in section.sections"
                 :id="tooltip.idToolTip"
                 :key="tooltip.toolTipClass"
-                :class="tooltip.toolTipClass"
+                :class="tooltip.toolTipClass + ' secfloor' + '  tooltip-show'"
                 >
-                {{ tooltip.toolTipText }}
+                <div class="apartdesc">
+                    <div class="apartdesc-text">
+                        <div class="apartdesc-text-title">
+                            {{ tooltip.title }}
+                        </div>
+                        <div class="apartdesc-text-textshadow">
+                            {{ tooltip.floor }} этаж
+                        </div>
+                        <div class="apartdesc-text-priceline">
+                            <div class="apartdesc-text-priceline-price">
+                                {{ tooltip.price.toLocaleString("ru") }} рублей
+                            </div>
+                            <div class="apartdesc-text-priceline-area">
+                                {{ tooltip.area2 }}м<sup>2</sup>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -88,7 +105,7 @@ function hover() {
 }
 
 function clickOnApart(e) {
-    console.log("click on apart",e)
+    console.log("click on apart", e)
     if (!e.sold) {
         router.push({
             path: "/apartment",
@@ -266,19 +283,21 @@ body {
 
 }
 
-.tooltip {
+.secfloor {
     position: absolute;
     width: fit-content;
-    background-color: #f44336;
-    color: #fff;
+    //background-color: #f44336;
+    background-color: white;
+    //color: #fff;
     padding: 5px 10px;
-    border-radius: 9999px;
+    ///border-radius: 9999px;
     pointer-events: none;
     opacity: 0;
     //opacity: 1;
     visibility: visible;
     will-change: transform, opacity;
     transition: opacity 0.5s;
+    @include box-shadow
 
 }
 
@@ -315,24 +334,28 @@ body {
 .apartdesc {
     display: flex;
     flex-direction: column;
+
     &-text {
         &-title {
-            font-family: 'Montserrat',serif;
+            font-family: 'Montserrat', serif;
             font-style: normal;
             font-weight: 400;
             font-size: 16px;
             line-height: 20px;
         }
+
         &-textshadow {
-            font-family: 'Montserrat',serif;
+            font-family: 'Montserrat', serif;
             font-style: normal;
             font-weight: 400;
             font-size: 10px;
             line-height: 16px;
             color: #757575;
         }
+
         &-priceline {
             display: flex;
+
             &-price {
                 font-family: "Montserrat", serif;
                 font-style: normal;
@@ -341,8 +364,9 @@ body {
                 line-height: 45px;
                 margin-right: 21px;
             }
+
             &-area {
-                font-family: 'Montserrat',serif;
+                font-family: 'Montserrat', serif;
                 font-style: normal;
                 font-weight: 300;
                 font-size: 30px;
