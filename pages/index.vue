@@ -127,6 +127,40 @@
                     </template>
                 </the-index-block>
             </div>
+            <div
+                v-animate-on-scroll
+                >
+                <div class="howbuy">
+                    <div class="h1 howbuy_title">
+                        Как купить?
+                    </div>
+                    <div class="howbuy-text">
+                        Продажи в ведутся строго по договорам долевого участия (ДДУ),
+                        согласно действующему законодательству РФ (№ 214‑ФЗ)
+                    </div>
+                    <the-tabs :tabs="['Ипотека','Рассрочка'/*,'Материнский капитал','100% оплата','Trade-in'*/]">
+                        <template #t0>
+                            <the-credit />
+                        </template>
+                        <template #t1>
+                            Текст про рассрочку
+                        </template>
+                        <!--                <template #t2>
+                                            t2
+                                        </template>
+                        
+                                        <template #t3>
+                                            t3
+                                        </template>
+                                        <template #t4>
+                                            t4
+                                        </template>
+                                        <template #t5>
+                                            t5
+                                        </template>-->
+                    </the-tabs>
+                </div>
+            </div>
         </div>
     </div>
 </template>

@@ -12,7 +12,7 @@
                     <div class="credit-filter-price">
                         {{ price.toLocaleString("ru") }}
                     </div>
-                    <the-button @click="showFeedbackModal">
+                    <the-button @click="showModal">
                         Получить одобрение
                     </the-button>
                 </div>
@@ -99,19 +99,32 @@
 </template>
 
 <script setup>
-import { useRuntimeConfig } from "nuxt/app"
+import { useRoute, useRuntimeConfig } from "nuxt/app"
 import apartsStore from "~/store/store.js"
 import creditTable from "~/functions/creditTable.js"
 import { ref } from "vue"
 
 const astore = apartsStore()
-const { showFeedbackModal } = astore
+
 const price = 1500000
 const config = useRuntimeConfig()
 const vznos = ref(0)
 const srok = ref(1)
 const table = ref([])
 table.value = creditTable
+const route = useRoute()
+const { showFeedbackModal } = astore
+
+function showModal() {
+    if (route.path !== "/") {
+        showFeedbackModal()
+    } else {
+        astore.currentApart = {
+            title: "Нажатие кнопки с главной страницы"
+        }
+        showFeedbackModal()
+    }
+}
 
 function calcTable() {
     const ntable = [...table.value]
@@ -147,11 +160,11 @@ function calc(srok, summ, percent, vznos) {
     flex-direction: row;
     padding: 30px;
     background: aliceblue;
-    margin: 20px 0 20px 0px;
+    margin: 20px 10px 20px 10px;
 
     @include phone {
         flex-flow: column;
-        padding: 10px;
+        padding: 20px 10px;
     }
 
     &-col {
@@ -214,7 +227,7 @@ function calc(srok, summ, percent, vznos) {
     line-height: 37px;
     text-align: left;
     color: #000000;
-    margin: 4px 0 4px 0;
+    margin: 4px 10px 4px 10px;
 }
 
 .bank-svg {
@@ -223,6 +236,8 @@ function calc(srok, summ, percent, vznos) {
 }
 
 .table {
+    margin: 0 10px 0 10px;
+
     .bank-col {
         display: flex;
         flex-flow: column;
@@ -235,6 +250,10 @@ function calc(srok, summ, percent, vznos) {
             font-size: 10px;
             line-height: 13px;
             padding: 8px;
+        }
+        @include tablet {
+            line-height: 15px;
+            font-size: 10px;
         }
     }
 
