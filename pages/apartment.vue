@@ -363,7 +363,7 @@ const { apart, showFeedbackModal } = useApart(route)
     }
 
     &-text {
-        margin: 13px 0;
+        margin: 13px 10px;
         font-family: "Montserrat", serif;
         font-style: normal;
         font-weight: 400;

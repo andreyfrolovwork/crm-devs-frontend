@@ -12,7 +12,7 @@
                     <div class="credit-filter-price">
                         {{ price.toLocaleString("ru") }}
                     </div>
-                    <the-button @click="showModal">
+                    <the-button @click="callFromMainPage">
                         Получить одобрение
                     </the-button>
                 </div>
@@ -99,12 +99,12 @@
 </template>
 
 <script setup>
-import { useRoute, useRuntimeConfig } from "nuxt/app"
-import apartsStore from "~/store/store.js"
+import {  useRuntimeConfig } from "nuxt/app"
+
 import creditTable from "~/functions/creditTable.js"
 import { ref } from "vue"
+import { callFromMainPage } from "../functions/callFromMainPage.js"
 
-const astore = apartsStore()
 
 const price = 1500000
 const config = useRuntimeConfig()
@@ -112,19 +112,7 @@ const vznos = ref(0)
 const srok = ref(1)
 const table = ref([])
 table.value = creditTable
-const route = useRoute()
-const { showFeedbackModal } = astore
 
-function showModal() {
-    if (route.path !== "/") {
-        showFeedbackModal()
-    } else {
-        astore.currentApart = {
-            title: "Нажатие кнопки с главной страницы"
-        }
-        showFeedbackModal()
-    }
-}
 
 function calcTable() {
     const ntable = [...table.value]

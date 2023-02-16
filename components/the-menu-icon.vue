@@ -28,6 +28,8 @@ function setShow(){
 /* Icon 1 */
 
 #nav-icon1, #nav-icon2, #nav-icon3, #nav-icon4 {
+    margin-left:15px;
+    margin-top: 2px;
     width: 26px;
     height: 23px;
     position: relative;

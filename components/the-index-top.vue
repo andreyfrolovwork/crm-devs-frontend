@@ -165,7 +165,7 @@ function goto() {
             text-align: center;
             font-family: 'Montserrat', serif;
             font-style: normal;
-            font-weight: 700;
+            font-weight: 400;
             font-size: 17px;
             line-height: 21px;
             color: #FFFFFF;

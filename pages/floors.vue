@@ -3,9 +3,9 @@
         <the-bottom-modal
             v-model:show-m="showModal"
             >
-            <button @click="clickOnApart(currentApart)">
+            <the-button-white @click="clickOnApart(currentApart)">
                 Перейти к описанию квартиры
-            </button>
+            </the-button-white>
             {{ currentApart.toolTipText }}
         </the-bottom-modal>
         <figure class="plane_floor">

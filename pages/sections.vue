@@ -1,7 +1,7 @@
 <template>
     <div>
         <the-bottom-modal
-            v-model:show-m="showModal"
+            v-model:show-m="bottomModal"
             >
             <the-button-white @click="clickOnSection(currentFloor)">
                 Перейти к площадке
@@ -89,13 +89,18 @@ import { useRouter, useRoute, useRuntimeConfig } from "nuxt/app"
 import { message } from "ant-design-vue"
 import $url from "../functions/fetch.js"
 import { isMobile } from "../functions/isMobile.js"
+import apartsStore from "../store/store.js"
+import { storeToRefs } from "pinia"
+
+const astore = apartsStore()
+const {bottomModal} = storeToRefs(astore)
 
 const router = useRouter()
 const route = useRoute()
 const config = useRuntimeConfig()
 const section = ref({})
 const loadSection = ref(false)
-const showModal = ref(false)
+/*const showModal = ref(false)*/
 const currentFloor = ref(null)
 let listener
 console.log("setup")
@@ -113,7 +118,7 @@ function clickOnSection(e) {
 function click(e) {
     if (isMobile.any()) {
         currentFloor.value = e
-        showModal.value = true
+        bottomModal.value = true
         console.log("click", e)
     } else {
         clickOnSection(e)

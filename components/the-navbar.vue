@@ -6,7 +6,9 @@
                 class="navbar-menu"
                 >
                 <ul class="nav-ul">
-                    <div class="navbar-menu__title">О проекте</div>
+                    <div class="navbar-menu__title">
+                        О проекте
+                    </div>
                     <li
                         v-for="link in menuLinks"
                         :key="link.name"
@@ -20,7 +22,9 @@
                             {{ link.name }}
                         </NuxtLink>
                     </li>
-                    <div class="navbar-menu__title">Подбор квартиры</div>
+                    <div class="navbar-menu__title">
+                        Подбор квартиры
+                    </div>
                     <li class="nav-menu">
                         <NuxtLink
                             class="link black bar"
@@ -52,6 +56,7 @@
                     >
             </div>
             <div class="menu-button">
+                <the-phone-icon @click="callFromMainPage"/>
                 <the-menu-icon @showmenu="showNavbarMenu" />
             </div>
         </div>
@@ -119,6 +124,8 @@
 <script setup>
 import { useRouter, useRuntimeConfig } from "nuxt/app"
 import { ref } from "vue"
+import { callFromMainPage } from "../functions/callFromMainPage.js"
+
 const menuLinks = [
     {
         name: "О проекте",
@@ -146,10 +153,11 @@ const show = ref(false)
 const showNavbar = ref(false)
 const router = useRouter()
 
-function showNavbarMenu(){
-    console.log('show menu')
+function showNavbarMenu() {
+    console.log("show menu")
     showNavbar.value = !showNavbar.value
 }
+
 function showMenu(value) {
     if (!value) {
         show.value = !show.value
@@ -157,9 +165,10 @@ function showMenu(value) {
         show.value = value
     }
 }
-function goToMain(){
+
+function goToMain() {
     router.push({
-        path:'/'
+        path: "/"
     })
 }
 </script>
@@ -177,6 +186,7 @@ function goToMain(){
     margin-bottom: auto;
     ///margin-left: 15px;
 }
+
 .navbar {
 
     //box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
@@ -191,14 +201,15 @@ function goToMain(){
     flex-direction: row;
     //max-width: 1440px;
     justify-content: center;
+
     &__mobile-button {
 
         @mixin show-mobile {
             display: flex;
             align-items: center;
-            flex-flow:row;
+            flex-flow: row;
             justify-content: space-between;
-            flex:1;
+            flex: 1;
             //margin: 0 58px 0 15px;
             margin: 0px 35px 0 15px;
             //margin: 0 25px 0 15px;
@@ -213,12 +224,13 @@ function goToMain(){
         }
 
     }
+
     &__center {
         @include phone {
             display: none;
         }
         @include tablet {
-            display:none;
+            display: none;
         }
         display: flex;
         max-width: 1440px;
@@ -228,6 +240,7 @@ function goToMain(){
         justify-content: space-between;
         //margin: 0 15px;
         margin: 0 66px 0 15px;
+
         &__left {
             display: flex;
             flex-direction: row;
@@ -247,15 +260,18 @@ function goToMain(){
     color: white;
     align-items: center;
     display: flex;
-    font-family: 'Montserrat',serif;
-    transition: color,text-shadow 0.15s ease-in-out;
+    font-family: 'Montserrat', serif;
+    transition: color, text-shadow 0.15s ease-in-out;
+
     &:hover {
         color: #e7e7e7;
         text-shadow: 0px 4px 4px rgb(233 233 233 / 40%);
     }
 }
-.black{
-    color:black;
+
+.black {
+    color: black;
+
     &:hover {
         color: #707070;
         text-shadow: 0px 4px 4px rgba(203, 185, 185, 0.4);
@@ -267,13 +283,14 @@ function goToMain(){
 .aicenter {
     align-items: center;
 }
+
 .m15r {
     margin-right: 15px;
 }
 
 .withmenu {
     display: flex;
-    flex-flow:column;
+    flex-flow: column;
     /* justify-content: center;*/
     /* flex-direction: column; */
     /* align-items: center; */
@@ -296,25 +313,35 @@ function goToMain(){
     width: 100vw;
     height: calc(100vh - 60px);
     margin-top: 60px;
+
     ul {
         padding: 50px 50px 50px 70px;
     }
+
     li {
         margin-left: 15px;
     }
+
     &__title {
-        font-family: 'Montserrat';
+        font-family: 'Montserrat',serif;
         font-style: normal;
         font-weight: 600;
-/*        font-size: 16px;
-        line-height: 20px;*/
+        /*        font-size: 16px;
+                line-height: 20px;*/
         font-size: 24px;
         line-height: 30px;
     }
+
     .bar {
         font-size: 18px;
         line-height: 33px;
     }
+
+}
+
+.menu-button {
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 // mobile menu transitiion property
@@ -330,6 +357,7 @@ function goToMain(){
     transform: translateX(-100px);
     opacity: 0;
 }
+
 .mobile-menu1-leave-to {
     transform: translateX(-100px);
     opacity: 0;

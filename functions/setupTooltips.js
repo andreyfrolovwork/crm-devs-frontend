@@ -1,3 +1,5 @@
+import { hideModal } from "~/functions/hideModal.js"
+
 export function setupTooltips(
     planeClass,
     shapeClass,
@@ -57,6 +59,8 @@ export function setupTooltips(
             showCurrentTooltip(e)
         } else {
             console.log("not contains shape")
+            // только для того, что бы скрыть модалку
+            hideModal()
             setShade(0.2)
             getShapesAndRemoveClass(planeClass, shapeClass, polygonShowClass)
             hideAllTooltips()

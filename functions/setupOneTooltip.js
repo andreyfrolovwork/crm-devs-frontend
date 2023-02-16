@@ -1,4 +1,5 @@
 import { isMobile } from "~/functions/isMobile.js"
+import { hideModal } from "~/functions/hideModal.js"
 
 export function setupOneTooltip(planeClass, holeClass, tooltipClass, tooltipShowClass) {
     function removeClass(removedClass) {
@@ -27,6 +28,7 @@ export function setupOneTooltip(planeClass, holeClass, tooltipClass, tooltipShow
                 hideAllTooltips()
                 showAndMoveCurrentTooltip(e)
             } else {
+                hideModal()
                 hideAllTooltips()
                 console.log("not hover")
             }

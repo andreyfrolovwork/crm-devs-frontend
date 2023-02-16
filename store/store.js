@@ -43,6 +43,7 @@ const apartsStore = defineStore("index-page", {
 
         currentApart: {},
         modalVisible: false,
+        bottomModal: false,
     }),
     getters: {
         b1: (state) => state.rooms.includes(1),
