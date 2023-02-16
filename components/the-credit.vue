@@ -65,36 +65,36 @@
         <div class="credit-sum">
             Сумма ипотеки {{ (price - vznos).toLocaleString("ru") }} руб.
         </div>
-        <!--        <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Банк</th>
-                            <th>Ставка</th>
-                            <th>Первый взнос</th>
-                            <th>Срок</th>
-                            <th>Платёж</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            v-for="(bank,i) in table"
-                            :key="bank.num"
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Банк</th>
+                    <th>Ставка</th>
+                    <th>Первый взнос</th>
+                    <th>Срок</th>
+                    <th>Платёж</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    v-for="(bank,i) in table"
+                    :key="bank.num"
+                    >
+                    <td class="bank-col">
+                        <img
+                            class="bank-svg"
+                            :src="config.public.baseImagesUrl +(i+1) + '_b.svg'"
+                            alt="bank"
                             >
-                            <td class="bank-col">
-                                <img
-                                    class="bank-svg"
-                                    :src="config.public.baseImagesUrl +(i+1) + '_b.svg'"
-                                    alt="bank"
-                                    >
-                                {{ bank.bank }}
-                            </td>
-                            <td>{{ bank.percent }}</td>
-                            <td>{{ bank.fee }}</td>
-                            <td>{{ bank.srok }}</td>
-                            <td>    <span class="bold">{{ bank.payment }} ₽</span></td>
-                        </tr>
-                    </tbody>
-                </table>-->
+                        {{ bank.bank }}
+                    </td>
+                    <td>{{ bank.percent }}</td>
+                    <td>{{ bank.fee }}</td>
+                    <td>{{ bank.srok }}</td>
+                    <td><span class="bold">{{ bank.payment }} ₽</span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -231,6 +231,11 @@ function calc(srok, summ, percent, vznos) {
         font-size: 12px;
         text-align: left;
         padding: 20px;
+        @include phone {
+            font-size: 10px;
+            line-height: 13px;
+            padding: 8px;
+        }
     }
 
 }
