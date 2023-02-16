@@ -12,6 +12,9 @@
                     <div class="credit-filter-price">
                         {{ price.toLocaleString("ru") }}
                     </div>
+                    <the-button @click="showFeedbackModal">
+                        Получить одобрение
+                    </the-button>
                 </div>
                 <div class="credit-filter-col">
                     <div class="credit-filter-title">
@@ -35,7 +38,10 @@
                             />
                     </div>
                 </div>
-                <div class="credit-filter-col">
+                <div
+                    class="credit-filter-col"
+                    :style="{borderBottom:'none', paddingBottom:0,marginBottom:0}"
+                    >
                     <div class="credit-filter-title">
                         Срок ипотеки, лет
                     </div>
@@ -59,48 +65,49 @@
         <div class="credit-sum">
             Сумма ипотеки {{ (price - vznos).toLocaleString("ru") }} руб.
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Банк</th>
-                    <th>Ставка</th>
-                    <th>Первый взнос</th>
-                    <th>Срок</th>
-                    <th>Платёж</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    v-for="(bank,i) in table"
-                    :key="bank.num"
-                    >
-                    <td class="bank-col">
-                        <img
-                            class="bank-svg"
-                            :src="config.public.baseImagesUrl +(i+1) + '_b.svg'"
-                            alt="bank"
+        <!--        <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Банк</th>
+                            <th>Ставка</th>
+                            <th>Первый взнос</th>
+                            <th>Срок</th>
+                            <th>Платёж</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            v-for="(bank,i) in table"
+                            :key="bank.num"
                             >
-                        {{ bank.bank }}
-                    </td>
-                    <td>{{ bank.percent }}</td>
-                    <td>{{ bank.fee }}</td>
-                    <td>{{ bank.srok }}</td>
-                    <td>    <span class="bold">{{ bank.payment }} ₽</span></td>
-                </tr>
-            </tbody>
-        </table>
+                            <td class="bank-col">
+                                <img
+                                    class="bank-svg"
+                                    :src="config.public.baseImagesUrl +(i+1) + '_b.svg'"
+                                    alt="bank"
+                                    >
+                                {{ bank.bank }}
+                            </td>
+                            <td>{{ bank.percent }}</td>
+                            <td>{{ bank.fee }}</td>
+                            <td>{{ bank.srok }}</td>
+                            <td>    <span class="bold">{{ bank.payment }} ₽</span></td>
+                        </tr>
+                    </tbody>
+                </table>-->
     </div>
 </template>
 
 <script setup>
 import { useRuntimeConfig } from "nuxt/app"
-
-const price = 1500000
+import apartsStore from "~/store/store.js"
 import creditTable from "~/functions/creditTable.js"
 import { ref } from "vue"
 
+const astore = apartsStore()
+const { showFeedbackModal } = astore
+const price = 1500000
 const config = useRuntimeConfig()
-
 const vznos = ref(0)
 const srok = ref(1)
 const table = ref([])
@@ -140,15 +147,23 @@ function calc(srok, summ, percent, vznos) {
     flex-direction: row;
     padding: 30px;
     background: aliceblue;
-
     margin: 20px 0 20px 0px;
 
+    @include phone {
+        flex-flow: column;
+        padding: 10px;
+    }
 
     &-col {
         display: flex;
         flex-flow: column;
         flex: 1;
         margin: 0 10px;
+        @include phone {
+            padding-bottom: 18px;
+            border-bottom: 0.4px solid #c9c9c9;
+            margin-bottom: 18px;
+        }
     }
 
     &-title {
@@ -162,7 +177,7 @@ function calc(srok, summ, percent, vznos) {
     }
 
     &-price {
-        margin: 0px 0 0 0;
+        margin: 0px 0 12px 0;
         line-height: 1.4;
         font-family: 'Montserrat', serif;
         font-style: normal;
@@ -186,7 +201,7 @@ function calc(srok, summ, percent, vznos) {
     }
 
     &-slider {
-
+        margin-top: 16px;
     }
 }
 

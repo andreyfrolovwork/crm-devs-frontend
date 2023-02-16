@@ -39,7 +39,9 @@
 
                         <div class="df jcc aic buybut">
                             <div>
-                                <the-button @click="showFeedbackModal">Оставить заявку</the-button>
+                                <the-button @click="showFeedbackModal">
+                                    Оставить заявку
+                                </the-button>
                             </div>
                             <div>
                                 <button class="download-pdf">
@@ -58,28 +60,33 @@
             </div>
         </div>
         <div class="howbuy">
-            <div class="h1 howbuy_title">Как купить?</div>
-            <div class="howbuy-text">Продажи в ЖК «Конфетти» ведутся строго по договорам долевого участия (ДДУ), согласно действующему законодательству РФ (№ 214‑ФЗ)</div>
-            <the-tabs :tabs="['Ипотека','Рассрочка','Материнский капитал','100% оплата','Trade-in']">
+            <div class="h1 howbuy_title">
+                Как купить?
+            </div>
+            <div class="howbuy-text">
+                Продажи в ведутся строго по договорам долевого участия (ДДУ),
+                согласно действующему законодательству РФ (№ 214‑ФЗ)
+            </div>
+            <the-tabs :tabs="['Ипотека','Рассрочка'/*,'Материнский капитал','100% оплата','Trade-in'*/]">
                 <template #t0>
                     <the-credit />
                 </template>
                 <template #t1>
-                    t1
+                    Текст про рассрочку
                 </template>
-                <template #t2>
-                    t2
-                </template>
-
-                <template #t3>
-                    t3
-                </template>
-                <template #t4>
-                    t4
-                </template>
-                <template #t5>
-                    t5
-                </template>
+                <!--                <template #t2>
+                                    t2
+                                </template>
+                
+                                <template #t3>
+                                    t3
+                                </template>
+                                <template #t4>
+                                    t4
+                                </template>
+                                <template #t5>
+                                    t5
+                                </template>-->
             </the-tabs>
         </div>
     </div>
@@ -91,10 +98,10 @@ import { useApart } from "../useHooks/useApart.js"
 
 const route = useRoute()
 const config = useRuntimeConfig()
-const { apart,showFeedbackModal } = useApart(route)
+const { apart, showFeedbackModal } = useApart(route)
 
 </script>
-<style lang="scss" >
+<style lang="scss">
 .splide__track {
     height: 100%; // вот это свойство мы добавили
     overflow: hidden;
@@ -165,12 +172,12 @@ const { apart,showFeedbackModal } = useApart(route)
         //min-width: 375px;
         height: 600px;
         @include tablet {
-            margin:0px;
+            margin: 0px;
         }
 
         @include phone {
             min-width: initial;
-            margin:0px;
+            margin: 0px;
         }
         //background-color: #c9a1a1;
     }
@@ -185,10 +192,10 @@ const { apart,showFeedbackModal } = useApart(route)
         margin-left: 5px;
         //min-width: 375px;
         @include tablet {
-            margin:10px 0 0 0;
+            margin: 10px 0 0 0;
         }
         @include phone {
-            margin:10px 0 0 0;
+            margin: 10px 0 0 0;
         }
 
         &__content {
@@ -248,10 +255,11 @@ const { apart,showFeedbackModal } = useApart(route)
                 flex-flow: column;
                 justify-content: center;
 
-                &__top-image{
+                &__top-image {
                     display: flex;
                     justify-content: center;
                 }
+
                 &__props {
                     margin-top: 20px;
                 }
@@ -343,14 +351,17 @@ const { apart,showFeedbackModal } = useApart(route)
 .howbuy_title {
     text-align: left;
 }
+
 .howbuy {
     max-width: 1440px;
     margin: 44px 0;
     display: flex;
     flex-flow: column;
+
     &-title {
         display: flex;
     }
+
     &-text {
         margin: 13px 0;
         font-family: "Montserrat", serif;

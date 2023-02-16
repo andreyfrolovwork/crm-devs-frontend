@@ -7,7 +7,8 @@
 
 <style scoped lang="scss">
 .the-button {
-
+    width: fit-content;
+    height: fit-content;
     background: none;
     //olor: inherit;
     border: none;
@@ -18,8 +19,8 @@
 
     align-items: center;
     padding: 8px 16px;
-    width: 168px;
-    height: 40px;
+    //width: 168px;
+    ///height: 40px;
 
     background: $base_green;
     color:white;
