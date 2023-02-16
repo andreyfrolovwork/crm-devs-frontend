@@ -8,9 +8,9 @@
             <Transition name="slide-fade">
                 <slot />
             </Transition>
-            <button @click="close">
+<!--            <button @click="close">
                 close
-            </button>
+            </button>-->
         </div>
     </Transition>
 </template>
@@ -31,7 +31,7 @@ function close(){
 <style scoped lang="scss">
 
 .the_modal_wrapper {
-    background: #3d9db2;
+    background: $base_green;
     z-index:101;
 
     position: absolute;
@@ -40,7 +40,8 @@ function close(){
     bottom:0px;
     left:0px;
     width: 100vw;
-    height: 200px;
+    //height: 200px;
+    height: 60px;
 
     display: flex;
     flex-flow: column;

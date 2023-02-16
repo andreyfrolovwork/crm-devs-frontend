@@ -3,7 +3,9 @@
         <the-bottom-modal
             v-model:show-m="showModal"
             >
-            <button @click="clickOnSection(currentFloor)">Перейти к площадке</button>
+            <the-button-white @click="clickOnSection(currentFloor)">
+                Перейти к площадке
+            </the-button-white>
             {{ currentFloor.toolTipText }}
         </the-bottom-modal>
         <figure class="plane-on-main">
