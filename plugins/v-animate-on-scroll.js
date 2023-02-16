@@ -21,7 +21,9 @@ export default defineNuxtPlugin((nuxtApp) => {
         },
         beforeUnmount: (el, binding, vnode, prevVnode) => {
             console.log("before unmount")
-            vnode.observer.disconnect()
+            if (vnode.observer) {
+                vnode.observer.disconnect()
+            }
         },
     })
 })
