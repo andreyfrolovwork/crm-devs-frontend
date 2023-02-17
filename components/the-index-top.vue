@@ -100,7 +100,14 @@ function goto() {
 <style lang="scss" scoped>
 .itop {
     height: 913px;
-    @include tablet {
+    @include media(null,1509px) {
+        margin-bottom: 140px;
+    }
+    @include media(null,764px) {
+        margin-bottom: 400px;
+    }
+
+/*    @include tablet {
         margin-bottom: 31px;
     }
     @include phone  {
@@ -117,7 +124,7 @@ function goto() {
     }
     @include media(745px) {
         margin-bottom: 0px;
-    }
+    }*/
     background-position-x: center;
     background-size: cover;
     display: flex;
@@ -127,7 +134,8 @@ function goto() {
 
     &-top {
         display: flex;
-        flex-basis: 22%;
+        margin-top: 644px;
+        //flex-basis: 22%;
         justify-content: center;
     }
 
@@ -196,7 +204,7 @@ function goto() {
                 cursor: pointer;
             }
 
-            @include box-shadow;
+            box-shadow: 0 0 19px rgb(0 0 0 / 30%);
             margin: 20px;
             padding: 20px;
             background-color: white;
