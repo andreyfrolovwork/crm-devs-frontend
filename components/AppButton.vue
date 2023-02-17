@@ -137,6 +137,9 @@ export default {
 
 <style lang="scss" scoped>
 .button {
+    font-family: 'Montserrat', serif;
+    font-style: normal;
+
     $that: &;
 
     display: inline-flex;
@@ -192,7 +195,7 @@ export default {
 
         @include hover {
             color: $white;
-            background-color: $color_dark-90;
+            background-color: $base_green_light;
         }
 
         &:disabled {
@@ -200,7 +203,7 @@ export default {
         }
 
         &:active {
-            background-color: $color_dark-70;
+            background-color: $base_green_light;
 
             .estate-card &,
             .new-estate-card & {

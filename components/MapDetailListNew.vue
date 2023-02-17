@@ -12,11 +12,6 @@
                     :checked="el.checked"
                     @change="$emit('map-set', el.text)"
                     >
-<!--                    <app-svg
-                        :id="el.id"
-                        :width="el.width"
-                        :height="el.height"
-                        />-->
                     <span class="map-detail-list__option-text">{{ el.text }}</span>
                 </FormCheck>
             </li>
@@ -146,6 +141,11 @@ export default {
 
     &__option-text {
         padding-left: 46px;
+        font-family: 'Montserrat', serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
 
         @include tablet {
             padding-left: 20px;

@@ -47,7 +47,6 @@
                 >
                 Панорама
             </AppButton>
-
         </div>
         <MapDetailListNew
             v-if="showInfrostructure"
@@ -62,7 +61,6 @@
             ref="panoramaRef"
             class="map-detail panorama"
             />
-
     </div>
     <!--    </Teleport>-->
 </template>
@@ -73,8 +71,12 @@ import { loadYmap } from "vue-yandex-maps"
 import settings from "@/functions/yandex.js"
 /* eslint-disable*/
 export default {
-
-  /*  inject: ["location", "estateType", "isZhk"],*/
+    props: {
+        cardPoint: {
+            type: Array,
+            default: [55.051205, 60.077164]
+        }
+    },
     data() {
         return {
             isMobile: false,
@@ -87,7 +89,6 @@ export default {
                 Магазины: [],
                 "Кафе и рестораны": []
             },
-            cardPoint: ["59.9201", "30.350087"],
             estateCardKey: 0,
             mapListKey: 0,
             list: [
@@ -183,6 +184,30 @@ export default {
         this.$root.panr = null
     },
     methods: {
+        async init() {
+            let zoom = new ymaps.control.ZoomControl()
+            let searchControl = new ymaps.control.SearchControl({
+                options: {
+                    size: "small",
+                    position: "none",
+                    provider: "yandex#search",
+                    noPopup: true
+                }
+            })
+            this.$root.search = searchControl
+            searchControl.events.add("click", this.clickOnSearch)
+            let myMap = new ymaps.Map("mapBlock", {
+                center: this.cardPoint,
+                zoom: this.mapSettings.zoom,
+                controls: [zoom, searchControl]
+            })
+            this.$root.map = myMap
+            myMap.events.add("click", this.clickOnMap)
+            this.mapIsShow = true
+            this.searchPanorama()
+            this.setCardPoint()
+
+        },
         clearMap() {
             this.$root.map.geoObjects.removeAll()
             this.curCard = null
@@ -396,108 +421,9 @@ export default {
             )
             this.$root.map.geoObjects.add(myPlacemark)
         },
-        /*async toggleObjects() {
-            if (this.showInfrostructure) {
-                this.showInfrostructure = false
-                this.$root.map.geoObjects.removeAll()
-            }
-
-            if (this.showObjects) {
-                this.showObjects = !this.showObjects
-                this.$root.map.geoObjects.removeAll()
-
-                this.setCardPoint()
-                this.curCard = null
-            } else {
-                this.$root.map.geoObjects.removeAll()
-                this.list.forEach((el, i) => {
-                    this.list[i].checked = false
-                })
-
-                this.showObjects = !this.showObjects
-                if (this.panoramaIsShow) {
-                    this.destroyPanorama()
-                }
-                let type = null
-                if (this.estateType === "Продажа") {
-                    type = 1
-                } else {
-                    type = 0
-                }
-                let config = {
-                    params: {
-                        city: this.location.region,
-                        type: type,
-                        isZhk: this.isZhk
-                    }
-                }
-                let objects = await axios.get("/api/getOffersList", config)
-                if (objects) {
-                    let collection = new ymaps.GeoObjectCollection(null, {
-                        preset: "islands#yellowIcon"
-                    })
-                    this.cards = objects.data.data
-                    objects.data.data.forEach((es) => {
-                        const notThisPoint =
-                            es.location.latitude !== this.location.latitude && es.location.longitude !== this.location.longitude
-                        const latLongIsExist = es.location.latitude && es.location.longitude
-                        if (notThisPoint && latLongIsExist) {
-                            let squareLayout = ymaps.templateLayoutFactory.createClass("<div class=\"map-point\"></div>")
-
-                            let myPlacemark = new ymaps.Placemark(
-                                [Number(es.location.latitude), Number(es.location.longitude)],
-                                {
-                                    hintContent: es.title
-                                },
-                                {
-                                    iconLayout: squareLayout,
-                                    iconShape: {
-                                        type: "Rectangle",
-                                        coordinates: [
-                                            [-25, -25],
-                                            [25, 25]
-                                        ]
-                                    }
-                                }
-                            )
-                            myPlacemark.events.add("click", this.handleClick)
-                            collection.add(myPlacemark)
-                        }
-                    })
-                    this.$root.map.geoObjects.add(collection)
-                }
-                this.setCardPoint()
-            }
-        },*/
-
-        handleClick(e) {
-            const activePlacemark = e.get("target")
-            const currentIndex = this.cards.findIndex(
-                (el) =>
-                    Number(el.location.latitude) === activePlacemark.geometry._coordinates[0] &&
-                    Number(el.location.longitude) === activePlacemark.geometry._coordinates[1] &&
-                    el.title === activePlacemark.properties._data.hintContent
-            )
-            this.curCard = this.cards[currentIndex]
-            this.estateCardKey += 1
-            e.originalEvent.originalEvent.originalEvent.target._data.geoObject.geometry._coordinates
-        },
         clickOnMap() {
             this.showInfrostructure = false
             this.curCard = null
-        },
-        async getCoordinates() {
-            const isExistCoordinates = this.location.latitude && this.location.longitude
-            if (isExistCoordinates) {
-                this.cardPoint = [this.location.latitude, this.location.longitude]
-                this.$root.map.setCenter(this.cardPoint)
-                this.searchPanorama()
-                this.setCardPoint()
-            } else {
-                this.$root.search
-                    .search(this.location["address-full"] + " " + this.location.apartment)
-                    .then(this.showCardPoint)
-            }
         },
         showCardPoint() {
             const points = this.$root.search.getResultsArray()
@@ -507,9 +433,6 @@ export default {
             this.setCardPoint()
             this.searchPanorama()
         },
-        getCenterForMap() {
-            return this.cardPoint
-        },
         clickOnSearch() {
             if (
                 event.target.className === "ymaps-2-1-79-float-button-icon ymaps-2-1-79-float-button-icon_icon_magnifier" ||
@@ -517,30 +440,8 @@ export default {
             ) {
                 this.mapSearchPanelOpen = !this.mapSearchPanelOpen
             }
-        },
-        async init() {
-            let zoom = new ymaps.control.ZoomControl()
-            let searchControl = new ymaps.control.SearchControl({
-                options: {
-                    size: "small",
-                    position: "none",
-                    provider: "yandex#search",
-                    noPopup: true
-                }
-            })
-            this.$root.search = searchControl
-            searchControl.events.add("click", this.clickOnSearch)
-            let myMap = new ymaps.Map("mapBlock", {
-                center: this.cardPoint,
-                zoom: this.mapSettings.zoom,
-                controls: [zoom, searchControl]
-            })
-            this.$root.map = myMap
-            myMap.events.add("click", this.clickOnMap)
-            this.mapIsShow = true
-            this.setCardPoint()
-
         }
+
     }
 }
 </script>
