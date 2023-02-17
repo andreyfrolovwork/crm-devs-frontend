@@ -188,7 +188,6 @@ const config = useRuntimeConfig()
     padding-bottom: 100px;
     height: 100vh;
     overflow: scroll;
-
     &-content {
         display: flex;
         flex-flow: column nowrap;
