@@ -102,7 +102,7 @@ const route = useRoute()
 const config = useRuntimeConfig()
 const section = ref({})
 const loadSection = ref(false)
-/*const showModal = ref(false)*/
+
 const currentFloor = ref(null)
 let listener
 console.log("setup")

@@ -6,22 +6,22 @@
                 class="navbar-menu"
                 >
                 <ul class="nav-ul">
-                    <div class="navbar-menu__title">
-                        О проекте
-                    </div>
-                    <li
-                        v-for="link in menuLinks"
-                        :key="link.name"
-                        class="nav-menu"
-                        >
-                        <NuxtLink
-                            class="link black bar"
-                            :to="link.to"
-                            @click="showNavbarMenu()"
+                    <!--     <div class="navbar-menu__title">
+                            О проекте
+                        </div>
+                       <li
+                            v-for="link in menuLinks"
+                            :key="link.name"
+                            class="nav-menu"
                             >
-                            {{ link.name }}
-                        </NuxtLink>
-                    </li>
+                            <NuxtLink
+                                class="link black bar"
+                                :to="link.to"
+                                @click="showNavbarMenu()"
+                                >
+                                {{ link.name }}
+                            </NuxtLink>
+                        </li>-->
                     <div class="navbar-menu__title">
                         Подбор квартиры
                     </div>
@@ -129,9 +129,9 @@ import { callFromMainPage } from "../functions/callFromMainPage.js"
 const menuLinks = [
     {
         name: "О проекте",
-        to: "/l1"
+        to: "/"
     },
-    {
+/*    {
         name: "Акции и новости",
         to: "/l2"
     },
@@ -146,7 +146,7 @@ const menuLinks = [
     {
         name: "Расположение",
         to: "/l5"
-    }
+    }*/
 ]
 const config = useRuntimeConfig()
 const show = ref(false)

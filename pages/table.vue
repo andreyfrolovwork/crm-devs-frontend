@@ -6,12 +6,12 @@
                 <ClientOnly
                     fallback-tag="span"
                     fallback="Loading filters..."
-                    >
+                >
                     <Transition name="slade-fade">
                         <div
                             v-if="isShowFilters"
                             class="filters"
-                            >
+                        >
                             <the-filter-rooms-buttons />
                             <the-filter-sliders />
                         </div>

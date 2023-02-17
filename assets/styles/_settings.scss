@@ -1,0 +1,49 @@
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+// COLORS
+
+$black: #000;
+$white: #fff;
+
+$color_orange-50: #f4691b;
+$color_orange-70: #cd4a00;
+$color_orange-90: #cb3809;
+$color_orange-15: #fdd9c1;
+$color_orange-5: #fdf0e7;
+$color_dark-90: #232930;
+$color_dark-70: #40464c;
+$color_dark-50: #68717b;
+$color_dark-40: #969ba0;
+$color_grey-15: #dcdfe1;
+$color_grey-10: #ebedee;
+$color_grey-2: #f9fafa;
+$color_red-50: #d20a30;
+$color_blue-50: #0280d7;
+$color_green-50: #079757;
+$color_yellow-50: #f29f21;
+$color_purple-50: #760281;
+
+$color_body: $color_dark-90;
+
+$color_primary: $color_orange-50;
+$color_primary-dark: $color_orange-70;
+
+$color_error: $color_red-50;
+$color_success: $color_green-50;
+
+
+/*  START MY  */
+$background-color: #f9f9f9;
+$base_green: #1C6B72;
+$base_green_light: #4da7b0;
+
+
+@mixin box-shadow {
+  box-shadow: 0 0 50px rgb(0 0 0 / 10%);
+}
+
+/*  END  */
