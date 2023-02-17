@@ -99,13 +99,13 @@ function goto() {
 
 <style lang="scss" scoped>
 .itop {
-    height: 913px;
-    @include media(null,1509px) {
+    /*height: 913px;*/
+/*    @include media(null,1509px) {
         margin-bottom: 140px;
     }
     @include media(null,764px) {
         margin-bottom: 400px;
-    }
+    }*/
 
 /*    @include tablet {
         margin-bottom: 31px;
@@ -140,9 +140,11 @@ function goto() {
     }
 
     &-header {
-        @include phone {
+        position: relative;
+        top: 81px;
+       /* @include phone {
             margin-top: 630px;
-        }
+        }*/
         display: flex;
         justify-content: center;
 
@@ -163,6 +165,9 @@ function goto() {
     }
 
     &-list {
+        position: relative;
+        top: 81px;
+
         margin: 24px 10px 0 10px;
         display: flex;
         flex-flow: row wrap;
@@ -188,6 +193,8 @@ function goto() {
     }
 
     &-list2 {
+        position: relative;
+        top: 81px;
 
         margin: 24px 10px 0 10px;
         display: flex;
@@ -200,7 +207,7 @@ function goto() {
 
             &:hover {
                 ///background-color: #efefef;
-                text-shadow: 0px 4px 4px rgba(45, 35, 35, 0.4);
+                //text-shadow: 0px 4px 4px rgba(45, 35, 35, 0.4);
                 cursor: pointer;
             }
 
