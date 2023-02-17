@@ -130,7 +130,7 @@
             <div
                 v-animate-on-scroll
                 >
-                <div class="howbuy">
+                <div class="howbuy m0auto1440">
                     <div class="h1 howbuy_title">
                         Как купить?
                     </div>
@@ -161,6 +161,14 @@
                     </the-tabs>
                 </div>
             </div>
+            <div
+
+                class="mapblock"
+                >
+                <div class="mapblock-child m0auto">
+                    <MapDetailYandex />
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -177,6 +185,7 @@ const config = useRuntimeConfig()
 .mwr {
     background-color: $background-color;
     padding-top: 60px;
+    padding-bottom: 100px;
     height: 100vh;
     overflow: scroll;
 
@@ -188,15 +197,12 @@ const config = useRuntimeConfig()
     }
 }
 
-.bl {
-    width: 100%;
-    height: 1000px;
-    background-color: #00A0E3;
-}
-
-.bl2 {
-    width: 100%;
-    height: 1000px;
-    background-color: #4ce300;
+.mapblock {
+/*    display: flex;
+    justify-content: center;*/
+    &-child {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
 }
 </style>

@@ -1,8 +1,4 @@
 <template>
-    <!--    <Teleport
-            :disabled="!mapFull"
-            to="body"
-            >-->
     <div
         id="mapBlock"
         class="shadow map-detail"
@@ -62,7 +58,6 @@
             class="map-detail panorama"
             />
     </div>
-    <!--    </Teleport>-->
 </template>
 
 <script>
