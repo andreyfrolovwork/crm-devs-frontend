@@ -130,7 +130,7 @@
             <div
                 v-animate-on-scroll
                 >
-                <div class="howbuy m0auto1440">
+                <div class="howbuy m0auto1440 p100">
                     <div class="h1 howbuy_title">
                         Как купить?
                     </div>
@@ -163,10 +163,14 @@
             </div>
             <div
 
-                class="mapblock"
+                class="mapblock p100"
                 >
                 <div class="mapblock-child m0auto">
-                    <MapDetailYandex :card-point="[55.044555,60.082794]" />
+                    <MapDetailYandex
+                        :card-point="[55.044555,60.082794]"
+                        :card-point-hint="'Дом на кирова'"
+                        :card-point-balloon="'Дом на кирова'"
+                        />
                 </div>
             </div>
         </div>
@@ -188,6 +192,7 @@ const config = useRuntimeConfig()
     padding-bottom: 100px;
     height: 100vh;
     overflow: scroll;
+
     &-content {
         display: flex;
         flex-flow: column nowrap;
@@ -197,8 +202,8 @@ const config = useRuntimeConfig()
 }
 
 .mapblock {
-/*    display: flex;
-    justify-content: center;*/
+    /*    display: flex;
+        justify-content: center;*/
     &-child {
         max-width: 1440px;
         margin: 0 auto;

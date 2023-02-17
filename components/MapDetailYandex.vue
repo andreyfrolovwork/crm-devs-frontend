@@ -70,6 +70,14 @@ export default {
         cardPoint: {
             type: Array,
             default: [55.051205, 60.077164]
+        },
+        cardPointHint: {
+            type: String,
+            default: 'hint'
+        },
+        cardPointBalloon: {
+            type: String,
+            default: 'balloon'
         }
     },
     data() {
@@ -406,8 +414,8 @@ export default {
             let myPlacemark = new ymaps.Placemark(
                 [this.cardPoint[0], this.cardPoint[1]],
                 {
-                    hintContent: "this.location[\"address\"]",
-                    balloonContent: "this.location[\"address-full\"]"
+                    hintContent: this.cardPointHint,
+                    balloonContent: this.cardPointBalloon
                 },
                 {
                     iconLayout: "default#image",
