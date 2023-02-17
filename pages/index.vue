@@ -166,7 +166,7 @@
                 class="mapblock"
                 >
                 <div class="mapblock-child m0auto">
-                    <MapDetailYandex />
+                    <MapDetailYandex :card-point="[55.044555,60.082794]" />
                 </div>
             </div>
         </div>
