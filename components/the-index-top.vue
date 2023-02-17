@@ -206,6 +206,7 @@ function goto() {
             transition: text-shadow 0.15s ease-in-out;
 
             &:hover {
+
                 ///background-color: #efefef;
                 //text-shadow: 0px 4px 4px rgba(45, 35, 35, 0.4);
                 cursor: pointer;
