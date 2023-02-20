@@ -9,17 +9,17 @@
             <div class="description">
                 <div class="description__content">
                     <div class="d2">
-                        <the-sec-small :section="apart.section"></the-sec-small>
+                        <the-sec-small :section="apart.section" />
 
-<!--                        <div class="d__top-image">
-                            <img
-                                :src="config.public.baseImagesUrl + 'all-sec.png'"
-                                alt="секции"
-                                class="description__content__sections"
-                                >
-                        </div>-->
+                        <!--                        <div class="d__top-image">
+                                                    <img
+                                                        :src="config.public.baseImagesUrl + 'all-sec.png'"
+                                                        alt="секции"
+                                                        class="description__content__sections"
+                                                        >
+                                                </div>-->
                         <div class="t title">
-                            {{ apart.title }} {{apart.section}}
+                            {{ apart.title }} {{ apart.section }}
                         </div>
                         <div class="d2__props">
                             <div class="t props">
@@ -30,10 +30,13 @@
                             </div>
                             <div class="dfr mprice">
                                 <div class="t price">
-                                    {{ apart.price }} рублей
+                                    {{ apart.pricelocale }} рублей
                                 </div>
-                                <div class="creditlink">
-                                    8 071 руб./мес.
+                                <div
+                                    class="creditlink"
+                                    @click="showModalWithText('Нажатие на кнопку кредита')"
+                                    >
+                                    {{ creditValue }} руб./мес.
                                     в ипотеку
                                 </div>
                             </div>
@@ -45,15 +48,15 @@
                                     Оставить заявку
                                 </the-button>
                             </div>
-                            <div>
-                                <button class="download-pdf">
-                                    <img
-                                        :src="config.public.baseImagesUrl + 'print.svg'"
-                                        alt=""
-                                        >
-                                    Скачать PDF- брошюру
-                                </button>
-                            </div>
+                            <!--                            <div>
+                                                            <button class="download-pdf">
+                                                                <img
+                                                                    :src="config.public.baseImagesUrl + 'print.svg'"
+                                                                    alt=""
+                                                                    >
+                                                                Скачать PDF- брошюру
+                                                            </button>
+                                                        </div>-->
 
                             <!--                            <feedback-button text="Оставить заявку" />-->
                         </div>
@@ -96,11 +99,12 @@
 <script setup>
 import { useRoute, useRuntimeConfig } from "nuxt/app"
 import { useApart } from "../useHooks/useApart.js"
-
+import { useModalWithTitle } from "../functions/useModalWithTitle.js"
 
 const route = useRoute()
 const config = useRuntimeConfig()
-const { apart, showFeedbackModal } = useApart(route)
+const {showModalWithText} = useModalWithTitle()
+const { creditValue, apart, showFeedbackModal } = useApart(route)
 
 </script>
 <style lang="scss">
@@ -284,12 +288,18 @@ const { apart, showFeedbackModal } = useApart(route)
                 }
 
                 .creditlink {
+                    font-family: "Montserrat", serif;
                     font-weight: 400;
                     font-size: 16px;
                     margin-left: 10px;
                     line-height: 31px;
                     @media (max-width: 486px) {
                         margin: 0;
+                    }
+
+                    &:hover {
+                        text-decoration: underline;
+                        cursor: pointer;
                     }
                 }
 

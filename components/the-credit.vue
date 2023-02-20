@@ -12,7 +12,7 @@
                     <div class="credit-filter-price">
                         {{ price.toLocaleString("ru") }}
                     </div>
-                    <the-button @click="callFromMainPage">
+                    <the-button @click="showModalWithText('Нажатие на блоке расчета кредита')">
                         Получить одобрение
                     </the-button>
                 </div>
@@ -104,8 +104,10 @@ import {  useRuntimeConfig } from "nuxt/app"
 import creditTable from "~/functions/creditTable.js"
 import { ref } from "vue"
 import { callFromMainPage } from "../functions/callFromMainPage.js"
+import { calc } from "../functions/calc.js"
+import { useModalWithTitle } from "../functions/useModalWithTitle.js"
 
-
+const {showModalWithText} = useModalWithTitle()
 const price = 1500000
 const config = useRuntimeConfig()
 const vznos = ref(0)
@@ -126,19 +128,6 @@ function calcTable() {
     table.value = result
 }
 
-function calc(srok, summ, percent, vznos) {
-    summ = summ - vznos
-    let ret = 0,
-        itog = 0,
-        monthPer = 0
-    for (let i = 1; i <= srok; i++) {
-        monthPer = summ * ((percent / 12) / 100)
-        itog = Math.round(monthPer * 100) / 100
-        ret = ret + itog
-    }
-    ret = Math.round(ret + summ)
-    return Math.round(ret / srok)
-}
 
 </script>
 
