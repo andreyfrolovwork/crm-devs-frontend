@@ -133,6 +133,7 @@ function gotoApart(e) {
 }
 
 function click(e) {
+    console.log("open")
     if (isMobile.any()) {
         console.log("current apart ", e)
         currentApart.value = e
@@ -141,6 +142,11 @@ function click(e) {
     } else {
         gotoApart(e)
     }
+}
+
+function hide() {
+    console.log("hide")
+    showModal.value = false
 }
 
 onBeforeMount(async () => {
@@ -206,20 +212,16 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     position: relative;
     overflow: hidden;
     overflow-x: auto;
     transition: .5s;
     box-sizing: border-box;
-
     margin: 0 20vw;
-
     height: 100vh;
     //background: #e5fdfd;
-
     @include map {
-        background: #f8d8ff;
+        //background: #f8d8ff;
     }
     @include tablet {
         margin: 0 3vw;
@@ -228,37 +230,20 @@ body {
         margin: 0 0;
     }
 
-    /*@include media(1080px){
-        margin:0 20vw;
-    }*/
-
-
     .svg-overlay {
         position: absolute;
         object-fit: cover;
         width: 100%;
-        /* height: 100vh;
-         width: initial;
-         max-width: initial;
-     */
         @include map {
-            height: initial;
-            width: 100vw;
+            height: 60%;
         }
     }
 
     .floor_plan-img {
         position: absolute;
         width: 100%;
-        /*    object-fit: cover;
-            height: 100vh;
-            width: initial;
-            max-width: initial;
-            height: 100%;*/
-
         @include map {
-            // height: initial;
-            //width: 100vw;
+            height: 60%;
         }
     }
 
@@ -280,20 +265,15 @@ body {
     .shapes .polygon-show {
         stroke-opacity: 1;
     }
-
 }
 
 .secfloor {
     position: absolute;
     width: fit-content;
-    //background-color: #f44336;
     background-color: white;
-    //color: #fff;
     padding: 5px 10px;
-    ///border-radius: 9999px;
     pointer-events: none;
     opacity: 0;
-    //opacity: 1;
     visibility: visible;
     will-change: transform, opacity;
     transition: opacity 0.5s;
@@ -309,27 +289,6 @@ body {
 .sold {
     background-color: #a4a4a4;
 }
-
-/*.holes-mask .polygon {
-    fill: #333;
-    transition: fill 0.5s;
-}
-
-.holes-mask .mask-show {
-    fill: #000;
-}
-
-.shade {
-    transition: fill-opacity 0.5s;
-}
-
-.sold {
-    background-color: #a4a4a4;
-}
-
-.aparts_areas {
-
-}*/
 
 .apartdesc {
     display: flex;
