@@ -9,15 +9,17 @@
             <div class="description">
                 <div class="description__content">
                     <div class="d2">
-                        <div class="d__top-image">
+                        <the-sec-small :section="apart.section"></the-sec-small>
+
+<!--                        <div class="d__top-image">
                             <img
                                 :src="config.public.baseImagesUrl + 'all-sec.png'"
                                 alt="секции"
                                 class="description__content__sections"
                                 >
-                        </div>
+                        </div>-->
                         <div class="t title">
-                            {{ apart.title }}
+                            {{ apart.title }} {{apart.section}}
                         </div>
                         <div class="d2__props">
                             <div class="t props">
@@ -199,7 +201,7 @@ const { apart, showFeedbackModal } = useApart(route)
         }
 
         &__content {
-            padding: 80px 100px;
+            padding: 64px 100px;
             display: flex;
             flex-flow: column;
             height: 100%;
@@ -274,6 +276,7 @@ const { apart, showFeedbackModal } = useApart(route)
                     font-weight: 600;
                     line-height: 35px;
                     margin-bottom: 19px;
+                    margin-top: 36px;
                     @include phone {
                         font-size: 27px;
                         //font-size: 12px;
