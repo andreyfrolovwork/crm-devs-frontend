@@ -98,6 +98,10 @@ const props = defineProps(["section"])
         flex-flow: column nowrap;
         width: 80px;
         height: 80px;
+        @include phone {
+            width: 60px;
+            height: 60px;
+        }
         border-bottom: 0.5px solid #b9b9b9;
         border-right: 0.5px solid #b9b9b9;
         border-top: 0.5px solid #b9b9b9;
