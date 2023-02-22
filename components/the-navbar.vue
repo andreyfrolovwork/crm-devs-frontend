@@ -56,7 +56,7 @@
                     >
             </div>
             <div class="menu-button">
-                <the-phone-icon @click="callFromMainPage"/>
+                <the-phone-icon @click="callFromMainPage" />
                 <the-menu-icon @showmenu="showNavbarMenu" />
             </div>
         </div>
@@ -130,23 +130,23 @@ const menuLinks = [
     {
         name: "О проекте",
         to: "/"
-    },
-/*    {
-        name: "Акции и новости",
-        to: "/l2"
-    },
-    {
-        name: "Ход строительства",
-        to: "/l3"
-    },
-    {
-        name: "Контакты",
-        to: "/l4"
-    },
-    {
-        name: "Расположение",
-        to: "/l5"
-    }*/
+    }
+    /*    {
+            name: "Акции и новости",
+            to: "/l2"
+        },
+        {
+            name: "Ход строительства",
+            to: "/l3"
+        },
+        {
+            name: "Контакты",
+            to: "/l4"
+        },
+        {
+            name: "Расположение",
+            to: "/l5"
+        }*/
 ]
 const config = useRuntimeConfig()
 const show = ref(false)
@@ -323,7 +323,7 @@ function goToMain() {
     }
 
     &__title {
-        font-family: 'Montserrat',serif;
+        font-family: 'Montserrat', serif;
         font-style: normal;
         font-weight: 600;
         /*        font-size: 16px;

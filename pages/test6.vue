@@ -5,6 +5,7 @@
         <button @click="changeSliderRef">
             set
         </button>
+        <br/>
         <ui-slider
             :min="0"
             :max="20"

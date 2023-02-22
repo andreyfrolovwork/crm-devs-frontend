@@ -43,6 +43,14 @@
                 </template>
             </the-tabs>
         </div>
+        <!--        /* slider */-->
+        <div class="p100">
+            <Slider v-model="values" />
+        </div>
+
+        <div class="p100">
+            <Slider v-model="valuesRange" />
+        </div>
     </div>
 </template>
 
@@ -57,6 +65,11 @@ function showModalHandle() {
 
 /* the-tabs */
 
+/* slider */
+import Slider from "@vueform/slider"
+
+const values = ref(10)
+const valuesRange = ref([0, 100])
 </script>
 
 <style scoped>
