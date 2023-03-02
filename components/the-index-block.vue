@@ -24,10 +24,14 @@
                 'margin-before-block-right':props.reverse
             }"
             >
-            <img
+            <a-image
+
                 :src="config.public.baseImagesUrl + props.image"
-                alt="image"
-                >
+                />
+            <!--            <img
+                            :src="config.public.baseImagesUrl + props.image"
+                            alt="image"
+                            >-->
         </div>
     </div>
 </template>
