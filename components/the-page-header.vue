@@ -16,6 +16,7 @@
     justify-content: center;
     margin-top: 60px;
     margin-bottom: 20px;
+    padding: 0 10px;
 
     &-h1 {
         font-family: "Montserrat", serif;

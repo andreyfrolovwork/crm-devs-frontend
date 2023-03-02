@@ -3,10 +3,41 @@
         class="itop"
         :style="{ backgroundImage: 'url(' + config.public.baseImagesUrl + 'index-main-image.webp' + ')' }"
         >
-        <div class="itop-top" />
+                <div class="itop-top" />
         <div class="itop-header">
-            <div class="itop-header-text">
-                Дом на Кирова
+            <div class="itop-header-left">
+                <div class="itop-header-text">
+                    Дом на Кирова
+                </div>
+                <div class="itop-header-text2">
+                    Дом на Кирова расположен в пешей доступности от центра Миасса, при этом находясь в живописном и
+                    насыщенном зеленью месте по пути следования экотропы Кошкуль, дорога на автомобиле до самых
+                    востребованных курортов Южного Урала – ГЛЦ Солнечной Долины и озера Тургояк займет всего 15
+                    минут.
+                    <br>
+                    <br>
+                    Жилой комплекс разработан с условиями современных требований: большой выбор
+                    функциональных планировочных решений для семей с детьми, молодых людей, а также взрослых людей,
+                    которым важно окружить себя природой и тишиной. Закрытая территория и двор без машин.
+                </div>
+            </div>
+            <div class="itop-header-right">
+                <div class="itop-header-right-news">
+                    <div class="itop-header-right-news-title">
+                        Льготная ипотека
+                    </div>
+                    <div class="itop-header-right-news-link">
+                        Читать далее
+                    </div>
+                </div>
+                <div class="itop-header-right-news">
+                    <div class="itop-header-right-news-title">
+                        Льготная ипотека
+                    </div>
+                    <div class="itop-header-right-news-link">
+                        Читать далее
+                    </div>
+                </div>
             </div>
         </div>
         <div class="itop-list">
@@ -110,19 +141,25 @@ function goto() {
 
     &-top {
         display: flex;
-        margin-top: 644px;
+        //margin-top: 644px;
+        margin-top: 200px;
         //flex-basis: 22%;
         justify-content: center;
     }
 
     &-header {
+        padding: 0 20px;
         position: relative;
         top: 81px;
-       /* @include phone {
-            margin-top: 630px;
-        }*/
         display: flex;
         justify-content: center;
+        flex-flow: row;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        @include phone {
+            flex-flow: column;
+        }
 
         &-text {
             @include phone {
@@ -134,13 +171,76 @@ function goto() {
             font-weight: 600;
             font-size: 100.477px;
             line-height: 122px;
-            text-align: center;
+            text-align: left;
             color: white;
+        }
+
+        &-text2 {
+            @include phone {
+                padding-right: 0px;
+            }
+            @include tablet {
+                padding-right: 50px;
+            }
+            padding-top: 37px;
+            padding-right: 200px;
+            font-family: 'Montserrat', serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+
+            color: #FFFFFF;
+
+        }
+
+        &-right {
+            display: flex;
+            flex-flow: column;
+            //justify-content: space-between;
+            justify-content: end;
+            padding-top: 30px;
+            @include phone {
+                align-items: center;
+            }
+            &-news {
+                margin: 10px;
+                background: rgba(0, 0, 0, 0.68);
+                padding: 34px;
+                width: fit-content;
+                @include phone {
+                    width: 100%;
+                }
+                &-title {
+                    font-family: 'Montserrat', serif;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 20px;
+
+                    color: #FFFFFF;
+                    margin-bottom: 7px;
+                }
+
+                &-link {
+
+                    font-family: 'Montserrat', serif;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 10px;
+                    line-height: 12px;
+
+                    color: #CECECE;
+                }
+            }
         }
 
     }
 
     &-list {
+        //max-width: 1200px;
+        //margin: 0 auto;
+        //padding: 0 10px;
         position: relative;
         top: 81px;
 
@@ -151,6 +251,9 @@ function goto() {
         box-sizing: border-box;
 
         &-el {
+            @include phone {
+                width: 100%;
+            }
             text-align: center;
             font-family: 'Montserrat', serif;
             font-style: normal;
