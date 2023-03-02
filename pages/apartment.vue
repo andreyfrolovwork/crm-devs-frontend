@@ -153,7 +153,7 @@ const { creditValue, apart, showFeedbackModal } = useApart(route)
 
     .block1 {
         display: flex;
-        max-width: 1440px;
+        max-width: 1200px;
         flex-flow: row;
 
         width: 100%;
@@ -366,7 +366,7 @@ const { creditValue, apart, showFeedbackModal } = useApart(route)
 }
 
 .howbuy {
-    max-width: 1440px;
+    max-width: 1200px;
     margin: 44px 0;
     display: flex;
     flex-flow: column;

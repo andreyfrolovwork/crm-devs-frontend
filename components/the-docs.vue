@@ -1,8 +1,9 @@
 <template>
-    <div>
+    <div >
         <div
             v-for="(doc,i) in props.docs"
             :key="i"
+            class="docsline"
             >
             <div class="doc">
                 <div class="doc-svg">
@@ -59,6 +60,9 @@ const config = useRuntimeConfig()
 </script>
 
 <style lang="scss" scoped>
+.docsline {
+    margin-right: 50px;
+}
 .doc {
     display: flex;
     flex-flow: row nowrap;

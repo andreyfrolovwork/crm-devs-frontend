@@ -114,9 +114,9 @@
                     <the-page-header>
                         Как купить?
                     </the-page-header>
-<!--                    <div class="h1 howbuy_title">
-                        Как купить?
-                    </div>-->
+                    <!--                    <div class="h1 howbuy_title">
+                                            Как купить?
+                                        </div>-->
                     <div class="howbuy-text">
                         Продажи в ведутся строго по договорам долевого участия (ДДУ),
                         согласно действующему законодательству РФ (№ 214‑ФЗ)
@@ -148,6 +148,10 @@
                 Документы
             </the-page-header>
             <the-docs-all />
+            <the-page-header>
+                Контакты
+            </the-page-header>
+            <the-contacts2 />
             <the-page-header>
                 Расположение
             </the-page-header>

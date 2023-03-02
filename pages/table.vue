@@ -50,7 +50,7 @@ onBeforeMount(async () => {
     align-items: center;
     &__content {
         padding: 90px 10px 0 10px;
-        max-width: 1440px;
+        max-width: 1200px;
         display: flex;
         flex-flow: column;
         align-items: flex-start;
@@ -74,7 +74,7 @@ onBeforeMount(async () => {
 .apartments {
     ///padding: 90px 10px 0 10px;
     //padding-top: 90px;
-    max-width: 1440px;
+    max-width: 1200px;
     display: flex;
     flex-flow: row;
     .data {

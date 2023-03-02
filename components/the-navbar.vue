@@ -247,7 +247,7 @@ function goToMain() {
             display: none;
         }
         display: flex;
-        max-width: 1440px;
+        max-width: 1200px;
         flex: 1;
         flex-flow: row;
         //background: #2c491c;

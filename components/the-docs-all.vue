@@ -44,6 +44,9 @@ const docs = [
 .docs {
     display: flex;
     flex-flow: row wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
 
 }
 </style>
