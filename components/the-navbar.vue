@@ -9,6 +9,7 @@
                     <!--     <div class="navbar-menu__title">
                             О проекте
                         </div>
+
                        <li
                             v-for="link in menuLinks"
                             :key="link.name"
@@ -70,7 +71,10 @@
                         >
                 </div>
                 <div
-                    class="link withmenu"
+                    :class="{
+                        'link withmenu':true,
+                        'link-active':route.path === '/'
+                    }"
                     @click="showMenu"
                     @mouseover="showMenu(true)"
                     @mouseleave="showMenu(false)"
@@ -93,15 +97,20 @@
                         </ul>
                     </the-menu>
                 </div>
-
                 <NuxtLink
-                    class="link"
+                    :class="{
+                        'link':true,
+                        'link-active':route.path === '/sections'
+                    }"
                     to="/sections"
                     >
                     На карте
                 </NuxtLink>
                 <NuxtLink
-                    class="link"
+                    :class="{
+                        'link':true,
+                        'link-active':route.path === '/table'
+                    }"
                     to="/table"
                     >
                     Поиск по параметрам
@@ -123,8 +132,12 @@
 
 <script setup>
 import { useRouter, useRuntimeConfig } from "nuxt/app"
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import { callFromMainPage } from "../functions/callFromMainPage.js"
+
+const activeLink = computed((path) => {
+    return false;
+})
 
 const menuLinks = [
     {
@@ -152,6 +165,7 @@ const config = useRuntimeConfig()
 const show = ref(false)
 const showNavbar = ref(false)
 const router = useRouter()
+const route = useRoute()
 
 function showNavbarMenu() {
     console.log("show menu")
@@ -267,6 +281,9 @@ function goToMain() {
         color: #e7e7e7;
         text-shadow: 0px 4px 4px rgb(233 233 233 / 40%);
     }
+}
+.link-active {
+    border-bottom: 4px solid #a3f2f9;
 }
 
 .black {
