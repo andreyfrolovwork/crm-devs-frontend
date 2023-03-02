@@ -2,16 +2,19 @@
     <div class="mwr">
         <div class="mwr-content">
             <the-index-top />
-            <div
+            <the-page-header>
+                Преимущества
+            </the-page-header>
+<!--            <div
                 v-animate-on-scroll
                 >
                 <the-index-block
                     h1="Заголовок"
                     image="index-4.png"
                     >
-                    <template #h1text>
-                        О проекте
-                    </template>
+                    &lt;!&ndash;                    <template #h1text>
+                                            О проекте
+                                        </template>&ndash;&gt;
                     <template #text>
                         Дом на Кирова расположен в пешей доступности от центра Миасса, при этом находясь в живописном и
                         насыщенном зеленью месте по пути следования экотропы Кошкуль, дорога на автомобиле до самых
@@ -21,7 +24,8 @@
                         которым важно окружить себя природой и тишиной. Закрытая территория и двор без машин.
                     </template>
                 </the-index-block>
-            </div>
+            </div>-->
+
             <the-gallery-advantages v-animate-on-scroll />
 
             <div
@@ -105,5 +109,8 @@ const config = useRuntimeConfig()
         max-width: 1440px;
         margin: 0 auto;
     }
+}
+.howbuy_title {
+    text-align: left;
 }
 </style>

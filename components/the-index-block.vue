@@ -25,7 +25,6 @@
             }"
             >
             <a-image
-
                 :src="config.public.baseImagesUrl + props.image"
                 />
             <!--            <img
@@ -48,7 +47,7 @@ const props = defineProps(["h1", "text", "image", "reverse"])
 .block {
     display: flex;
     flex-flow: row nowrap;
-    margin: 100px 10px 0 10px;
+    margin: 0px 10px 0 10px;
 
     max-width: 1200px;
     @include tablet {

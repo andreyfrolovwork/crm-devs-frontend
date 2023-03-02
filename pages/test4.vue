@@ -40,7 +40,7 @@ const config = useRuntimeConfig()
 
     &__content {
         padding: 90px;
-        max-width: 1440px;
+        max-width: 1200px;
         display: flex;
         justify-content: center;
     }

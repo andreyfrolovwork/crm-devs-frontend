@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="howbuy">
-            <div class="h1 howbuy_title">
+            <div id="centertext" class="h1 howbuy_title">
                 Как купить?
             </div>
             <div class="howbuy-text">

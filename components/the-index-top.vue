@@ -99,32 +99,8 @@ function goto() {
 
 <style lang="scss" scoped>
 .itop {
-    /*height: 913px;*/
-/*    @include media(null,1509px) {
-        margin-bottom: 140px;
-    }
-    @include media(null,764px) {
-        margin-bottom: 400px;
-    }*/
+    margin: 0 0 100px;
 
-/*    @include tablet {
-        margin-bottom: 31px;
-    }
-    @include phone  {
-        margin-bottom: 470px;
-    }
-    @include media(400px,534px) {
-        margin-bottom: 430px;
-    }
-    @include media(618px) {
-        margin-bottom: 350px;
-    }
-    @include media(645px, 744px) {
-        margin-bottom: 50px;
-    }
-    @include media(745px) {
-        margin-bottom: 0px;
-    }*/
     background-position-x: center;
     background-size: cover;
     display: flex;
