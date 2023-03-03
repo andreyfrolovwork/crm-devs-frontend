@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div class="docslinemain">
         <div
             v-for="(doc,i) in props.docs"
             :key="i"
@@ -60,8 +60,16 @@ const config = useRuntimeConfig()
 </script>
 
 <style lang="scss" scoped>
+.docslinemain {
+    display: flex;
+    flex-flow: column;
+    flex: 1;
+}
 .docsline {
     margin-right: 50px;
+    display: flex;
+    flex-flow: column;
+    flex: 1;
 }
 .doc {
     display: flex;

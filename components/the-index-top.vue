@@ -3,7 +3,7 @@
         class="itop"
         :style="{ backgroundImage: 'url(' + config.public.baseImagesUrl + 'index-main-image.webp' + ')' }"
         >
-                <div class="itop-top" />
+        <div class="itop-top" />
         <div class="itop-header">
             <div class="itop-header-left">
                 <div class="itop-header-text">
@@ -21,23 +21,26 @@
                     которым важно окружить себя природой и тишиной. Закрытая территория и двор без машин.
                 </div>
             </div>
-            <div class="itop-header-right">
+            <div
+                class="itop-header-right"
+                @click="scrollTo('news-1')"
+                >
                 <div class="itop-header-right-news">
                     <div class="itop-header-right-news-title">
-                        Льготная ипотека
+                        Старт продаж
                     </div>
                     <div class="itop-header-right-news-link">
                         Читать далее
                     </div>
                 </div>
-                <div class="itop-header-right-news">
-                    <div class="itop-header-right-news-title">
-                        Льготная ипотека
-                    </div>
-                    <div class="itop-header-right-news-link">
-                        Читать далее
-                    </div>
-                </div>
+                <!--                <div class="itop-header-right-news">
+                                    <div class="itop-header-right-news-title">
+                                        Льготная ипотека
+                                    </div>
+                                    <div class="itop-header-right-news-link">
+                                        Читать далее
+                                    </div>
+                                </div>-->
             </div>
         </div>
         <div class="itop-list">
@@ -117,6 +120,7 @@
 
 <script setup>
 import { useRouter, useRuntimeConfig } from "nuxt/app"
+import { scrollTo } from "~/functions/scrollTo.js"
 
 const router = useRouter()
 const config = useRuntimeConfig()
@@ -203,7 +207,9 @@ function goto() {
             @include phone {
                 align-items: center;
             }
+
             &-news {
+                cursor: pointer;
                 margin: 10px;
                 background: rgba(0, 0, 0, 0.68);
                 padding: 34px;
@@ -211,6 +217,7 @@ function goto() {
                 @include phone {
                     width: 100%;
                 }
+
                 &-title {
                     font-family: 'Montserrat', serif;
                     font-style: normal;

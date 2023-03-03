@@ -144,6 +144,10 @@
                     </the-tabs>
                 </div>
             </div>
+            <the-page-header id="news-1">
+                Новости
+            </the-page-header>
+            <the-news />
             <the-page-header>
                 Документы
             </the-page-header>
@@ -155,6 +159,7 @@
             <the-page-header>
                 Расположение
             </the-page-header>
+
             <div
 
                 class="mapblock"
