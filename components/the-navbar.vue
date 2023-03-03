@@ -6,23 +6,23 @@
                 class="navbar-menu"
                 >
                 <ul class="nav-ul">
-                    <!--     <div class="navbar-menu__title">
-                            О проекте
-                        </div>
+                    <div class="navbar-menu__title">
+                        О проекте
+                    </div>
 
-                       <li
-                            v-for="link in menuLinks"
-                            :key="link.name"
-                            class="nav-menu"
+                    <li
+                        v-for="link in menuLinks"
+                        :key="link.name"
+                        class="nav-menu"
+                        >
+                        <nuxt-link
+                            class="link black bar"
+                            :to="link.to"
+                            @click="clickOnSubLink()"
                             >
-                            <NuxtLink
-                                class="link black bar"
-                                :to="link.to"
-                                @click="showNavbarMenu()"
-                                >
-                                {{ link.name }}
-                            </NuxtLink>
-                        </li>-->
+                            {{ link.name }}
+                        </nuxt-link>
+                    </li>
                     <div class="navbar-menu__title">
                         Подбор квартиры
                     </div>
@@ -82,6 +82,17 @@
                     О проекте -
                     <the-menu :show="show">
                         <ul class="nav-ul">
+                            <li>
+                                <NuxtLink
+                                    class="link black"
+                                    :to="{
+                                        path:'/',
+                                        hash:'#news-1'
+                                    }"
+                                    >
+                                    хеш линк
+                                </NuxtLink>
+                            </li>
                             <li
                                 v-for="link in menuLinks"
                                 :key="link.name"
@@ -136,30 +147,40 @@ import { computed, ref } from "vue"
 import { callFromMainPage } from "../functions/callFromMainPage.js"
 
 const activeLink = computed((path) => {
-    return false;
+    return false
 })
 
 const menuLinks = [
     {
         name: "О проекте",
-        to: "/"
-    }
+        to: "/",
+        hash: "#about-project"
+    },
+    {
+        name: "Акции и новости",
+        to: "/",
+        hash: "#news-1"
+    },
+    {
+        name: "Документы",
+        to: "/",
+        hash: "#docs"
+    },
     /*    {
-            name: "Акции и новости",
-            to: "/l2"
-        },
-        {
             name: "Ход строительства",
-            to: "/l3"
-        },
-        {
-            name: "Контакты",
-            to: "/l4"
-        },
-        {
-            name: "Расположение",
-            to: "/l5"
-        }*/
+            to: "/,
+
+        },*/
+    {
+        name: "Контакты",
+        to: "/",
+        hash: "#contacts"
+    },
+    {
+        name: "Расположение",
+        to: "/",
+        hash: "#geo-position"
+    }
 ]
 const config = useRuntimeConfig()
 const show = ref(false)
@@ -177,6 +198,15 @@ function showMenu(value) {
         show.value = !show.value
     } else {
         show.value = value
+    }
+}
+
+function clickOnSubLink(id) {
+    if (showNavbar.value) {
+        showNavbar.value = false
+    }
+    if (route.path === "/") {
+        scrollTo(id)
     }
 }
 
@@ -208,7 +238,8 @@ function goToMain() {
 
     height: 60px;
     width: 100vw;
-    background-color: $base_green;
+    //background-color: $base_green;
+    background: linear-gradient(180deg, #1C6B72 0%, rgba(0, 121, 132, 0.869792) 99.99%, rgba(28, 107, 114, 0) 100%);
     position: absolute;
     z-index: 99;
     display: flex;
@@ -282,6 +313,7 @@ function goToMain() {
         text-shadow: 0px 4px 4px rgb(233 233 233 / 40%);
     }
 }
+
 .link-active {
     border-bottom: 4px solid #a3f2f9;
 }

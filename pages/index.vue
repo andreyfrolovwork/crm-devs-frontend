@@ -1,7 +1,7 @@
 <template>
     <div class="mwr">
         <div class="mwr-content">
-            <the-index-top />
+            <the-index-top id="about-project" />
             <div
                 v-animate-on-scroll
                 >
@@ -148,15 +148,15 @@
                 Новости
             </the-page-header>
             <the-news />
-            <the-page-header>
+            <the-page-header id="docs">
                 Документы
             </the-page-header>
             <the-docs-all />
-            <the-page-header>
+            <the-page-header id="contacts">
                 Контакты
             </the-page-header>
             <the-contacts2 />
-            <the-page-header>
+            <the-page-header id="get-position">
                 Расположение
             </the-page-header>
 
@@ -187,7 +187,7 @@ const config = useRuntimeConfig()
 <style lang="scss">
 .mwr {
     background-color: $background-color;
-    padding-top: 60px;
+    //padding-top: 60px;
     padding-bottom: 100px;
     height: 100vh;
     overflow: scroll;
