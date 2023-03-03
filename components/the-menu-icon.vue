@@ -2,7 +2,7 @@
     <div
         id="nav-icon1"
         :class="{
-            open:show
+            open:props.show
         }"
         @click="setShow"
         >
@@ -14,12 +14,9 @@
 
 <script setup>
 const emit = defineEmits(['showmenu'])
-
-import { ref } from 'vue'
-const show = ref(false)
+const props = defineProps(['show'])
 function setShow(){
     emit('showmenu')
-    show.value = !show.value
 }
 </script>
 

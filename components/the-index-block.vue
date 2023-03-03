@@ -24,13 +24,14 @@
                 'margin-before-block-right':props.reverse
             }"
             >
-            <a-image
+            <!--            <a-image
+                height="400"
                 :src="config.public.baseImagesUrl + props.image"
-                />
-            <!--            <img
-                            :src="config.public.baseImagesUrl + props.image"
-                            alt="image"
-                            >-->
+                />-->
+            <img
+                :src="config.public.baseImagesUrl + props.image"
+                alt="image"
+                >
         </div>
     </div>
 </template>
@@ -47,8 +48,8 @@ const props = defineProps(["h1", "text", "image", "reverse"])
 .block {
     display: flex;
     flex-flow: row nowrap;
-    margin: 100px 10px 0 10px;
-
+    //margin: 100px 10px 0 10px;
+    margin: 75px 10px 0 10px;
     max-width: 1200px;
     @include tablet {
         margin: 100px 10px 0 10px;
@@ -57,6 +58,7 @@ const props = defineProps(["h1", "text", "image", "reverse"])
         margin: 80px 10px 0 10px;
         flex-flow: column;
     }
+
     &-left {
 
         //padding: 80px 0 20px 80px;
@@ -65,7 +67,7 @@ const props = defineProps(["h1", "text", "image", "reverse"])
         flex-flow: column;
         flex: 1;
         //background: aliceblue;
-        background-color:white;
+        background-color: white;
         box-sizing: border-box;
 
         &-h1 {
@@ -102,9 +104,10 @@ const props = defineProps(["h1", "text", "image", "reverse"])
     &-right {
         display: flex;
         flex: 1;
-        background-color:white;
+        background-color: white;
+
         img {
-            height: 500px;
+            height: 400px;
             width: 100%;
             object-fit: cover;
         }
@@ -125,6 +128,7 @@ const props = defineProps(["h1", "text", "image", "reverse"])
         margin-bottom: 10px;
     }
 }
+
 .margin-before-block-right {
     margin-right: 10px;
     @include phone {

@@ -15,13 +15,24 @@
                         :key="link.name"
                         class="nav-menu"
                         >
-                        <nuxt-link
-                            class="link black bar"
-                            :to="link.to"
-                            @click="clickOnSubLink()"
+                        <div
+                            class="link black   bar"
+                            @click="moveTo(link)"
                             >
                             {{ link.name }}
-                        </nuxt-link>
+                        </div>
+                        <!--                        <NuxtLink
+                            class="link black  bar"
+                            :to="{
+                                to:link.to,
+                                query:{
+                                    anchor:link.hash
+                                }
+                            }"
+                            @click="closeMenu"
+                            >
+                            {{ link.name }}
+                        </NuxtLink>-->
                     </li>
                     <div class="navbar-menu__title">
                         Подбор квартиры
@@ -30,7 +41,7 @@
                         <NuxtLink
                             class="link black bar"
                             to="/sections"
-                            @click="showNavbarMenu()"
+                            @click="closeMenu"
                             >
                             На карте
                         </NuxtLink>
@@ -39,7 +50,7 @@
                         <NuxtLink
                             class="link black bar"
                             to="/table"
-                            @click="showNavbarMenu()"
+                            @click="closeMenu"
                             >
                             Поиск по параметрам
                         </NuxtLink>
@@ -58,7 +69,10 @@
             </div>
             <div class="menu-button">
                 <the-phone-icon @click="callFromMainPage" />
-                <the-menu-icon @showmenu="showNavbarMenu" />
+                <the-menu-icon
+                    :show="showNavbar"
+                    @showmenu="showNavbarMenu"
+                    />
             </div>
         </div>
         <div class="navbar__center">
@@ -82,28 +96,17 @@
                     О проекте -
                     <the-menu :show="show">
                         <ul class="nav-ul">
-                            <li>
-                                <NuxtLink
-                                    class="link black"
-                                    :to="{
-                                        path:'/',
-                                        hash:'#news-1'
-                                    }"
-                                    >
-                                    хеш линк
-                                </NuxtLink>
-                            </li>
                             <li
                                 v-for="link in menuLinks"
                                 :key="link.name"
                                 class="nav-menu"
                                 >
-                                <NuxtLink
+                                <div
                                     class="link black"
-                                    :to="link.to"
+                                    @click="moveTo(link)"
                                     >
                                     {{ link.name }}
-                                </NuxtLink>
+                                </div>
                             </li>
                         </ul>
                     </the-menu>
@@ -193,6 +196,10 @@ function showNavbarMenu() {
     showNavbar.value = !showNavbar.value
 }
 
+function closeMenu() {
+    showNavbar.value = false
+}
+
 function showMenu(value) {
     if (!value) {
         show.value = !show.value
@@ -213,6 +220,17 @@ function clickOnSubLink(id) {
 function goToMain() {
     router.push({
         path: "/"
+    })
+}
+
+function moveTo(link){
+    closeMenu()
+    console.log('move to')
+    router.push({
+        path:link.to,
+        query: {
+            anchor:link.hash
+        }
     })
 }
 </script>
@@ -298,6 +316,7 @@ function goToMain() {
     //margin:0 5px;
     //font-weight: 600;
     //font-size: 16px;
+    cursor:pointer;
     margin: 0 10px;
     font-weight: 450;
     font-size: 14px;
