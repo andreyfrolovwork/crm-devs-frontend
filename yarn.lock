@@ -1122,11 +1122,6 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.45.tgz#a3fffa7489eafff38d984e23d0236e230c818bc2"
   integrity sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==
 
-"@vueform/slider@^2.1.7":
-  version "2.1.7"
-  resolved "https://registry.yarnpkg.com/@vueform/slider/-/slider-2.1.7.tgz#8e228bd18529980d34acf6711dd6afe053a8e23d"
-  integrity sha512-wKyiVVN03RKTV2vp7r50PDq5hcM4kVVzUO2ex+BAAtrn5oX08iU5NzWTWCuH7dCkiLMDRUVravDu3B0NwaxZMQ==
-
 "@vueuse/head@^1.0.15":
   version "1.0.22"
   resolved "https://registry.yarnpkg.com/@vueuse/head/-/head-1.0.22.tgz#66b591d6e4dc636c6578d1c04a96bd6c2e00f3b6"
