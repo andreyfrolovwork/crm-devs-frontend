@@ -372,7 +372,7 @@ body {
     font-weight: 600;
 }
 
-#label1 {
+/*#label1 {
     top: 187px;
     left: 345px;
 }
@@ -391,5 +391,25 @@ body {
 #label5 {
     top: 187px;
     left: 2000px;
+}*/
+#label1 {
+    top: 168px;
+    left: 309px;
+}
+#label2 {
+    top: 168px;
+    left: 666px;
+}
+#label3 {
+    top: 168px;
+    left: 1013px;
+}
+#label4 {
+    top: 168px;
+    left: 1408px;
+}
+#label5 {
+    top: 168px;
+    left: 1769px;
 }
 </style>
