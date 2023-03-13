@@ -25,7 +25,7 @@
 
             <svg
                 class="svg-overlay"
-                viewBox="0 0 2000 930"
+                viewBox="0 0 1920 1080"
                 xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
                 >
@@ -36,116 +36,38 @@
                         >
                         <rect
                             fill="#fff"
-                            width="2000"
-                            height="930"
+                            width="1920"
+                            height="1080"
                             />
-                        <polygon
+                        <path
                             v-for="hole in section.sections"
                             :key="hole.d"
-                            :points="hole.d"
+                            :d="hole.d"
                             :class="hole.classNameHoles"
-                            />
-                        <rect
-                            class="fil0 str0"
-                            x="249.74"
-                            y="137.01"
-                            width="64.45"
-                            height="21.09"
-                            rx="14"
-                            ry="18.9"
-                            />
-                        <rect
-                            class="fil0 str0"
-                            x="1328.75"
-                            y="137.01"
-                            width="64.45"
-                            height="21.09"
-                            rx="14"
-                            ry="18.9"
-                            />
-                        <rect
-                            class="fil0 str0"
-                            x="602.47"
-                            y="137.01"
-                            width="64.45"
-                            height="21.09"
-                            rx="14"
-                            ry="18.9"
-                            />
-                        <rect
-                            class="fil0 str0"
-                            x="946.23"
-                            y="137.01"
-                            width="64.45"
-                            height="21.09"
-                            rx="14"
-                            ry="18.9"
-                            />
-                        <rect
-                            class="fil0 str0"
-                            x="1684.12"
-                            y="137.01"
-                            width="64.45"
-                            height="21.09"
-                            rx="14"
-                            ry="18.9"
                             />
 
                     </mask>
                 </defs>
                 <rect
                     class="shade"
-                    width="2000"
-                    height="930"
+                    width="1920"
+                    height="1080"
                     fill="#000"
                     fill-opacity="0.2  "
                     mask="url(#holes)"
                     />
                 <g class="shapes">
-                    <polygon
+                    <path
                         v-for="hole in section.sections"
                         :id="hole.idShape"
                         :key="hole.d"
-                        :points="hole.d"
+                        :d="hole.d"
                         :class="hole.classNameShape"
                         @click="click(hole)"
                         />
 
                 </g>
-
             </svg>
-            <div class="sec-label-wrapper">
-                <div
-                    id="label1"
-                    class="sec-label"
-                    >
-                    Секция 1
-                </div>
-                <div
-                    id="label2"
-                    class="sec-label"
-                    >
-                    Секция 2
-                </div>
-                <div
-                    id="label3"
-                    class="sec-label"
-                    >
-                    Секция 3
-                </div>
-                <div
-                    id="label4"
-                    class="sec-label"
-                    >
-                    Секция 4
-                </div>
-                <div
-                    id="label5"
-                    class="sec-label"
-                    >
-                    Секция 5
-                </div>
-            </div>
             <div class="tooltips">
                 <div
                     v-for="tooltip in section.sections"
@@ -173,7 +95,7 @@ import apartsStore from "../store/store.js"
 import { storeToRefs } from "pinia"
 
 const astore = apartsStore()
-const { bottomModal } = storeToRefs(astore)
+const {bottomModal} = storeToRefs(astore)
 
 const router = useRouter()
 const route = useRoute()
@@ -207,7 +129,7 @@ function click(e) {
 
 onBeforeMount(() => {
     $url("/sections", {
-        section: route.query.section | 3
+        section: route.query.section | 1
     }).then((r) => {
         console.log(r)
         section.value = r
@@ -230,7 +152,7 @@ onMounted(() => {
         "tooltip-show",
         "polygon-show",
         ".shade"
-    ), 1)
+    ), 50)
     window.addEventListener("mousemove", listener)
 
 })
@@ -361,35 +283,5 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100%;
-}
-.sec-label-wrapper {
-    display: flex;
-}
-.sec-label {
-    position: relative;
-    color: white;
-    font-family: 'Montserrat',serif;
-    font-weight: 600;
-}
-
-#label1 {
-    top: 187px;
-    left: 345px;
-}
-#label2 {
-    top: 187px;
-    left: 751px;
-}
-#label3 {
-    top: 187px;;
-    left: 1144px;
-}
-#label4 {
-    top: 187px;
-    left: 1590px;
-}
-#label5 {
-    top: 187px;
-    left: 2000px;
 }
 </style>

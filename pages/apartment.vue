@@ -205,12 +205,12 @@ const { creditValue, apart, showFeedbackModal } = useApart(route)
         }
 
         &__content {
-            padding: 64px 100px;
+            padding: 54px 100px;
             display: flex;
             flex-flow: column;
             height: 100%;
             @media (max-width: 1382px) {
-                padding: 60px 50px;
+                padding: 54px 50px;
             }
             @media (max-width: 1110px) {
                 padding: 40px 15px;
