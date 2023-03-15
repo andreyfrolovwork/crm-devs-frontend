@@ -215,7 +215,7 @@ $container-width: 1520;
 // my
 
 @mixin map() {
-  @media (min-aspect-ratio: 16/9) {
+  @media (min-aspect-ratio: 200/93) {
     @content;
   }
 }

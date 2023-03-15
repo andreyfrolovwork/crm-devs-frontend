@@ -43,7 +43,7 @@
                             to="/sections"
                             @click="closeMenu"
                             >
-                            На карте
+                            На плане дома
                         </NuxtLink>
                     </li>
                     <li class="nav-menu">
@@ -118,7 +118,7 @@
                     }"
                     to="/sections"
                     >
-                    На карте
+                    На плане дома
                 </NuxtLink>
                 <NuxtLink
                     :class="{
