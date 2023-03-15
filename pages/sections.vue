@@ -219,7 +219,7 @@
                             :class="hole.classNameHoles"
                             />
                         <rect
-                            class="fil0 str0"
+
                             x="238.49"
                             y="133.84"
                             width="91.02"
@@ -287,38 +287,7 @@
                 </g>
 
             </svg>
-            <!--            <div class="sec-label-wrapper">
-                            <div
-                                id="label1"
-                                class="sec-label"
-                                >
-                                Секция 1
-                            </div>
-                            <div
-                                id="label2"
-                                class="sec-label"
-                                >
-                                Секция 2
-                            </div>
-                            <div
-                                id="label3"
-                                class="sec-label"
-                                >
-                                Секция 3
-                            </div>
-                            <div
-                                id="label4"
-                                class="sec-label"
-                                >
-                                Секция 4
-                            </div>
-                            <div
-                                id="label5"
-                                class="sec-label"
-                                >
-                                Секция 5
-                            </div>
-                        </div>-->
+
             <div class="tooltips">
                 <div
                     v-for="tooltip in section.sections"
@@ -542,65 +511,6 @@ body {
     color: white;
     font-family: 'Montserrat', serif;
     font-weight: 600;
-}
-
-/*#label1 {
-    top: 187px;
-    left: 345px;
-}
-#label2 {
-    top: 187px;
-    left: 751px;
-}
-#label3 {
-    top: 187px;;
-    left: 1144px;
-}
-#label4 {
-    top: 187px;
-    left: 1590px;
-}
-#label5 {
-    top: 187px;
-    left: 2000px;
-}*/
-.sec-label-wrapper {
-    position: absolute;
-    object-fit: cover;
-
-    height: 100vh;
-    width: initial;
-    max-width: initial;
-
-    @include map {
-        height: initial;
-        width: 100vw;
-    }
-}
-
-#label1 {
-    top: 187px;
-    left: 345px;
-}
-
-#label2 {
-    top: 187px;
-    left: 751px;
-}
-
-#label3 {
-    top: 187px;
-    left: 1145px;
-}
-
-#label4 {
-    top: 187px;
-    left: 1590px;
-}
-
-#label5 {
-    top: 187px;
-    left: 2000px;
 }
 
 .fil-label {
