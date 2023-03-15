@@ -1,7 +1,7 @@
 <template>
     <div
         class="itop"
-        :style="{ backgroundImage: 'url(' + config.public.baseImagesUrl + 'index-main-image.webp' + ')' }"
+        :style="{ backgroundImage: 'url(' + config.public.baseImagesUrl + 'n_2_main.webp' + ')', backgroundPosition: 'center' }"
         >
         <div class="itop-top" />
         <div class="itop-header">
@@ -19,6 +19,20 @@
                     Жилой комплекс разработан с условиями современных требований: большой выбор
                     функциональных планировочных решений для семей с детьми, молодых людей, а также взрослых людей,
                     которым важно окружить себя природой и тишиной. Закрытая территория и двор без машин.
+                </div>
+            </div>
+            <div class="itop-list mobile-list">
+                <div class="itop-list-el">
+                    Ипотека за 1 рубль
+                </div>
+                <div class="itop-list-el">
+                    Квартиры с мебелью
+                </div>
+                <div class="itop-list-el">
+                    Туристичекие активности в пешей доступности
+                </div>
+                <div class="itop-list-el">
+                    Закрытая территория, дворы без машин
                 </div>
             </div>
             <div
@@ -43,7 +57,7 @@
                                 </div>-->
             </div>
         </div>
-        <div class="itop-list">
+        <div class="itop-list desktop-list">
             <div class="itop-list-el">
                 Ипотека за 1 рубль
             </div>
@@ -146,7 +160,8 @@ function goto() {
     &-top {
         display: flex;
         //margin-top: 644px;
-        margin-top: 200px;
+        ///margin-top: 200px;
+        margin-top: 50px;
         //flex-basis: 22%;
         justify-content: center;
     }
@@ -167,8 +182,10 @@ function goto() {
 
         &-text {
             @include phone {
-                font-size: 79.477px;
-                line-height: 93px;
+                /*                font-size: 79.477px;
+                                line-height: 93px;*/
+                font-size: 61.477px;
+                line-height: 74px;
             }
             font-family: 'Montserrat', serif;
             font-style: normal;
@@ -244,6 +261,29 @@ function goto() {
 
     }
 
+    .mobile-list {
+        display: none;
+        @include phone {
+            display: initial;
+            top: 0px;
+            margin: 36px 10px 0px 10px;
+        }
+/*        @include tablet {
+            display: initial;
+            top: 0px;
+            margin: 36px 10px 0px 10px;
+        }*/
+    }
+
+    .desktop-list {
+        @include phone {
+            display: none;
+        }
+/*        @include tablet {
+            display: none;
+        }*/
+    }
+
     &-list {
         //max-width: 1200px;
         //margin: 0 auto;
@@ -307,9 +347,13 @@ function goto() {
                 font-family: 'Montserrat', serif;
                 font-style: normal;
                 font-weight: 400;
-                font-size: 21px;
-                line-height: 26px;
+                /*          font-size: 21px;
+                          line-height: 26px;*/
                 margin-bottom: 18px;
+
+                font-size: 18px;
+                line-height: 9px;
+
             }
 
             &-label {
@@ -317,8 +361,10 @@ function goto() {
                 font-family: "Montserrat", serif;
                 font-style: normal;
                 font-weight: 400;
-                font-size: 16px;
-                line-height: 20px;
+                /*           font-size: 16px;
+                           line-height: 20px;*/
+                font-size: 12px;
+                line-height: 13px;
             }
         }
     }
