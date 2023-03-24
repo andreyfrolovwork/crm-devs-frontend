@@ -117,8 +117,7 @@ const apartsStore = defineStore("index-page", {
                     page: this.page,
                     orderBy: this.orderBy,
                     sortBy: this.sortBy,
-
-                    area: this.area,
+                    /*       area: this.area,*/
                     price: this.price,
                     floor: this.floor,
                     rooms: this.roomsProps,
