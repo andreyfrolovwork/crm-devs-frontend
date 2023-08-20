@@ -126,7 +126,7 @@
                         <!--                <template #t2>
                                             t2
                                         </template>
-                        
+
                                         <template #t3>
                                             t3
                                         </template>
@@ -173,7 +173,7 @@
                 >
                 <div class="mapblock-child m0auto">
                     <MapDetailYandex
-                        :card-point="[55.044555,60.082794]"
+                        :card-point="[55.032745, 60.123806]"
                         :card-point-hint="'Дом на кирова'"
                         :card-point-balloon="'Дом на кирова'"
                         />

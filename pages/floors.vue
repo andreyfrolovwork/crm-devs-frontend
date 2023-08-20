@@ -156,7 +156,7 @@ onBeforeMount(async () => {
     }).catch(() => {
         message.error("Произошла ошибка на сервере, попробуйте обновить страницу!")
     })
-    console.log(result)
+    console.log('section___',result)
     section.value = result
 })
 

@@ -69,7 +69,8 @@ export default {
     props: {
         cardPoint: {
             type: Array,
-            default: [55.051205, 60.077164]
+            //default: [55.051205, 60.077164]
+            default: [55.032745, 60.123806]
         },
         cardPointHint: {
             type: String,

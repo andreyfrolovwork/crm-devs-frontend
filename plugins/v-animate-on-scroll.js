@@ -14,7 +14,7 @@ export default defineNuxtPlugin((nuxtApp) => {
                 }
             }
             vnode.observer = new IntersectionObserver(callback, {
-                rootMargin: "5px",
+                rootMargin: "100px",
                 //threshold: 0.1,
             })
             vnode.observer.observe(el)
